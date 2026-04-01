@@ -1,0 +1,23 @@
+{
+  "name": "Alex 排球力量训练",
+  "short_name": "Alex训练",
+  "description": "Alex 髋关节康复 + 排球力量训练追踪系统",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "./",
+  "theme_color": "#f4f7f9",
+  "background_color": "#f4f7f9",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

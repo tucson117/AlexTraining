@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Alex训练">
+<meta name="theme-color" content="#f4f7f9">
+<link rel="manifest" href="manifest.json">
+<title>Alex 排球力量训练</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================================================
+   OCEAN DEPTHS THEME — v4.0
+   Apple HomeKit 胶囊风格 · GitHub Pages 独立部署
+   ================================================ */
+:root {
+  --navy: #1a2332;
+  --teal: #2d8b8b; --teal-dark: #247070; --teal-light: #d6f0f0; --teal-bg: #eef8f8;
+  --seafoam: #a8dadc; --seafoam-light: #d4eded;
+  --bg: #f4f7f9; --surface: #ffffff; --surface2: #eef2f5;
+  --border: #d8e0e6; --border2: #c4cfd8;
+  --text: #1a2332; --text2: #546678; --text3: #6b7d8d;
+  --green: #2d8b5e; --green-light: #d9f2e6; --green-bg: #edfaf3;
+  --yellow: #c59316; --yellow-light: #fdf4d8; --yellow-bg: #fefbf0;
+  --red: #c0392b; --red-light: #fce4e1;
+  --orange: #d47824; --orange-light: #fde8d0;
+  --purple: #6a5acd; --purple-light: #e8e4f8;
+  --pink: #c0477a; --pink-light: #fce4ef;
+  --radius: 16px; --radius-sm: 12px; --radius-pill: 50px;
+  --shadow-sm: 0 1px 2px rgba(26,35,50,.06);
+  --shadow: 0 2px 8px rgba(26,35,50,.08);
+  --shadow-lg: 0 8px 24px rgba(26,35,50,.14);
+  --font: 'Inter', -apple-system, 'PingFang SC', 'Segoe UI', sans-serif;
+  --topbar-h: 56px;
+  --bottombar-h: 64px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{touch-action:manipulation;background:var(--bg);}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;overscroll-behavior:none;}
+
+/* ===== EDGE FADE OVERLAYS ===== */
+.fade-top,.fade-bottom{position:fixed;left:0;right:0;z-index:50;pointer-events:none;}
+.fade-top{top:0;height:calc(env(safe-area-inset-top, 10px) + var(--topbar-h) + 24px);background:linear-gradient(to bottom, var(--bg) 0%, rgba(244,247,249,.85) 50%, rgba(244,247,249,0) 100%);}
+.fade-bottom{bottom:0;height:calc(env(safe-area-inset-bottom, 8px) + var(--bottombar-h) + 32px);background:linear-gradient(to top, var(--bg) calc(env(safe-area-inset-bottom, 8px) + 16px), rgba(244,247,249,.85) 60%, rgba(244,247,249,0) 100%);}
+
+/* ===== FLOATING TOP BAR (capsule) ===== */
+.topbar{position:fixed;top:calc(env(safe-area-inset-top, 10px) + 6px);left:50%;transform:translateX(-50%);z-index:100;width:calc(100% - 48px);max-width:560px;height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--radius-pill);border:1px solid rgba(216,224,230,.5);box-shadow:0 4px 20px rgba(26,35,50,.1);}
+.topbar-left{display:flex;align-items:center;gap:10px;}
+.topbar-left .logo-svg{flex-shrink:0;}
+.topbar-left h1{font-size:1.1em;font-weight:800;letter-spacing:-.03em;color:var(--navy);line-height:1.2;}
+.topbar-left .date{font-size:0.78em;font-weight:600;color:var(--teal-dark);}
+.status-pill{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--radius-pill);background:var(--surface);border:1.5px solid var(--border);font-size:0.72em;font-weight:600;color:var(--text2);white-space:nowrap;box-shadow:var(--shadow-sm);transition:all .3s;}
+.status-pill .s-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .3s;}
+.status-pill.synced{border-color:var(--green-light);color:var(--green);}.status-pill.synced .s-dot{background:var(--green);}
+.status-pill.syncing{border-color:var(--teal-light);color:var(--teal);}.status-pill.syncing .s-dot{background:var(--teal);animation:pulse 1s infinite;}
+.status-pill.saving{border-color:var(--yellow-light);color:var(--yellow);}.status-pill.saving .s-dot{background:var(--yellow);animation:pulse 1s infinite;}
+.status-pill.error{border-color:var(--red-light);color:var(--red);}.status-pill.error .s-dot{background:var(--red);}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ===== FLOATING BOTTOM NAV (capsule) ===== */
+.bottombar{position:fixed;bottom:calc(env(safe-area-inset-bottom, 8px) + 16px);left:50%;transform:translateX(-50%);z-index:100;width:calc(100% - 56px);max-width:360px;height:var(--bottombar-h);padding:6px 8px;display:flex;gap:4px;background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--radius-pill);border:1px solid rgba(216,224,230,.5);box-shadow:0 4px 20px rgba(26,35,50,.12);}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:var(--radius-pill);cursor:pointer;font-size:0.72em;font-weight:600;color:var(--text3);transition:all .2s;user-select:none;min-height:44px;-webkit-tap-highlight-color:transparent;}
+.tab .tab-icon{font-size:1.15em;line-height:1;}
+.tab .tab-label{line-height:1;}
+.tab.active{color:var(--teal);font-weight:700;background:var(--teal-bg);}
+.tab:hover:not(.active){color:var(--text);background:var(--surface2);}
+@media(min-width:601px){
+  .bottombar{bottom:20px;max-width:400px;}
+  .tab{flex-direction:row;gap:6px;}
+}
+
+/* ===== SCROLLABLE CONTENT ===== */
+.app{max-width:680px;margin:0 auto;padding:calc(var(--topbar-h) + env(safe-area-inset-top, 10px) + 16px) 12px calc(var(--bottombar-h) + env(safe-area-inset-bottom, 8px) + 20px);}
+.panel{display:none;}.panel.active{display:block;}
+
+/* ===== CONTROL BAR ===== */
+.control-bar{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:10px 14px;margin:8px 0;box-shadow:var(--shadow);}
+.activities-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.activities-row .act-label{font-size:0.78em;font-weight:600;color:var(--text3);white-space:nowrap;}
+.session-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.rest-part{display:flex;align-items:center;gap:8px;}
+.rest-part .rlabel{font-size:0.82em;font-weight:600;color:var(--text2);white-space:nowrap;}
+.toggle-switch{position:relative;width:48px;height:26px;cursor:pointer;flex-shrink:0;}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--border2);border-radius:26px;transition:all .3s;}
+.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:all .3s;box-shadow:var(--shadow-sm);}
+.toggle-switch input:checked+.toggle-slider{background:var(--teal);}
+.toggle-switch input:checked+.toggle-slider::before{transform:translateX(22px);}
+.ctrl-div{width:1px;height:22px;background:var(--border);flex-shrink:0;}
+.session-chip{padding:5px 14px;border-radius:var(--radius-pill);border:2px solid var(--border);background:var(--surface);color:var(--text2);font-size:0.8em;font-weight:600;cursor:pointer;transition:all .15s;font-family:var(--font);min-height:36px;display:inline-flex;align-items:center;}
+.session-chip.active{border-color:var(--teal);background:var(--teal);color:#fff;}
+.btn-clear{padding:4px 10px;border-radius:var(--radius-pill);border:1.5px solid var(--red-light);background:var(--surface);color:var(--red);font-size:0.72em;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .15s;display:inline-flex;align-items:center;gap:3px;min-height:32px;}
+.btn-clear:hover{background:var(--red-light);}
+.rest-msg{text-align:center;padding:48px 24px;color:var(--text2);}
+.rest-msg .icon{font-size:2.5em;margin-bottom:8px;}
+.rest-msg p{font-size:1em;font-weight:600;}
+.rest-msg .sub{font-size:0.82em;margin-top:6px;color:var(--text3);}
+
+/* ===== MODULE CARD ===== */
+.module-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);margin:12px 0;box-shadow:var(--shadow);overflow:hidden;}
+.module-header{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;user-select:none;transition:background .15s;}
+.module-header:hover{background:var(--surface2);}
+.module-header .module-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.78em;color:#fff;flex-shrink:0;}
+.module-header h2{font-size:1em;flex:1;font-weight:700;}
+.module-header .module-badge{font-size:0.75em;padding:4px 12px;border-radius:var(--radius-pill);font-weight:700;}
+.module-header .module-badge.done{background:var(--green-bg);color:var(--green);}
+.module-header .module-badge.partial{background:var(--yellow-bg);color:var(--yellow);}
+.module-header .module-badge.empty{background:var(--surface2);color:var(--text3);}
+.module-header .chevron{color:var(--text3);font-size:0.75em;transition:transform .3s cubic-bezier(.4,0,.2,1);}
+.module-card.collapsed .chevron{transform:rotate(-90deg);}
+.module-body{max-height:8000px;overflow:hidden;transition:max-height .4s ease,opacity .3s ease;opacity:1;}
+.module-card.collapsed .module-body{max-height:0;opacity:0;}
+.icon-base-module{background:linear-gradient(135deg,var(--teal),var(--teal-dark));}
+.icon-str-module{background:linear-gradient(135deg,#c0392b,#a02e22);}
+
+/* ===== SECTION (flat) ===== */
+.section{border-top:1px solid var(--border);}
+.section-header{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;user-select:none;transition:background .15s;}
+.section-header:hover{background:var(--surface2);}
+.section-header .sec-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.72em;color:#fff;flex-shrink:0;}
+.section-header h3{font-size:0.92em;flex:1;font-weight:700;letter-spacing:-.01em;}
+.section-header .time-badge{font-size:0.72em;color:var(--text2);background:var(--surface2);padding:3px 10px;border-radius:10px;font-weight:500;}
+.section-header .chevron{color:var(--text3);font-size:0.7em;transition:transform .3s cubic-bezier(.4,0,.2,1);}
+.section.collapsed .chevron{transform:rotate(-90deg);}
+.section-body{max-height:3000px;overflow:hidden;transition:max-height .35s ease,opacity .25s ease;opacity:1;padding:4px 12px 8px;}
+.section.collapsed .section-body{max-height:0;opacity:0;padding-top:0;padding-bottom:0;}
+.section-desc{padding:4px 16px 6px 52px;font-size:0.75em;color:var(--text3);line-height:1.5;}
+.icon-warmup{background:linear-gradient(135deg,#e8a838,#d48c20);}
+.icon-hip{background:linear-gradient(135deg,#7c6bdb,#5b4dba);}
+.icon-stability{background:linear-gradient(135deg,#2d8b8b,#1f7070);}
+.icon-core{background:linear-gradient(135deg,#d47824,#b5621a);}
+.icon-ankle{background:linear-gradient(135deg,#c0477a,#a03060);}
+.icon-strength{background:linear-gradient(135deg,#c0392b,#a02e22);}
+.icon-cooldown{background:linear-gradient(135deg,#6b7d8d,#546678);}
+
+/* ===== PRIORITY DIVIDER ===== */
+.priority-divider{display:flex;align-items:center;gap:10px;padding:6px 4px;font-size:0.72em;font-weight:600;}
+.priority-divider::before,.priority-divider::after{content:'';flex:1;height:1px;border-top:1px dashed var(--border2);}
+.priority-divider.optional{color:var(--text3);}
+
+/* ===== EXERCISE CAPSULE ===== */
+.ex-capsule{display:flex;align-items:center;background:var(--surface2);border-radius:var(--radius);margin:5px 0;padding:0;transition:all .15s;border:1.5px solid transparent;}
+.ex-capsule:hover{border-color:var(--border);}
+.ex-capsule.done{opacity:.6;}
+.ex-capsule.done .ex-name{text-decoration:line-through;text-decoration-thickness:2px;text-underline-offset:3px;color:var(--green);}
+.ex-check-wrap{display:flex;align-items:center;justify-content:center;width:50px;flex-shrink:0;align-self:stretch;}
+.ex-check{appearance:none;-webkit-appearance:none;width:28px;height:28px;border-radius:50%;border:2.5px solid var(--border2);background:var(--surface);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;position:relative;}
+.ex-check:checked{border-color:var(--teal);background:var(--teal);}
+.ex-check:checked::after{content:'\2713';color:#fff;font-size:14px;font-weight:700;position:absolute;}
+.ex-check:hover{border-color:var(--teal-light);transform:scale(1.08);}
+.ex-check:checked:hover{background:var(--teal-dark);}
+.ex-text{flex:1;padding:10px 4px;min-width:0;}
+.ex-row1{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.ex-name{font-weight:700;font-size:0.85em;color:var(--navy);letter-spacing:-.01em;}
+.ex-zh{font-size:0.78em;color:var(--text2);}
+.opt-tag{font-size:0.6em;font-weight:600;color:var(--text3);background:var(--surface);padding:1px 6px;border-radius:4px;}
+.ex-row2{font-size:0.75em;color:var(--text3);margin-top:1px;display:flex;gap:8px;flex-wrap:wrap;}
+.ex-row2 .sets{color:var(--teal-dark);font-weight:600;}
+.ex-row2 .purpose{font-style:italic;}
+.ex-actions{display:flex;align-items:center;gap:4px;padding:0 8px;flex-shrink:0;}
+.ex-btn{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.75em;font-weight:700;transition:all .15s;-webkit-tap-highlight-color:transparent;text-decoration:none;}
+.ex-btn-tip{background:var(--teal-bg);color:var(--teal);border:1.5px solid var(--teal-light);}
+.ex-btn-tip:hover{background:var(--teal);color:#fff;}
+.ex-btn-yt{background:var(--red-light);color:var(--red);border:1.5px solid transparent;}
+.ex-btn-yt:hover{background:var(--red);color:#fff;}
+.ex-inputs{display:flex;gap:6px;padding:0 12px 6px 54px;opacity:.7;transition:opacity .2s;}
+.ex-capsule:hover+.ex-inputs,.ex-inputs:focus-within{opacity:1;}
+.ex-inputs input{background:var(--surface);border:1.5px solid var(--border);color:var(--text);border-radius:8px;padding:4px 8px;font-size:0.72em;font-family:var(--font);transition:all .2s;min-height:30px;}
+.ex-inputs input:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 2px var(--teal-light);}
+.ex-inputs input::placeholder{color:var(--text3);font-style:italic;}
+.ex-inputs input.actual{width:130px;}
+.ex-inputs input.note{flex:1;min-width:80px;}
+
+/* Superset / Rope */
+.superset-label{display:flex;align-items:center;gap:8px;padding:4px 4px;font-size:0.72em;color:var(--orange);font-weight:700;}
+.superset-label::before,.superset-label::after{content:'';flex:1;height:1px;background:var(--orange-light);}
+.rope-break{text-align:center;padding:4px;font-size:0.72em;color:var(--yellow);background:var(--yellow-bg);border-radius:8px;margin:4px 0;font-weight:500;}
+
+/* ===== MONITORING ===== */
+.monitoring{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin:12px 0;box-shadow:var(--shadow);}
+.monitoring h3{font-size:0.95em;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-weight:700;}
+.monitoring h3::before{content:'';display:inline-block;width:4px;height:18px;background:var(--yellow);border-radius:2px;}
+.monitor-item{padding:8px 0;border-bottom:1px solid var(--surface2);}
+.monitor-item:last-child{border-bottom:none;}
+.monitor-item .q-text{font-size:0.85em;font-weight:600;margin-bottom:6px;line-height:1.4;}
+
+/* ===== NOTES ===== */
+.session-notes{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px;margin:12px 0;box-shadow:var(--shadow);}
+.session-notes h3{font-size:0.92em;margin-bottom:8px;font-weight:700;}
+.session-notes textarea{width:100%;background:var(--surface2);border:2px solid var(--border);color:var(--text);border-radius:10px;padding:10px;font-size:0.82em;resize:vertical;min-height:70px;font-family:var(--font);line-height:1.6;transition:all .2s;}
+.session-notes textarea:focus{border-color:var(--teal);outline:none;background:var(--surface);box-shadow:0 0 0 3px var(--teal-light);}
+.session-notes textarea::placeholder{color:var(--text3);font-style:italic;}
+
+/* ===== CHIPS ===== */
+.chip-group{display:flex;flex-wrap:wrap;gap:5px;}
+.chip{padding:5px 12px;border-radius:var(--radius-pill);border:2px solid var(--border);background:var(--surface);color:var(--text2);font-size:0.78em;font-weight:500;cursor:pointer;transition:all .15s;font-family:var(--font);user-select:none;-webkit-tap-highlight-color:transparent;}
+.chip:hover{border-color:var(--teal-light);background:var(--teal-bg);}
+.chip.selected{border-color:var(--teal);background:var(--teal);color:#fff;font-weight:600;}
+.chip.warn.selected{border-color:var(--yellow);background:var(--yellow);color:#fff;}
+.chip.danger.selected{border-color:var(--red);background:var(--red);color:#fff;}
+.chip.multi-sel.selected{border-color:var(--purple);background:var(--purple);color:#fff;font-weight:600;}
+.chip.mini{padding:4px 10px;font-size:0.72em;}
+
+/* Bottom Sheet */
+.sheet-overlay{position:fixed;inset:0;background:rgba(26,35,50,.45);z-index:300;opacity:0;pointer-events:none;transition:opacity .25s ease;backdrop-filter:blur(2px);}
+.sheet-overlay.show{opacity:1;pointer-events:auto;}
+.sheet-panel{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px 32px;z-index:301;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);max-height:60vh;overflow-y:auto;box-shadow:0 -4px 24px rgba(26,35,50,.15);}
+.sheet-overlay.show+.sheet-panel,.sheet-panel.show{transform:translateY(0);}
+.sheet-handle{width:36px;height:4px;background:var(--border2);border-radius:2px;margin:0 auto 14px;}
+.sheet-title{font-weight:700;font-size:1em;margin-bottom:4px;color:var(--navy);}
+.sheet-subtitle{font-size:0.78em;color:var(--teal);font-weight:600;margin-bottom:10px;}
+.sheet-body{font-size:0.88em;color:var(--text);line-height:1.7;}
+.sheet-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--surface2);color:var(--text2);font-size:1.1em;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* ===== CALENDAR ===== */
+.cal-nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0;}
+.cal-nav button{background:var(--surface);border:1.5px solid var(--border);color:var(--text);padding:8px 20px;border-radius:var(--radius-pill);cursor:pointer;font-family:var(--font);font-weight:500;transition:all .15s;}
+.cal-nav button:hover{background:var(--surface2);}
+.cal-nav span{font-weight:800;font-size:1.05em;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:8px 0;}
+.cal-header{text-align:center;font-size:0.72em;color:var(--text3);padding:6px 2px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.cal-day{text-align:center;padding:8px 2px;border-radius:10px;font-size:0.82em;cursor:pointer;min-height:48px;background:var(--surface);border:1.5px solid transparent;transition:all .15s;}
+.cal-day.empty{background:transparent;cursor:default;}
+.cal-day.has-session{border-color:var(--border);}
+.cal-day.has-session.full{border-left:4px solid var(--teal);}
+.cal-day.has-session.base-only{border-left:4px solid var(--seafoam);}
+.cal-day.has-session.rest{border-left:4px solid var(--surface2);}
+.cal-day.has-session.multi{border-right:4px solid var(--purple);}
+.cal-day.today{outline:2.5px solid var(--teal);outline-offset:-1px;font-weight:800;}
+.cal-day:hover:not(.empty){background:var(--teal-bg);}
+.cal-day .day-num{font-weight:600;}
+.cal-day .completion{font-size:0.75em;color:var(--green);font-weight:700;}
+.cal-day .rest-mark{font-size:0.75em;color:var(--text3);}
+
+/* History */
+.history-detail{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin:10px 0;box-shadow:var(--shadow);}
+.history-detail h3{font-size:1em;font-weight:700;margin-bottom:4px;}
+.history-detail .meta{font-size:0.75em;color:var(--text3);margin-bottom:12px;}
+.history-section-title{font-size:0.85em;font-weight:700;color:var(--teal);margin:12px 0 6px;padding-top:8px;border-top:1px solid var(--surface2);}
+.history-exercise{padding:3px 0;font-size:0.82em;display:flex;gap:8px;align-items:baseline;line-height:1.4;}
+.history-exercise .mark{font-weight:800;width:16px;}
+.history-exercise .mark.done{color:var(--green);}
+.history-exercise .mark.skip{color:var(--text3);}
+.history-exercise .actual-val{color:var(--teal);font-weight:500;}
+.history-exercise .note-val{color:var(--text2);font-style:italic;}
+.history-notes{margin-top:12px;padding:12px;background:var(--surface2);border-radius:10px;font-size:0.82em;white-space:pre-wrap;line-height:1.6;border:1px solid var(--border);}
+.history-monitoring{margin-top:12px;}
+.history-monitoring .mon-title{font-size:0.85em;font-weight:700;color:var(--yellow);margin-bottom:6px;}
+.history-monitoring .mon-item{font-size:0.82em;padding:2px 0;line-height:1.4;}
+
+/* ===== REPORT ===== */
+.report{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:20px;margin:10px 0;box-shadow:var(--shadow);}
+.report h3{font-size:1.05em;font-weight:800;margin-bottom:4px;}
+.report .subtitle{font-size:0.78em;color:var(--text3);margin-bottom:14px;}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0;}
+.stat-card{background:var(--surface2);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--border);}
+.stat-card .value{font-size:1.7em;font-weight:800;color:var(--teal-dark);}
+.stat-card .label{font-size:0.75em;color:var(--text2);margin-top:2px;font-weight:500;}
+.progress-bar{background:var(--surface2);border-radius:10px;height:6px;margin:4px 0;overflow:hidden;}
+.progress-bar .fill{height:100%;border-radius:10px;transition:width .4s ease;}
+.progress-item{margin:8px 0;}
+.progress-item .plabel{display:flex;justify-content:space-between;font-size:0.82em;margin-bottom:3px;font-weight:500;}
+.report-section{margin-top:20px;padding-top:14px;border-top:1px solid var(--border);}
+.report-section h4{font-size:0.95em;font-weight:700;margin-bottom:10px;}
+
+/* ===== SETTINGS ===== */
+.data-section{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:20px;margin:10px 0;box-shadow:var(--shadow);}
+.data-section h3{font-size:0.95em;font-weight:700;margin-bottom:8px;}
+.data-section p{font-size:0.82em;color:var(--text2);margin-bottom:12px;line-height:1.6;}
+.btn-export{background:var(--teal);color:#fff;border:none;padding:10px 22px;border-radius:var(--radius-pill);cursor:pointer;font-size:0.85em;font-weight:600;font-family:var(--font);transition:all .15s;}
+.btn-export:hover{background:var(--teal-dark);}
+.btn-secondary{background:var(--surface);color:var(--text2);border:2px solid var(--border);padding:8px 20px;border-radius:var(--radius-pill);cursor:pointer;font-size:0.82em;font-weight:600;font-family:var(--font);}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:calc(var(--bottombar-h) + env(safe-area-inset-bottom, 8px) + 24px);left:50%;transform:translateX(-50%) translateY(30px);background:var(--navy);color:#fff;padding:14px 28px;border-radius:24px;font-size:0.88em;font-weight:600;z-index:200;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.34,1.56,.64,1);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Loading */
+.loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:12px;}
+.loading-overlay .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay p{color:var(--text2);font-size:.9em;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .app{padding:calc(var(--topbar-h) + env(safe-area-inset-top, 10px) + 14px) 8px calc(var(--bottombar-h) + env(safe-area-inset-bottom, 8px) + 20px);}
+  .section-header{padding:8px 14px;}
+  .section-body{padding:4px 8px 8px;}
+  .ex-inputs{padding-left:42px;flex-direction:column;align-items:stretch;}
+  .ex-inputs input.actual,.ex-inputs input.note{width:100%;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div><p>正在加载训练数据...</p></div>
+
+<!-- EDGE FADE OVERLAYS -->
+<div class="fade-top"></div>
+<div class="fade-bottom"></div>
+
+<!-- FLOATING TOP BAR -->
+<div class="topbar" id="topbar">
+  <div class="topbar-left">
+    <svg class="logo-svg" viewBox="0 0 30 30" width="28" height="28">
+      <circle cx="15" cy="15" r="13.5" fill="none" stroke="var(--navy)" stroke-width="2.2"/>
+      <path d="M3.5 20 Q15 14, 26.5 20" fill="none" stroke="var(--navy)" stroke-width="1.6"/>
+      <path d="M5 9 Q15 16, 25 9" fill="none" stroke="var(--navy)" stroke-width="1.6"/>
+      <path d="M15 1.5 Q13 15, 15 28.5" fill="none" stroke="var(--navy)" stroke-width="1.6"/>
+    </svg>
+    <div>
+      <h1>Alex 排球力量训练</h1>
+      <div class="date" id="headerDate"></div>
+    </div>
+  </div>
+  <div class="status-pill syncing" id="statusPill"><div class="s-dot"></div><span id="statusText">连接中</span></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="app" id="app">
+  <div class="panel active" id="panel-train">
+    <div id="controlBar"></div>
+    <div id="trainingContent"></div>
+    <div id="monitoringSection"></div>
+    <div class="session-notes" id="notesSection">
+      <h3>本次训练备注</h3>
+      <textarea id="sessionNotes" placeholder="记录观察、感受、异常情况..." oninput="markDirty()"></textarea>
+    </div>
+  </div>
+  <div class="panel" id="panel-calendar">
+    <div class="cal-nav"><button onclick="calNav(-1)">&larr; 上月</button><span id="calTitle"></span><button onclick="calNav(1)">下月 &rarr;</button></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div id="historyDetail"></div>
+  </div>
+  <div class="panel" id="panel-report"><div id="reportContent"></div></div>
+  <div class="panel" id="panel-settings">
+    <div class="data-section">
+      <h3>数据管理</h3>
+      <p>数据自动同步到 Google Sheet，手机电脑实时共享。</p>
+      <button class="btn-export" onclick="exportData()">导出 JSON</button>
+    </div>
+    <div class="data-section" style="margin-top:10px;">
+      <h3>训练计划</h3>
+      <p>v4.0 — 胶囊风格 · GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) · 自动保存</p>
+      <div id="statsOverview"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FIXED BOTTOM NAV -->
+<div class="bottombar" id="tabBar">
+  <div class="tab active" data-tab="train"><span class="tab-icon">💪</span><span class="tab-label">训练</span></div>
+  <div class="tab" data-tab="calendar"><span class="tab-icon">📅</span><span class="tab-label">日历</span></div>
+  <div class="tab" data-tab="report"><span class="tab-icon">📊</span><span class="tab-label">报告</span></div>
+  <div class="tab" data-tab="settings"><span class="tab-icon">⚙️</span><span class="tab-label">数据</span></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+<div class="sheet-panel" id="sheetPanel">
+  <div class="sheet-handle"></div>
+  <button class="sheet-close" onclick="closeSheet()">&times;</button>
+  <div class="sheet-title" id="sheetTitle"></div>
+  <div class="sheet-subtitle" id="sheetSubtitle"></div>
+  <div class="sheet-body" id="sheetBody"></div>
+</div>
+
+<script>
+// ============================================
+// ★ GAS API URL — 部署后填入你的 Web App URL ★
+// ============================================
+const GAS_API = 'https://script.google.com/macros/s/AKfycbyZEwUWg4S_9_pqgqklj7y822NnSqsxxa-G5fqMqSajKKmhTvnhxLt6CNsOGYR-S4Vj/exec';
+
+// ============================================
+// EXERCISE DATABASE
+// ============================================
+const EX={
+  crossCrawl:{en:"Cross Crawl",zh:"交叉行进",sets:"2×20",tip:"站立，右膝抬起碰左手肘，换边。训练对侧协调——改善步态中右臂不摆动的问题。",purpose:"步态协调",pr:"must",yt:"https://www.youtube.com/results?search_query=cross+crawl+standing+exercise"},
+  jumpRopeWarmup:{en:"Jump Rope",zh:"跳绳",sets:"2×1min",tip:"轻松节奏，双脚微跳，脚踝弹性。心率微升即可。",purpose:"心肺预热",pr:"opt",yt:"https://www.youtube.com/results?search_query=jump+rope+basics+beginner"},
+  hipRotation90:{en:"Hip 90/90",zh:"髋关节旋转+90/90",sets:"各15次",tip:"仰卧屈膝双腿倒向左右（内外旋）。然后坐姿90/90：前后腿各弯90°，交替转向。感受左右差异。",purpose:"髋关节活动度",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+mobility+stretch+transition"},
+  clamshell:{en:"Clamshell",zh:"蛤蛎式",sets:"3×15 / 左4×15",tip:"弹力带套膝上方，侧卧屈膝，上方膝盖打开。骨盆不要后翻！左侧多做1组。最重要的臀中肌激活动作。",purpose:"臀中肌激活",pr:"must",yt:"https://www.youtube.com/results?search_query=clamshell+exercise+resistance+band+glute+med"},
+  hipAbduction:{en:"Hip Abduction",zh:"侧卧直腿抬高",sets:"2×12/侧",tip:"侧卧伸直腿，脚尖略内旋，缓慢抬起。激活臀中肌后部纤维。",purpose:"臀中肌后部",pr:"must",yt:"https://www.youtube.com/results?search_query=side+lying+hip+abduction+glute+med"},
+  lateralBandWalk:{en:"Lateral Band Walk",zh:"弹力带横移",sets:"3×15步/方向",tip:"弹力带套踝上方，微蹲横向走。蛤蛎式激活后做，IT Band不适应减轻。",purpose:"臀中肌功能化",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+band+walk+proper+form"},
+  slGluteBridge:{en:"SL Glute Bridge",zh:"单腿臀桥",sets:"3×12/侧",tip:"仰卧屈膝，单腿蹬地抬臀。脚跟驱动，顶部骨盆水平。",purpose:"臀大肌+骨盆稳定",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+glute+bridge+form"},
+  hipAirplane:{en:"Hip Airplane",zh:"Hip Airplane",sets:"2×8/侧",tip:"单腿站立前倾，躯干缓慢左右旋转。左侧控制是重点，可扶墙。",purpose:"髋三维控制",pr:"opt",yt:"https://www.youtube.com/results?search_query=hip+airplane+exercise+single+leg"},
+  deadBug:{en:"Dead Bug",zh:"Dead Bug",sets:"3×10/侧",tip:"仰卧双手双脚朝天，对侧手脚同时伸出，腰椎贴地。核心抗伸展。",purpose:"核心深层稳定",pr:"opt",yt:"https://www.youtube.com/results?search_query=dead+bug+exercise+proper+form"},
+  slBalance:{en:"SL Balance",zh:"单腿站立",sets:"3×20-30s/侧",tip:"赤脚站立。左侧重点：臀部撑住，不让身体左倒。",purpose:"Trendelenburg监测",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+balance+stand+exercise"},
+  shortFoot:{en:"Short Foot",zh:"短足训练",sets:"10s×10",tip:"赤脚，用足弓肌肉撑起足弓（脚趾不卷）。建立足弓控制。",purpose:"足弓激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=short+foot+exercise+arch+activation"},
+  slCalfRaise:{en:"SL Calf Raise",zh:"单腿提踵",sets:"3×15/侧",tip:"台阶边缘全幅度提踵，下降3秒。排球落地需要强壮小腿。",purpose:"小腿力量",pr:"opt",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+full+range"},
+  hipFlexorStretch:{en:"Hip Flexor Stretch",zh:"髋屈肌拉伸",sets:"2×30s/侧",tip:"半跪姿，后腿侧臀肌收紧，身体微前移。释放髋屈肌紧张。",purpose:"髋屈肌释放",pr:"opt",yt:"https://www.youtube.com/results?search_query=half+kneeling+hip+flexor+stretch"},
+  bandedLungePull:{en:"Banded Lunge Pull",zh:"弹力带弓步侧拉",sets:"2×8/侧",tip:"弹力带从侧面拉住前膝做弓步抗阻。激活大转子区域深层肌肉。",purpose:"深层肌肉激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=banded+lunge+lateral+pull+hip+stability"},
+  jumpRopeStr:{en:"Jump Rope",zh:"跳绳热身",sets:"2×1min",tip:"基础动作过渡到力量训练。脚踝预热。",purpose:"心肺预热",pr:"must",yt:"https://www.youtube.com/results?search_query=jump+rope+warm+up"},
+  mountainClimber:{en:"Mountain Climber",zh:"Mountain Climber",sets:"2×30s",tip:"平板支撑交替提膝。中等速度，不冲刺！核心收紧。",purpose:"心肺+核心",pr:"must",yt:"https://www.youtube.com/results?search_query=mountain+climber+exercise+form"},
+  shoulderTapPlank:{en:"Shoulder Tap",zh:"Shoulder Tap",sets:"2×30s",tip:"平板支撑交替触肩。骨盆不转动！抗旋转核心训练。",purpose:"核心抗旋转",pr:"must",yt:"https://www.youtube.com/results?search_query=shoulder+tap+plank+anti+rotation"},
+  gobletSquat:{en:"Goblet Squat",zh:"高脚杯深蹲",sets:"3×8-12",tip:"胸前托哑铃，站距肩宽，脚尖外转10-15°。左膝推向小脚趾。当前13kg。",purpose:"下肢推",pr:"must",yt:"https://www.youtube.com/results?search_query=goblet+squat+proper+form+technique"},
+  dbReverseFly:{en:"DB Reverse Fly",zh:"俯身飞鸟",sets:"3×10-15",tip:"俯身45°，双臂侧展，肩胛后收。HVV同款。",purpose:"上背+扣球减速肌",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+reverse+fly+form"},
+  slRDL:{en:"Single-Leg RDL",zh:"单腿硬拉",sets:"3×8-10/侧",tip:"单腿站立前倾摸地。右5kg/左2.5kg或无负重。左侧可轻扶，不代偿。",purpose:"后链+平衡（监测项）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form"},
+  dbFloorFly:{en:"DB Floor Fly",zh:"地板飞鸟",sets:"3×10-12",tip:"仰卧地板，双臂展开合拢。地板限制下降保护肩。",purpose:"胸肌（保护肩版）",pr:"must",yt:"https://www.youtube.com/results?search_query=floor+dumbbell+chest+fly"},
+  sideStepUp:{en:"Side Step-Up",zh:"侧向上步",sets:"3×8-10/侧",tip:"侧面踏上高凳。替代弓步（无膝痛）。左腿多2-3个。膝盖不内扣！",purpose:"单腿推",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+step+up+dumbbell+exercise"},
+  arnoldPress:{en:"Arnold Press",zh:"Arnold推举",sets:"3×8-10",tip:"掌心朝自己开始，推举中旋转到掌心朝前。HVV家庭版。",purpose:"肩+旋转（扣球准备）",pr:"must",yt:"https://www.youtube.com/results?search_query=arnold+press+dumbbell+form"},
+  pushupPause:{en:"Push-up (3s Pause)",zh:"俯卧撑停顿",sets:"3×10-15",tip:"标准俯卧撑底部停3秒再推起。消除弹性反射。HVV同款。",purpose:"推力+底部力量",pr:"must",yt:"https://www.youtube.com/results?search_query=push+up+pause+at+bottom+technique"},
+  proneIYTW:{en:"Prone I-Y-T-W",zh:"俯卧IYTW",sets:"3×10-15",tip:"俯卧手臂做I/Y/T/W四个方向。覆盖肩袖全部肌群。",purpose:"肩袖稳定（伤害预防）",pr:"must",yt:"https://www.youtube.com/results?search_query=prone+IYTW+exercise+shoulder+rehab"},
+  sidePlankLegRaise:{en:"Side Plank+Raise",zh:"侧平板+抬腿",sets:"3×20-30s/侧",tip:"侧平板稳定后上方腿抬起。左侧做抬腿加强臀中肌。",purpose:"核心侧链+臀中肌",pr:"must",yt:"https://www.youtube.com/results?search_query=side+plank+leg+raise+exercise"},
+  slCalfRaiseISO:{en:"Calf Raise+ISO",zh:"提踵+静止",sets:"3×12-15/侧",tip:"提踵后最高点停10秒。左右分开做，观察差异。",purpose:"小腿耐力（跳跃落地）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+isometric+hold"},
+  dbVSit:{en:"DB V-Sit",zh:"V字仰卧起坐",sets:"3×10-15",tip:"持哑铃双腿上身同时V字抬起。控制速度不甩。HVV同款。",purpose:"核心屈曲（扣球收腹）",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+v+sit+up+exercise"},
+  dbSitupTwist:{en:"Sit-up Twist",zh:"仰卧起坐转体",sets:"3×10-12",tip:"仰卧起坐到顶部加左右转体。核心旋转——扣球发球动力链。",purpose:"核心旋转（扣球动力链）",pr:"must",yt:"https://www.youtube.com/results?search_query=weighted+sit+up+twist+exercise"},
+  stretch9090:{en:"90/90 Stretch",zh:"90/90拉伸",sets:"每侧30s×2",tip:"坐姿90/90长时间保持。左侧重点。",purpose:"髋活动度恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+stretch+hold"},
+  quadStretch:{en:"Quad Stretch",zh:"股四头肌拉伸",sets:"每侧30s",tip:"站立或侧卧拉脚踝靠近臀部。",purpose:"下肢恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=standing+quad+stretch"},
+  figure4Stretch:{en:"Figure-4 Stretch",zh:"4字形拉伸",sets:"每侧30s",tip:"仰卧一腿搭另一腿膝盖成4字，双手抱大腿拉向胸口。",purpose:"臀部深层放松",pr:"must",yt:"https://www.youtube.com/results?search_query=figure+4+stretch+piriformis"}
+};
+
+// ============================================
+// SECTIONS
+// ============================================
+const SECTIONS_BASE=[
+  {id:"warmup",num:1,title:"热身与协调",iconCls:"icon-warmup",time:"3min",desc:"唤醒身体，交叉行进改善步态协调。",exercises:["crossCrawl","jumpRopeWarmup"]},
+  {id:"hip",num:2,title:"髋关节激活",iconCls:"icon-hip",time:"6min",desc:"激活左髋活动度。蛤蛎式是最重要的激活动作，每次必做。",exercises:["hipRotation90","clamshell","hipAbduction"]},
+  {id:"stability",num:3,title:"单腿稳定",iconCls:"icon-stability",time:"7min",desc:"针对左侧骨盆下沉，通过单腿训练重建臀中肌控制。",exercises:["lateralBandWalk","slGluteBridge","hipAirplane"]},
+  {id:"core",num:4,title:"核心与平衡",iconCls:"icon-core",time:"5min",desc:"深层核心+单腿平衡。左侧站立能力是关键指标。",exercises:["deadBug","slBalance"]},
+  {id:"ankle",num:5,title:"脚踝与灵活性",iconCls:"icon-ankle",time:"4min",desc:"排球需要强壮足踝。髋屈肌拉伸释放紧张。",exercises:["shortFoot","slCalfRaise","hipFlexorStretch","bandedLungePull"]}
+];
+const SECTIONS_STR=[
+  {id:"strW",num:6,title:"力量热身",iconCls:"icon-warmup",time:"5min",desc:"心肺预热，不做到力竭。",exercises:["jumpRopeStr","mountainClimber","shoulderTapPlank"]},
+  {id:"ss1",num:7,title:"下肢推+上肢拉",iconCls:"icon-strength",time:"",desc:"高脚杯深蹲+俯身飞鸟，上下肢交替。",exercises:["gobletSquat","dbReverseFly"],ss:true,rope:true},
+  {id:"ss2",num:8,title:"下肢拉+上肢推",iconCls:"icon-strength",time:"",desc:"单腿RDL左侧是监测项。地板飞鸟保护肩。",exercises:["slRDL","dbFloorFly"],ss:true,rope:true},
+  {id:"ss3",num:9,title:"单腿+肩推",iconCls:"icon-strength",time:"",desc:"侧向Step-up替代弓步。Arnold推举准备扣球。",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true},
+  {id:"ss4",num:10,title:"推力+后链",iconCls:"icon-strength",time:"",desc:"俯卧撑停顿去弹性反射。IYTW覆盖肩袖全方向。",exercises:["pushupPause","proneIYTW"],ss:true,rope:true},
+  {id:"ss5",num:11,title:"核心+小腿",iconCls:"icon-strength",time:"",desc:"侧平板抬腿=核心+臀中肌。小腿模拟跳跃落地。",exercises:["sidePlankLegRaise","slCalfRaiseISO"],ss:true},
+  {id:"ss6",num:12,title:"核心旋转",iconCls:"icon-strength",time:"",desc:"扣球和发球动力链来自核心旋转。",exercises:["dbVSit","dbSitupTwist"],ss:true},
+  {id:"cool",num:13,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"力量训练后必须拉伸。90/90左侧重点。",exercises:["stretch9090","quadStretch","figure4Stretch"]}
+];
+const MON=[
+  {id:"itband",text:"Lateral Band Walk时IT Band感觉？",opts:["无不适","轻微，激活后消失","明显不适","需停止"]},
+  {id:"leftKnee",text:"深蹲左膝跟脚尖？",opts:["完全跟住","偶尔内扣","明显内扣","无法控制"]},
+  {id:"slRDLcomp",text:"单腿RDL左侧代偿？",opts:["不需要","轻微","明显","无法不代偿"]},
+  {id:"jointPain",text:"关节有无锐痛？",opts:["无","轻微酸胀","明显不适","锐痛(停止)"]},
+  {id:"leftBalance",text:"左侧单腿站立？",opts:["明显改善","持平","比之前差","很不稳"]},
+  {id:"energy",text:"整体感觉？",opts:["状态很好","正常","有点疲惫","非常疲惫"]}
+];
+const OTHER_ACTIVITIES=["排球训练","学校体育课","校外体育项目"];
+
+// ============================================
+// STATE
+// ============================================
+let today=new Date(),calM=today.getMonth(),calY=today.getFullYear();
+let draft={};let cloudData={};let isOnline=true;
+let currentSessionIdx=1,isRestDay=false;
+let baseCollapsed=false,strCollapsed=true;
+let saveState='saved';
+let autoSaveTimer=null;
+const SK='alex_training_v3';
+
+// ============================================
+// HELPERS
+// ============================================
+function cacheGet(){try{return JSON.parse(localStorage.getItem(SK))||{};}catch(e){return {};}}
+function cacheSet(d){try{localStorage.setItem(SK,JSON.stringify(d));}catch(e){}}
+function dk(d){if(typeof d==='string')return d;return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);}
+function getSessions(dateKey){const arr=cloudData[dateKey];if(!arr)return[];if(Array.isArray(arr))return arr;return[arr];}
+function getCurrentSaved(){return getSessions(dk(today)).find(function(s){return s.sessionIdx===currentSessionIdx;})||null;}
+function localISO(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'T'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');}
+function getModuleCompletion(sections){let t=0,d=0;sections.forEach(function(sec){sec.exercises.forEach(function(id){t++;if(draft&&draft.exercises&&draft.exercises[id]&&draft.exercises[id].done)d++;});});return t?Math.round(d/t*100):0;}
+function completionBadge(pct){
+  if(pct>=80) return '<span class="module-badge done">\u2713 '+pct+'%</span>';
+  if(pct>0) return '<span class="module-badge partial">'+pct+'%</span>';
+  return '<span class="module-badge empty">0%</span>';
+}
+function mergeDaySessions(dateKey){
+  const sessions=getSessions(dateKey).filter(function(s){return !s.isRest;});
+  const merged={exercises:{},monitoring:{},activities:[],notes:[]};let hasStr=false;
+  sessions.forEach(function(s){
+    if(s.exercises) Object.entries(s.exercises).forEach(function(e){var id=e[0],d=e[1];if(!merged.exercises[id]||d.done) merged.exercises[id]=d;});
+    if(s.monitoring) Object.entries(s.monitoring).forEach(function(e){var id=e[0],d=e[1];if(!merged.monitoring[id]||(d.value&&!merged.monitoring[id].value)) merged.monitoring[id]=d;});
+    if(s.otherActivities) s.otherActivities.forEach(function(a){if(!merged.activities.includes(a))merged.activities.push(a);});
+    if(s.notes) merged.notes.push(s.notes);
+    if(s.phase==='full') hasStr=true;
+  });
+  merged.phase=hasStr?'full':'base';merged.count=sessions.length;return merged;
+}
+
+// ============================================
+// STATUS PILL
+// ============================================
+function updateStatus(state,text){
+  const pill=document.getElementById('statusPill'),txt=document.getElementById('statusText');
+  if(!pill||!txt)return;
+  pill.className='status-pill '+state;
+  txt.textContent=text;
+}
+
+// ============================================
+// AUTO-SAVE
+// ============================================
+function markDirty(){
+  draft.notes=document.getElementById('sessionNotes')?.value||'';
+  localStorage.setItem('alex_draft',JSON.stringify(draft));
+  if(saveState==='saving') return;
+  saveState='dirty';updateStatus('saving','未保存');
+  if(autoSaveTimer) clearTimeout(autoSaveTimer);
+  autoSaveTimer=setTimeout(function(){doSave(true);},5000);
+}
+function doSave(isAuto){
+  if(saveState==='saving'&&isAuto) return;
+  if(saveState==='saved') return;
+  if(autoSaveTimer){clearTimeout(autoSaveTimer);autoSaveTimer=null;}
+  saveState='saving';updateStatus('saving','保存中...');
+  const key=dk(today);
+  const allEx={};
+  [].concat(SECTIONS_BASE,SECTIONS_STR).forEach(function(sec){sec.exercises.forEach(function(id){
+    allEx[id]={done:(draft&&draft.exercises&&draft.exercises[id]&&draft.exercises[id].done)||false,actual:(draft&&draft.exercises&&draft.exercises[id]&&draft.exercises[id].actual)||'',note:(draft&&draft.exercises&&draft.exercises[id]&&draft.exercises[id].note)||''};
+  });});
+  const monData={};
+  MON.forEach(function(q){monData[q.id]={value:(draft&&draft.monitoring&&draft.monitoring[q.id]&&draft.monitoring[q.id].value)||'',note:(draft&&draft.monitoring&&draft.monitoring[q.id]&&draft.monitoring[q.id].note)||''};});
+  const hasStr=SECTIONS_STR.some(function(sec){return sec.exercises.some(function(id){return allEx[id]&&allEx[id].done;});});
+  const sessionData={
+    date:key,sessionIdx:currentSessionIdx,phase:hasStr?'full':'base',isRest:isRestDay,
+    exercises:allEx,monitoring:monData,otherActivities:draft.otherActivities||[],
+    notes:document.getElementById('sessionNotes')?.value||'',savedAt:localISO()
+  };
+  cloudSave(key,currentSessionIdx,sessionData,function(result){
+    saveState='saved';
+    if(result&&result.success){updateStatus('synced','已保存');toast(isAuto?'已自动保存':'已保存');}
+    else{updateStatus('error','仅本地');toast('已保存到本地');}
+    renderControlBar();
+  });
+}
+
+// ============================================
+// CLOUD SYNC — fetch() 代替 google.script.run
+// ============================================
+function cloudLoad(callback){
+  updateStatus('syncing','连接中...');
+  fetch(GAS_API)
+    .then(function(r){
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(data){
+      cloudData=data||{};
+      cacheSet(cloudData);isOnline=true;updateStatus('synced','已连通');
+      if(callback)callback();
+    })
+    .catch(function(err){
+      console.warn('cloudLoad failed:',err);
+      cloudData=cacheGet();isOnline=false;updateStatus('error','离线');
+      if(callback)callback();
+    });
+}
+function cloudSave(dateKey,idx,sessionData,callback){
+  updateStatus('saving','保存中...');
+  if(!cloudData[dateKey])cloudData[dateKey]=[];
+  if(!Array.isArray(cloudData[dateKey]))cloudData[dateKey]=[cloudData[dateKey]];
+  const ei=cloudData[dateKey].findIndex(function(s){return s.sessionIdx===idx;});
+  if(ei>=0)cloudData[dateKey][ei]=sessionData;else cloudData[dateKey].push(sessionData);
+  cacheSet(cloudData);
+  var body=JSON.stringify({dateKey:dateKey,sessionIdx:idx,sessionJson:JSON.stringify(sessionData)});
+  fetch(GAS_API,{method:'POST',body:body})
+    .then(function(r){return r.json();})
+    .then(function(r){isOnline=true;if(callback)callback(r);})
+    .catch(function(e){
+      // POST 可能因 CORS 重定向无法读取响应，但数据已发送到服务器
+      // 用 no-cors 重试确保数据到达
+      fetch(GAS_API,{method:'POST',body:body,mode:'no-cors'})
+        .then(function(){isOnline=true;if(callback)callback({success:true});})
+        .catch(function(){isOnline=false;if(callback)callback({success:false});});
+    });
+}
+
+// ============================================
+// RENDER: CONTROL BAR
+// ============================================
+function renderControlBar(){
+  const key=dk(today),sessions=getSessions(key);
+  let h='<div class="control-bar">';
+  h+='<div class="activities-row"><span class="act-label">其他运动</span><div class="chip-group">';
+  h+='<span class="chip mini multi-sel'+(!(draft.otherActivities&&draft.otherActivities.length)?' selected':'')+'" onclick="toggleActivity(\'none\')">无</span>';
+  OTHER_ACTIVITIES.forEach(function(a){
+    var sel=(draft.otherActivities&&draft.otherActivities.includes(a))?' selected':'';
+    h+='<span class="chip mini multi-sel'+sel+'" onclick="toggleActivity(\''+a+'\')">'+a+'</span>';
+  });
+  h+='</div></div>';
+  h+='<div class="session-row">';
+  h+='<div class="rest-part"><span class="rlabel">休息日</span><label class="toggle-switch"><input type="checkbox" id="restToggle" '+(isRestDay?'checked':'')+' onchange="toggleRest()"><span class="toggle-slider"></span></label></div>';
+  h+='<div class="ctrl-div"></div>';
+  h+='<span class="session-chip'+(currentSessionIdx===1?' active':'')+'" onclick="switchSession(1)">训练一</span>';
+  var hasSaved1=sessions.some(function(s){return s.sessionIdx===1;});
+  if(hasSaved1||currentSessionIdx===2){
+    h+='<span class="session-chip'+(currentSessionIdx===2?' active':'')+'" onclick="switchSession(2)">训练二</span>';
+  }
+  h+='<div class="ctrl-div"></div>';
+  h+='<button class="btn-clear" onclick="clearForm()">\uD83D\uDDD1 清除</button>';
+  h+='</div></div>';
+  document.getElementById('controlBar').innerHTML=h;
+}
+
+// ============================================
+// CLEAR FORM
+// ============================================
+function clearForm(){
+  if(!confirm('清除当前表单所有填写内容？\n（不会删除已保存的数据）'))return;
+  draft={exercises:{},monitoring:{},notes:'',otherActivities:[]};
+  isRestDay=false;
+  localStorage.removeItem('alex_draft');
+  saveState='saved';updateStatus('synced','已连通');
+  renderTraining();
+  toast('表单已清除');
+}
+
+// ============================================
+// RENDER: TRAINING
+// ============================================
+function toggleRest(){
+  const toggle=document.getElementById('restToggle');
+  const wantRest=toggle.checked;
+  if(wantRest&&draft&&draft.exercises&&Object.values(draft.exercises).some(function(e){return e.done;})){
+    if(!confirm('已有训练记录，确定标记为休息日？')){toggle.checked=false;return;}
+  }
+  isRestDay=wantRest;renderTraining();markDirty();
+}
+
+function switchSession(idx){
+  currentSessionIdx=idx;
+  const saved=getCurrentSaved();
+  if(saved){
+    draft={exercises:Object.assign({},(saved.exercises||{})),monitoring:Object.assign({},(saved.monitoring||{})),notes:saved.notes||'',otherActivities:[].concat(saved.otherActivities||[])};
+    isRestDay=!!saved.isRest;
+    var hasStr=SECTIONS_STR.some(function(sec){return sec.exercises.some(function(id){return saved.exercises&&saved.exercises[id]&&saved.exercises[id].done;});});
+    strCollapsed=!hasStr;baseCollapsed=false;
+  } else {draft={};isRestDay=false;baseCollapsed=false;strCollapsed=true;}
+  saveState='saved';updateStatus('synced','已连通');
+  renderTraining();
+}
+
+function toggleModule(mod){
+  var scrollY=window.scrollY;
+  if(mod==='base')baseCollapsed=!baseCollapsed;else strCollapsed=!strCollapsed;
+  renderTrainingContent();requestAnimationFrame(function(){window.scrollTo(0,scrollY);});
+}
+
+function renderTraining(){
+  const DAYS=['周日','周一','周二','周三','周四','周五','周六'];
+  document.getElementById('headerDate').textContent=today.getFullYear()+'年'+(today.getMonth()+1)+'月'+today.getDate()+'日 '+DAYS[today.getDay()];
+  renderControlBar();
+  if(isRestDay){
+    document.getElementById('trainingContent').innerHTML='<div class="rest-msg"><div class="icon">\uD83C\uDF0A</div><p>今天是休息日</p><div class="sub">恢复也是训练的一部分</div></div>';
+    document.getElementById('monitoringSection').innerHTML='';
+    document.getElementById('notesSection').style.display='block';
+    document.getElementById('sessionNotes').value=(draft&&draft.notes)||'';
+    return;
+  }
+  document.getElementById('notesSection').style.display='block';
+  renderTrainingContent();
+}
+
+function renderTrainingContent(){
+  var basePct=getModuleCompletion(SECTIONS_BASE),strPct=getModuleCompletion(SECTIONS_STR);
+  var html='';
+  html+='<div class="module-card'+(baseCollapsed?' collapsed':'')+'" id="mod-base">';
+  html+='<div class="module-header" onclick="toggleModule(\'base\')"><div class="module-icon icon-base-module">1-5</div><h2>基础训练</h2>'+completionBadge(basePct)+'<span class="chevron">\u25BC</span></div>';
+  html+='<div class="module-body">';
+  SECTIONS_BASE.forEach(function(sec){html+=renderSection(sec,true);});
+  html+='</div></div>';
+  html+='<div class="module-card'+(strCollapsed?' collapsed':'')+'" id="mod-str">';
+  html+='<div class="module-header" onclick="toggleModule(\'str\')"><div class="module-icon icon-str-module">6+</div><h2>力量训练 + 放松</h2>'+completionBadge(strPct)+'<span class="chevron">\u25BC</span></div>';
+  html+='<div class="module-body">';
+  SECTIONS_STR.forEach(function(sec){html+=renderSection(sec,false);});
+  html+='</div></div>';
+  document.getElementById('trainingContent').innerHTML=html;
+  var mh='<div class="monitoring"><h3>训练监控</h3>';
+  MON.forEach(function(q){
+    var sv=(draft&&draft.monitoring&&draft.monitoring[q.id])||{};
+    mh+='<div class="monitor-item"><div class="q-text">'+q.text+'</div><div class="chip-group">';
+    q.opts.forEach(function(o,i){
+      var sel=sv.value===o?' selected':'';
+      var sev=i>=q.opts.length-1?' danger':i>=q.opts.length-2?' warn':'';
+      mh+='<span class="chip'+sev+sel+'" onclick="selectChip(this,\''+q.id+'\',\''+o+'\')">'+o+'</span>';
+    });
+    mh+='</div><input type="text" placeholder="补充说明..." value="'+(sv.note||'')+'" onchange="updMon(\''+q.id+'\',\'note\',this.value)" style="margin-top:4px;width:100%;background:var(--surface2);border:2px solid var(--border);color:var(--text);border-radius:10px;padding:6px 12px;font-size:0.8em;font-family:var(--font);min-height:36px;"></div>';
+  });
+  mh+='</div>';
+  document.getElementById('monitoringSection').innerHTML=mh;
+  document.getElementById('sessionNotes').value=(draft&&draft.notes)||'';
+}
+
+function renderSection(sec,isBase){
+  var h='<div class="section" id="sec-'+sec.id+'">';
+  h+='<div class="section-header" onclick="this.parentElement.classList.toggle(\'collapsed\')">';
+  h+='<div class="sec-icon '+sec.iconCls+'">'+sec.num+'</div>';
+  h+='<h3>'+sec.title+'</h3>';
+  if(sec.time) h+='<span class="time-badge">'+sec.time+'</span>';
+  h+='<span class="chevron">\u25BC</span></div>';
+  h+='<div class="section-desc">'+sec.desc+'</div>';
+  h+='<div class="section-body">';
+  if(isBase){
+    var must=sec.exercises.filter(function(id){return EX[id].pr==='must';});
+    var opt=sec.exercises.filter(function(id){return EX[id].pr==='opt';});
+    must.forEach(function(id){h+=renderEx(id);});
+    if(must.length>0&&opt.length>0) h+='<div class="priority-divider optional">以下可选，有时间再做</div>';
+    opt.forEach(function(id){h+=renderEx(id);});
+  } else {
+    sec.exercises.forEach(function(id,i){
+      h+=renderEx(id);
+      if(sec.ss&&i===0) h+='<div class="superset-label">A+B 连做 \u00B7 休息30-45s \u00B7 共3轮</div>';
+    });
+  }
+  if(sec.rope) h+='<div class="rope-break">~ 跳绳200次衔接 ~</div>';
+  h+='</div></div>';
+  return h;
+}
+
+function renderEx(id){
+  var ex=EX[id],sd=(draft&&draft.exercises&&draft.exercises[id])||{};
+  var dc=sd.done?' done':'';
+  var h='<div class="ex-capsule'+dc+'" id="ex-'+id+'">';
+  h+='<div class="ex-check-wrap"><input type="checkbox" class="ex-check" '+(sd.done?'checked':'')+' onchange="togEx(\''+id+'\',this.checked)"></div>';
+  h+='<div class="ex-text"><div class="ex-row1"><span class="ex-name">'+ex.en+'</span><span class="ex-zh">'+ex.zh+'</span>';
+  if(ex.pr==='opt') h+='<span class="opt-tag">可选</span>';
+  h+='</div><div class="ex-row2"><span class="sets">'+ex.sets+'</span><span class="purpose">'+ex.purpose+'</span></div></div>';
+  h+='<div class="ex-actions"><button class="ex-btn ex-btn-tip" onclick="openSheet(\''+id+'\')" title="详情">?</button>';
+  h+='<a class="ex-btn ex-btn-yt" href="'+ex.yt+'" target="_blank" title="视频">\u25B6</a></div></div>';
+  h+='<div class="ex-inputs"><input class="actual" type="text" placeholder="实际组数/重量" value="'+(sd.actual||'')+'" onchange="updEx(\''+id+'\',\'actual\',this.value)">';
+  h+='<input class="note" type="text" placeholder="备注" value="'+(sd.note||'')+'" onchange="updEx(\''+id+'\',\'note\',this.value)"></div>';
+  return h;
+}
+
+function openSheet(id){var ex=EX[id];if(!ex)return;document.getElementById('sheetTitle').textContent=ex.en+' '+ex.zh;document.getElementById('sheetSubtitle').textContent=ex.sets+' \u00B7 '+ex.purpose;document.getElementById('sheetBody').textContent=ex.tip;document.getElementById('sheetOverlay').classList.add('show');document.getElementById('sheetPanel').classList.add('show');}
+function closeSheet(){document.getElementById('sheetOverlay').classList.remove('show');document.getElementById('sheetPanel').classList.remove('show');}
+function selectChip(el,qId,val){var g=el.parentElement;var was=el.classList.contains('selected');g.querySelectorAll('.chip').forEach(function(c){c.classList.remove('selected');});if(!was){el.classList.add('selected');updMon(qId,'value',val);}else{updMon(qId,'value','');}}
+
+function toggleActivity(val){
+  if(!draft.otherActivities)draft.otherActivities=[];
+  if(val==='none'){draft.otherActivities=[];}else{
+    var idx=draft.otherActivities.indexOf(val);
+    if(idx>=0)draft.otherActivities.splice(idx,1);else draft.otherActivities.push(val);
+  }
+  markDirty();
+  var scrollY=window.scrollY;renderControlBar();requestAnimationFrame(function(){window.scrollTo(0,scrollY);});
+}
+
+function togEx(id,c){if(!draft.exercises)draft.exercises={};if(!draft.exercises[id])draft.exercises[id]={};draft.exercises[id].done=c;var e=document.getElementById('ex-'+id);if(e)e.classList.toggle('done',c);markDirty();}
+function updEx(id,f,v){if(!draft.exercises)draft.exercises={};if(!draft.exercises[id])draft.exercises[id]={};draft.exercises[id][f]=v;markDirty();}
+function updMon(id,f,v){if(!draft.monitoring)draft.monitoring={};if(!draft.monitoring[id])draft.monitoring[id]={};draft.monitoring[id][f]=v;markDirty();}
+function loadDraft(){try{draft=JSON.parse(localStorage.getItem('alex_draft'))||{};}catch(e){draft={};}}
+
+// ============================================
+// CALENDAR
+// ============================================
+function renderCalendar(){
+  document.getElementById('calTitle').textContent=calY+'\u5E74'+(calM+1)+'\u6708';
+  var h='';
+  ['\u4E00','\u4E8C','\u4E09','\u56DB','\u4E94','\u516D','\u65E5'].forEach(function(d){h+='<div class="cal-header">'+d+'</div>';});
+  var start=new Date(calY,calM,1).getDay()-1;if(start<0)start=6;
+  for(var i=0;i<start;i++)h+='<div class="cal-day empty"></div>';
+  var days=new Date(calY,calM+1,0).getDate(),now=new Date();
+  for(var d=1;d<=days;d++){
+    var dt=new Date(calY,calM,d),key=dk(dt),sessions=getSessions(key),isToday=dt.toDateString()===now.toDateString();
+    var cls='cal-day';if(isToday)cls+=' today';
+    var inner='<div class="day-num">'+d+'</div>';
+    if(sessions.length>0){
+      cls+=' has-session';var m=mergeDaySessions(key);
+      if(sessions.every(function(s){return s.isRest;})){cls+=' rest';inner+='<div class="rest-mark">\u4F11</div>';}
+      else{cls+=m.phase==='full'?' full':' base-only';var tE=0,tD=0;Object.values(m.exercises).forEach(function(e){tE++;if(e.done)tD++;});if(tE>0)inner+='<div class="completion">'+Math.round(tD/tE*100)+'%</div>';if(m.count>1)cls+=' multi';}
+    }else if(dt<now&&!isToday){inner+='<div class="rest-mark" style="color:var(--border2)">\u00B7</div>';}
+    h+='<div class="'+cls+'" onclick="showHist(\''+key+'\')">'+inner+'</div>';
+  }
+  document.getElementById('calGrid').innerHTML=h;
+}
+function calNav(dir){calM+=dir;if(calM>11){calM=0;calY++;}if(calM<0){calM=11;calY--;}renderCalendar();}
+
+function showHist(key){
+  var sessions=getSessions(key),el=document.getElementById('historyDetail');
+  if(!sessions.length){el.innerHTML='<div class="history-detail"><p style="color:var(--text2)">'+key+'\uFF1A\u65E0\u8BB0\u5F55</p></div>';return;}
+  var h='';
+  sessions.forEach(function(s,si){
+    var label=s.isRest?'\u4F11\u606F\u65E5':s.phase==='full'?'\u57FA\u7840+\u529B\u91CF':'\u57FA\u7840\u8BAD\u7EC3';
+    h+='<div class="history-detail"><h3>'+s.date+(sessions.length>1?' \u00B7 \u8BAD\u7EC3'+(si+1):'')+' \u2014 '+label+'</h3>';
+    h+='<div class="meta">\u4FDD\u5B58\u4E8E '+(s.savedAt||'');
+    if(s.otherActivities&&s.otherActivities.length)h+=' \u00B7 \u5176\u4ED6: '+s.otherActivities.join(', ');
+    h+='</div>';
+    if(!s.isRest){
+      var secs=s.phase==='full'?[].concat(SECTIONS_BASE,SECTIONS_STR):SECTIONS_BASE;
+      secs.forEach(function(sec){
+        var hasData=sec.exercises.some(function(id){return s.exercises&&s.exercises[id]&&(s.exercises[id].done||s.exercises[id].actual);});
+        if(!hasData&&s.phase==='full'&&SECTIONS_BASE.indexOf(sec)>=0)return;
+        h+='<div class="history-section-title">'+sec.num+' \u00B7 '+sec.title+'</div>';
+        sec.exercises.forEach(function(id){var ex=EX[id],d=(s.exercises&&s.exercises[id])||{};
+          h+='<div class="history-exercise"><span class="mark '+(d.done?'done':'skip')+'">'+(d.done?'\u2713':'\u00B7')+'</span><span>'+ex.en+'</span>';
+          if(d.actual)h+=' <span class="actual-val">['+d.actual+']</span>';
+          if(d.note)h+=' <span class="note-val">\u2014 '+d.note+'</span>';h+='</div>';});
+      });
+      if(s.monitoring){h+='<div class="history-monitoring"><div class="mon-title">\u76D1\u63A7\u53CD\u998B</div>';
+        MON.forEach(function(q){var m=s.monitoring[q.id];if(m&&m.value)h+='<div class="mon-item">'+q.text+' <strong>'+m.value+'</strong>'+(m.note?' \u2014 '+m.note:'')+'</div>';});h+='</div>';}
+    }
+    if(s.notes)h+='<div class="history-notes">'+s.notes+'</div>';h+='</div>';
+  });
+  el.innerHTML=h;
+}
+
+// ============================================
+// REPORT
+// ============================================
+function renderReport(){
+  var allSessions=[];
+  Object.values(cloudData).forEach(function(arr){(Array.isArray(arr)?arr:[arr]).forEach(function(s){if(s&&!s.isRest)allSessions.push(s);});});
+  allSessions.sort(function(a,b){return (a.date||'').localeCompare(b.date||'');});
+  if(!allSessions.length){document.getElementById('reportContent').innerHTML='<div class="report"><p style="color:var(--text2)">\u8FD8\u6CA1\u6709\u8BAD\u7EC3\u8BB0\u5F55\u3002</p></div>';return;}
+  var first=new Date(allSessions[0].date),now=new Date(),weeks=Math.max(1,Math.ceil((now-first)/(7*864e5))),period=Math.ceil(weeks/4)||1;
+  var full=allSessions.filter(function(s){return s.phase==='full';}).length,base=allSessions.filter(function(s){return s.phase==='base';}).length;
+  var tE=0,tD=0;allSessions.forEach(function(s){if(s.exercises)Object.values(s.exercises).forEach(function(e){tE++;if(e.done)tD++;});});
+  var avg=tE?Math.round(tD/tE*100):0;
+  var actCount={};allSessions.forEach(function(s){if(s.otherActivities)s.otherActivities.forEach(function(a){actCount[a]=(actCount[a]||0)+1;});});
+  var h='<div class="report"><h3>\u8BAD\u7EC3\u8FDB\u5C55\u62A5\u544A</h3><div class="subtitle">\u7B2C'+period+'\u4E2A4\u5468\u5468\u671F \u00B7 \u9996\u6B21 '+allSessions[0].date+' \u00B7 \u7D2F\u8BA1'+allSessions.length+'\u6B21</div>';
+  h+='<div class="stat-grid"><div class="stat-card"><div class="value">'+allSessions.length+'</div><div class="label">\u603B\u8BAD\u7EC3\u6B21\u6570</div></div>';
+  h+='<div class="stat-card"><div class="value">'+full+'/'+base+'</div><div class="label">\u5B8C\u6574/\u57FA\u7840</div></div>';
+  h+='<div class="stat-card"><div class="value">'+avg+'%</div><div class="label">\u5E73\u5747\u5B8C\u6210\u7387</div></div>';
+  h+='<div class="stat-card"><div class="value">'+weeks+'</div><div class="label">\u8BAD\u7EC3\u5468\u6570</div></div></div>';
+  if(Object.keys(actCount).length){
+    h+='<div style="margin:10px 0;font-size:.85em;color:var(--text2)">\u5176\u4ED6\u8FD0\u52A8: ';
+    Object.entries(actCount).forEach(function(e){h+='<span style="background:var(--purple-light);color:#4c3d99;padding:2px 10px;border-radius:10px;font-weight:600;margin-right:4px">'+e[0]+' \u00D7'+e[1]+'</span>';});
+    h+='</div>';
+  }
+  var exS={};allSessions.forEach(function(s){if(s.exercises)Object.entries(s.exercises).forEach(function(e){var id=e[0],d=e[1];if(!exS[id])exS[id]={t:0,d:0,a:[]};exS[id].t++;if(d.done)exS[id].d++;if(d.actual)exS[id].a.push({date:s.date,actual:d.actual});});});
+  h+='<div class="report-section"><h4>\u57FA\u7840\u52A8\u4F5C\u5B8C\u6210\u7387 (1-5)</h4>';
+  SECTIONS_BASE.forEach(function(sec){sec.exercises.forEach(function(id){
+    var st=exS[id];if(!st)return;var ex=EX[id];if(!ex)return;
+    var p=Math.round(st.d/st.t*100),c=p>=80?'var(--green)':p>=50?'var(--yellow)':'var(--red)';
+    h+='<div class="progress-item"><div class="plabel"><span>'+ex.en+' '+ex.zh+'</span><span>'+p+'% ('+st.d+'/'+st.t+')</span></div><div class="progress-bar"><div class="fill" style="width:'+p+'%;background:'+c+'"></div></div>';
+    if(st.a.length){var l=st.a[st.a.length-1];h+='<div style="font-size:.72em;color:var(--text3)">\u6700\u8FD1: '+l.actual+' ('+l.date+')</div>';}h+='</div>';});});
+  h+='</div>';
+  h+='<div class="report-section"><h4>\u529B\u91CF\u8BAD\u7EC3\u5B8C\u6210\u7387 (6-13)</h4>';
+  SECTIONS_STR.forEach(function(sec){sec.exercises.forEach(function(id){
+    var st=exS[id];if(!st)return;var ex=EX[id];if(!ex)return;
+    var p=Math.round(st.d/st.t*100),c=p>=80?'var(--green)':p>=50?'var(--yellow)':'var(--red)';
+    h+='<div class="progress-item"><div class="plabel"><span>'+ex.en+' '+ex.zh+'</span><span>'+p+'% ('+st.d+'/'+st.t+')</span></div><div class="progress-bar"><div class="fill" style="width:'+p+'%;background:'+c+'"></div></div>';
+    if(st.a.length){var l=st.a[st.a.length-1];h+='<div style="font-size:.72em;color:var(--text3)">\u6700\u8FD1: '+l.actual+' ('+l.date+')</div>';}h+='</div>';});});
+  h+='</div>';
+  h+='<div class="report-section"><h4>\u76D1\u63A7\u8D8B\u52BF</h4>';
+  MON.forEach(function(q){var vs=allSessions.filter(function(s){return s.monitoring&&s.monitoring[q.id]&&s.monitoring[q.id].value;}).map(function(s){return{d:s.date,v:s.monitoring[q.id].value,n:s.monitoring[q.id].note};});
+    if(vs.length){h+='<div style="margin:8px 0"><div style="font-weight:700;font-size:.85em">'+q.text+'</div>';
+      vs.forEach(function(v){var g=v.v.indexOf('\u65E0')>=0||v.v.indexOf('\u5B8C\u5168')>=0||v.v.indexOf('\u6539\u5584')>=0||v.v.indexOf('\u5F88\u597D')>=0;
+        h+='<div style="font-size:.8em;padding:1px 0"><span style="color:var(--text3)">'+v.d+'</span> <span style="color:'+(g?'var(--green)':'var(--yellow)')+'">'+v.v+'</span>'+(v.n?' \u2014 <span style="color:var(--text2);font-style:italic">'+v.n+'</span>':'')+'</div>';});h+='</div>';}});
+  h+='</div>';
+  h+='<div class="report-section"><h4>4\u5468\u8BC4\u4F30\u6E05\u5355</h4>';
+  ["\u9AD8\u811A\u676F\u6DF1\u8E72 13kg\u00D73\u00D715\uFF1F\u5DE6\u4FA7\u5F31\u611F\uFF1F","\u5355\u817F\u786C\u62C9\u5DE6\u4FA7 2.5kg\u4E0D\u4EE3\u507F\uFF1F","90/90\u5DE6\u4FA7 \u819D\u76D6\u79BB\u5730\u8DDD\u79BB\u51CF\u5C11\uFF1F","Lateral Band Walk \u6FC0\u6D3B\u540EIT Band\u65E0\u4E0D\u9002\uFF1F","\u6B65\u6001 \u53F3\u811A\u843D\u5730\u4E0B\u6C89\u6539\u5584\uFF1F","\u843D\u5730 \u5DE6\u819D\u5185\u6263\u51CF\u5C11\uFF1F","\u5BF9\u6BD4\u7167\u7247/\u89C6\u9891"].forEach(function(i){h+='<div style="font-size:.82em;padding:3px 0;color:var(--text2)">\u2610 '+i+'</div>';});
+  h+='</div></div>';
+  h+='<div style="text-align:center;margin:12px 0"><button class="btn-secondary" onclick="exportReport()">\u5BFC\u51FA\u62A5\u544A</button></div>';
+  document.getElementById('reportContent').innerHTML=h;
+}
+function exportReport(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([document.getElementById('reportContent').innerText],{type:'text/plain;charset=utf-8'}));a.download='Alex\u8BAD\u7EC3\u62A5\u544A_'+dk(new Date())+'.txt';a.click();}
+
+// ============================================
+// SETTINGS & EXPORT
+// ============================================
+function exportData(){var b=new Blob([JSON.stringify(cloudData,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='Alex\u8BAD\u7EC3\u6570\u636E_'+dk(new Date())+'.json';a.click();}
+function renderSettings(){
+  var ts=Object.values(cloudData).reduce(function(s,a){var l=Array.isArray(a)?a:[a];return s+l.length;},0);
+  var sz=new Blob([JSON.stringify(cloudData)]).size;
+  document.getElementById('statsOverview').innerHTML=isOnline
+    ?'<p style="font-size:.85em;color:var(--green)">\u2601\uFE0F \u4E91\u7AEF\u540C\u6B65 \u00B7 '+ts+' \u6B21\u8BB0\u5F55 \u00B7 '+(sz/1024).toFixed(1)+' KB</p>'
+    :'<p style="font-size:.85em;color:var(--orange)">\u26A0\uFE0F \u79BB\u7EBF \u00B7 '+ts+' \u6B21\u672C\u5730\u8BB0\u5F55</p>';
+}
+
+// ============================================
+// TABS
+// ============================================
+document.querySelectorAll('.tab').forEach(function(tab){tab.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});tab.classList.add('active');document.getElementById('panel-'+tab.dataset.tab).classList.add('active');if(tab.dataset.tab==='calendar')renderCalendar();if(tab.dataset.tab==='report')renderReport();if(tab.dataset.tab==='settings')renderSettings();});});
+
+function renderAll(){
+  var scrollY=window.scrollY,key=dk(today),sessions=getSessions(key);
+  if(sessions.length>0){
+    var latest=sessions[sessions.length-1];
+    currentSessionIdx=latest.sessionIdx||1;
+    if(latest.exercises)draft={exercises:Object.assign({},(latest.exercises||{})),monitoring:Object.assign({},(latest.monitoring||{})),notes:latest.notes||'',otherActivities:[].concat(latest.otherActivities||[])};
+    isRestDay=!!latest.isRest;
+    var hasStr=SECTIONS_STR.some(function(sec){return sec.exercises.some(function(id){return latest.exercises&&latest.exercises[id]&&latest.exercises[id].done;});});
+    strCollapsed=!hasStr;baseCollapsed=false;
+  }else{loadDraft();}
+  saveState='saved';updateStatus('synced','已连通');
+  renderTraining();renderCalendar();renderSettings();
+  requestAnimationFrame(function(){window.scrollTo(0,scrollY);});
+}
+
+// ============================================
+// INIT
+// ============================================
+(function init(){
+  cloudData=cacheGet();loadDraft();renderAll();
+  cloudLoad(function(){renderAll();var o=document.getElementById('loadingOverlay');if(o)o.style.display='none';});
+  setTimeout(function(){var o=document.getElementById('loadingOverlay');if(o)o.style.display='none';},5000);
+})();
+</script>
+</body>
+</html>
