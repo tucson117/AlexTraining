@@ -732,7 +732,7 @@ function renderEx(id){
   h+='</div><div class="ex-row2"><span class="sets">'+ex.sets+'</span><span class="purpose">'+ex.purpose+'</span></div></div>';
   h+='<div class="ex-actions"><button class="ex-btn ex-btn-tip" onclick="openSheet(\''+id+'\')" title="详情">?</button>';
   h+='<a class="ex-btn ex-btn-yt" href="'+ex.yt+'" target="_blank" title="视频">\u25B6</a></div></div>';
-  h+='<div class="ex-inputs"><input class="actual" type="text" inputmode="numeric" placeholder="实际组数/重量" value="'+(sd.actual||'')+'" onchange="updEx(\''+id+'\',\'actual\',this.value)">';
+  h+='<div class="ex-inputs"><input class="actual" type="text" placeholder="实际组数/重量" value="'+(sd.actual||'')+'" onchange="updEx(\''+id+'\',\'actual\',this.value)">';
   h+='<input class="note" type="text" placeholder="备注" value="'+(sd.note||'')+'" onchange="updEx(\''+id+'\',\'note\',this.value)"></div>';
   return h;
 }
