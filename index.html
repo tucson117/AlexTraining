@@ -388,64 +388,82 @@ const GAS_API = 'https://script.google.com/macros/s/AKfycbyZEwUWg4S_9_pqgqklj7y8
 // EXERCISE DATABASE
 // ============================================
 const EX={
-  crossCrawl:{en:"Cross Crawl",zh:"交叉行进",sets:"2×20",tip:"站立，右膝抬起碰左手肘，换边。训练对侧协调——改善步态中右臂不摆动的问题。",purpose:"步态协调",pr:"must",yt:"https://www.youtube.com/results?search_query=cross+crawl+standing+exercise"},
-  jumpRopeWarmup:{en:"Jump Rope",zh:"跳绳",sets:"2×1min",tip:"轻松节奏，双脚微跳，脚踝弹性。心率微升即可。",purpose:"心肺预热",pr:"opt",yt:"https://www.youtube.com/results?search_query=jump+rope+basics+beginner"},
-  hipRotation90:{en:"Hip 90/90",zh:"髋关节旋转+90/90",sets:"各15次",tip:"仰卧屈膝双腿倒向左右（内外旋）。然后坐姿90/90：前后腿各弯90°，交替转向。感受左右差异。",purpose:"髋关节活动度",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+mobility+stretch+transition"},
-  clamshell:{en:"Clamshell",zh:"蛤蛎式",sets:"3×15 / 左4×15",tip:"弹力带套膝上方，侧卧屈膝，上方膝盖打开。骨盆不要后翻！左侧多做1组。最重要的臀中肌激活动作。",purpose:"臀中肌激活",pr:"must",yt:"https://www.youtube.com/results?search_query=clamshell+exercise+resistance+band+glute+med"},
-  hipAbduction:{en:"Hip Abduction",zh:"侧卧直腿抬高",sets:"2×12/侧",tip:"侧卧伸直腿，脚尖略内旋，缓慢抬起。激活臀中肌后部纤维。",purpose:"臀中肌后部",pr:"must",yt:"https://www.youtube.com/results?search_query=side+lying+hip+abduction+glute+med"},
-  lateralBandWalk:{en:"Lateral Band Walk",zh:"弹力带横移",sets:"3×15步/方向",tip:"弹力带套踝上方，微蹲横向走。蛤蛎式激活后做，IT Band不适应减轻。",purpose:"臀中肌功能化",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+band+walk+proper+form"},
-  slGluteBridge:{en:"SL Glute Bridge",zh:"单腿臀桥",sets:"3×12/侧",tip:"仰卧屈膝，单腿蹬地抬臀。脚跟驱动，顶部骨盆水平。",purpose:"臀大肌+骨盆稳定",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+glute+bridge+form"},
-  hipAirplane:{en:"Hip Airplane",zh:"Hip Airplane",sets:"2×8/侧",tip:"单腿站立前倾，躯干缓慢左右旋转。左侧控制是重点，可扶墙。",purpose:"髋三维控制",pr:"opt",yt:"https://www.youtube.com/results?search_query=hip+airplane+exercise+single+leg"},
-  deadBug:{en:"Dead Bug",zh:"Dead Bug",sets:"3×10/侧",tip:"仰卧双手双脚朝天，对侧手脚同时伸出，腰椎贴地。核心抗伸展。",purpose:"核心深层稳定",pr:"opt",yt:"https://www.youtube.com/results?search_query=dead+bug+exercise+proper+form"},
-  slBalance:{en:"SL Balance",zh:"单腿站立",sets:"3×20-30s/侧",tip:"赤脚站立。左侧重点：臀部撑住，不让身体左倒。",purpose:"Trendelenburg监测",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+balance+stand+exercise"},
-  shortFoot:{en:"Short Foot",zh:"短足训练",sets:"10s×10",tip:"赤脚，用足弓肌肉撑起足弓（脚趾不卷）。建立足弓控制。",purpose:"足弓激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=short+foot+exercise+arch+activation"},
-  slCalfRaise:{en:"SL Calf Raise",zh:"单腿提踵",sets:"3×15/侧",tip:"台阶边缘全幅度提踵，下降3秒。排球落地需要强壮小腿。",purpose:"小腿力量",pr:"opt",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+full+range"},
-  hipFlexorStretch:{en:"Hip Flexor Stretch",zh:"髋屈肌拉伸",sets:"2×30s/侧",tip:"半跪姿，后腿侧臀肌收紧，身体微前移。释放髋屈肌紧张。",purpose:"髋屈肌释放",pr:"opt",yt:"https://www.youtube.com/results?search_query=half+kneeling+hip+flexor+stretch"},
-  bandedLungePull:{en:"Banded Lunge Pull",zh:"弹力带弓步侧拉",sets:"2×8/侧",tip:"弹力带从侧面拉住前膝做弓步抗阻。激活大转子区域深层肌肉。",purpose:"深层肌肉激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=banded+lunge+lateral+pull+hip+stability"},
-  jumpRopeStr:{en:"Jump Rope",zh:"跳绳热身",sets:"2×1min",tip:"基础动作过渡到力量训练。脚踝预热。",purpose:"心肺预热",pr:"must",yt:"https://www.youtube.com/results?search_query=jump+rope+warm+up"},
-  mountainClimber:{en:"Mountain Climber",zh:"Mountain Climber",sets:"2×30s",tip:"平板支撑交替提膝。中等速度，不冲刺！核心收紧。",purpose:"心肺+核心",pr:"must",yt:"https://www.youtube.com/results?search_query=mountain+climber+exercise+form"},
-  shoulderTapPlank:{en:"Shoulder Tap",zh:"Shoulder Tap",sets:"2×30s",tip:"平板支撑交替触肩。骨盆不转动！抗旋转核心训练。",purpose:"核心抗旋转",pr:"must",yt:"https://www.youtube.com/results?search_query=shoulder+tap+plank+anti+rotation"},
-  gobletSquat:{en:"Goblet Squat",zh:"高脚杯深蹲",sets:"3×8-12",tip:"胸前托哑铃，站距肩宽，脚尖外转10-15°。左膝推向小脚趾。当前13kg。",purpose:"下肢推",pr:"must",yt:"https://www.youtube.com/results?search_query=goblet+squat+proper+form+technique"},
-  dbReverseFly:{en:"DB Reverse Fly",zh:"俯身飞鸟",sets:"3×10-15",tip:"俯身45°，双臂侧展，肩胛后收。HVV同款。",purpose:"上背+扣球减速肌",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+reverse+fly+form"},
-  slRDL:{en:"Single-Leg RDL",zh:"单腿硬拉",sets:"3×8-10/侧",tip:"单腿站立前倾摸地。右5kg/左2.5kg或无负重。左侧可轻扶，不代偿。",purpose:"后链+平衡（监测项）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form"},
-  dbFloorFly:{en:"DB Floor Fly",zh:"地板飞鸟",sets:"3×10-12",tip:"仰卧地板，双臂展开合拢。地板限制下降保护肩。",purpose:"胸肌（保护肩版）",pr:"must",yt:"https://www.youtube.com/results?search_query=floor+dumbbell+chest+fly"},
-  sideStepUp:{en:"Side Step-Up",zh:"侧向上步",sets:"3×8-10/侧",tip:"侧面踏上高凳。替代弓步（无膝痛）。左腿多2-3个。膝盖不内扣！",purpose:"单腿推",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+step+up+dumbbell+exercise"},
-  arnoldPress:{en:"Arnold Press",zh:"Arnold推举",sets:"3×8-10",tip:"掌心朝自己开始，推举中旋转到掌心朝前。HVV家庭版。",purpose:"肩+旋转（扣球准备）",pr:"must",yt:"https://www.youtube.com/results?search_query=arnold+press+dumbbell+form"},
-  pushupPause:{en:"Push-up (3s Pause)",zh:"俯卧撑停顿",sets:"3×10-15",tip:"标准俯卧撑底部停3秒再推起。消除弹性反射。HVV同款。",purpose:"推力+底部力量",pr:"must",yt:"https://www.youtube.com/results?search_query=push+up+pause+at+bottom+technique"},
-  proneIYTW:{en:"Prone I-Y-T-W",zh:"俯卧IYTW",sets:"3×10-15",tip:"俯卧手臂做I/Y/T/W四个方向。覆盖肩袖全部肌群。",purpose:"肩袖稳定（伤害预防）",pr:"must",yt:"https://www.youtube.com/results?search_query=prone+IYTW+exercise+shoulder+rehab"},
-  sidePlankLegRaise:{en:"Side Plank+Raise",zh:"侧平板+抬腿",sets:"3×20-30s/侧",tip:"侧平板稳定后上方腿抬起。左侧做抬腿加强臀中肌。",purpose:"核心侧链+臀中肌",pr:"must",yt:"https://www.youtube.com/results?search_query=side+plank+leg+raise+exercise"},
-  slCalfRaiseISO:{en:"Calf Raise+ISO",zh:"提踵+静止",sets:"3×12-15/侧",tip:"提踵后最高点停10秒。左右分开做，观察差异。",purpose:"小腿耐力（跳跃落地）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+isometric+hold"},
-  dbVSit:{en:"DB V-Sit",zh:"V字仰卧起坐",sets:"3×10-15",tip:"持哑铃双腿上身同时V字抬起。控制速度不甩。HVV同款。",purpose:"核心屈曲（扣球收腹）",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+v+sit+up+exercise"},
-  dbSitupTwist:{en:"Sit-up Twist",zh:"仰卧起坐转体",sets:"3×10-12",tip:"仰卧起坐到顶部加左右转体。核心旋转——扣球发球动力链。",purpose:"核心旋转（扣球动力链）",pr:"must",yt:"https://www.youtube.com/results?search_query=weighted+sit+up+twist+exercise"},
+  // === 预备热身 ===
+  thoracicRotation:{en:"Thoracic Rotation",zh:"仰卧胸椎旋转（开胸）",sets:"各5-8次/侧",tip:"躺下来手臂打开，感受胸椎转动。每次训练第一件事。",purpose:"胸椎活动度",pr:"must",yt:"https://www.youtube.com/results?search_query=supine+thoracic+rotation+stretch"},
+  windshieldWiper:{en:"Windshield Wiper",zh:"仰卧膝倒（雨刷）",sets:"各10次/侧",tip:"双腿弯起左右倒，髋关节内外旋预热。配合胸椎旋转作为开场。",purpose:"髋关节内外旋预热",pr:"must",yt:"https://www.youtube.com/results?search_query=supine+windshield+wiper+hip+mobility"},
+  // === 热身与协调 ===
+  crossCrawl:{en:"Cross Crawl",zh:"交叉行进",sets:"1×50-60 或 1分钟",tip:"站立，对侧手膝碰触。一组做完即可。训练对侧协调——改善步态。",purpose:"步态协调",pr:"must",yt:"https://www.youtube.com/results?search_query=cross+crawl+standing+exercise"},
+  jumpingJacks:{en:"Jumping Jacks",zh:"开合跳",sets:"1×1分钟",tip:"室内用开合跳替代跳绳。心率微升即可，不需要做到喘。",purpose:"心肺预热",pr:"must",yt:"https://www.youtube.com/results?search_query=jumping+jacks+proper+form"},
+  // === 髋关节激活 ===
+  hipRotation90:{en:"Hip 90/90",zh:"90/90髋关节旋转转换",sets:"1×20（各10）",tip:"坐姿90/90：前后腿各弯90°，交替转向。感受左右差异。左侧有明显改善趋势。",purpose:"髋关节活动度",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+mobility+stretch+transition"},
+  clamshell:{en:"Clamshell",zh:"蛤蛎式",sets:"左2×15 + 右1×15",tip:"弹力带套膝上方，侧卧屈膝，上方膝盖打开。骨盆不要后翻！**最重要的臀中肌激活动作**。目前轻弹力带。",purpose:"臀中肌激活",pr:"must",yt:"https://www.youtube.com/results?search_query=clamshell+exercise+resistance+band+glute+med"},
+  hipAbduction:{en:"Hip Abduction",zh:"侧卧直腿抬高",sets:"2×10/侧",tip:"侧卧伸直腿，脚尖略内旋，缓慢抬起。激活臀中肌后部纤维。",purpose:"臀中肌后部",pr:"must",yt:"https://www.youtube.com/results?search_query=side+lying+hip+abduction+glute+med"},
+  // === 单腿稳定 ===
+  slGluteBridge:{en:"SL Glute Bridge",zh:"单腿臀桥",sets:"3×7/侧（顶部3秒）",tip:"仰卧屈膝，单腿蹬地抬臀。脚跟驱动，顶部保持3秒，骨盆水平。减少数量提高质量。",purpose:"臀大肌+骨盆稳定",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+glute+bridge+form"},
+  hipAirplane:{en:"Hip Airplane",zh:"Hip Airplane",sets:"2×10/侧",tip:"单腿站立前倾，躯干缓慢左右旋转。扶椅子慢速，体会髋部转动可控性。右侧控制优于左侧。",purpose:"髋三维控制",pr:"must",yt:"https://www.youtube.com/results?search_query=hip+airplane+exercise+single+leg"},
+  slBalance:{en:"SL Balance",zh:"单腿站立",sets:"左右左 3×30s",tip:"赤脚站立。左侧多做一组（左右左）。注意左髋不要向内折叠。",purpose:"Trendelenburg监测",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+balance+stand+exercise"},
+  lateralBandWalk:{en:"Lateral Band Walk",zh:"弹力带横移",sets:"2-3×15步/方向",tip:"弹力带套踝上方，微蹲横向走。**放最后做**，测试IT Band。左侧先走多一组。用髋带膝盖走，膝盖以下像固定的鞋子。",purpose:"臀中肌功能化（IT Band测试）",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+band+walk+proper+form"},
+  // === 穿插用动作 ===
+  deadBug:{en:"Dead Bug",zh:"Dead Bug",sets:"1×10",tip:"仰卧双手双脚朝天，对侧手脚同时伸出，腰椎贴地。蛤蛎式组间穿插用。",purpose:"核心深层稳定（穿插）",pr:"opt",yt:"https://www.youtube.com/results?search_query=dead+bug+exercise+proper+form"},
+  // === 拉伸与灵活性（有时间加做）===
+  hipFlexorStretch:{en:"Hip Flexor Stretch",zh:"髋屈肌拉伸",sets:"1-2×30s/侧",tip:"半跪姿，后腿侧臀肌收紧，身体微前移。Alex感觉明显，尽量安排。",purpose:"髋屈肌释放",pr:"opt",yt:"https://www.youtube.com/results?search_query=half+kneeling+hip+flexor+stretch"},
+  bandedLungePull:{en:"Banded Lunge Pull",zh:"弹力带弓步侧拉",sets:"1-2×30s/侧",tip:"弹力带从侧面拉住前膝做弓步抗阻。大转子前方激活感强烈，尽量安排。",purpose:"深层肌肉激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=banded+lunge+lateral+pull+hip+stability"},
+  shortFoot:{en:"Short Foot",zh:"短足训练",sets:"可省略",tip:"日常动作中提醒足弓三点即可，不单独占时间。",purpose:"足弓激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=short+foot+exercise+arch+activation"},
+  slCalfRaise:{en:"SL Calf Raise",zh:"单腿提踵",sets:"可省略",tip:"大训练有负重版。如有时间随手做几个。",purpose:"小腿力量",pr:"opt",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+full+range"},
+  // === 力量热身+预激活 ===
+  jumpingJacksStr:{en:"Jumping Jacks",zh:"开合跳（力量预热）",sets:"1×1分钟",tip:"室内开合跳。如果刚做完基础动作可跳过。",purpose:"心肺预热",pr:"must",yt:"https://www.youtube.com/results?search_query=jumping+jacks+proper+form"},
+  boxSquat:{en:"Box Squat",zh:"箱式深蹲（预激活）",sets:"2×5",tip:"坐到凳子上停2秒，臀部主动发力站起。让臀肌开机，避免第一组深蹲膝盖代偿。",purpose:"深蹲前臀肌激活",pr:"must",yt:"https://www.youtube.com/results?search_query=box+squat+bodyweight+activation"},
+  // === 力量超级组 ===
+  gobletSquat:{en:"Goblet Squat",zh:"高脚杯深蹲",sets:"3×10",tip:"胸前托哑铃10kg（稳定后回13kg）。站距肩宽，脚尖外转10-15°，左膝推向小脚趾。起身时腰背不要过度前倾。",purpose:"下肢推",pr:"must",yt:"https://www.youtube.com/results?search_query=goblet+squat+proper+form+technique"},
+  dbReverseFly:{en:"DB Reverse Fly",zh:"俯身哑铃飞鸟",sets:"3×10-15",tip:"2×3.5kg。俯身45°，双臂侧展，肩胛后收。不需要大重量，控制肩胛后收。",purpose:"上背+扣球减速肌",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+reverse+fly+form"},
+  slRDL:{en:"Single-Leg RDL",zh:"单腿硬拉",sets:"3×10/侧",tip:"左右均5kg。左侧稳定性在改善但右臀上翘仍明显。暂不减重，重点提高技术质量。",purpose:"后链+平衡（监测项）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form"},
+  dbFloorFly:{en:"DB Bench Fly",zh:"哑铃凳飞鸟",sets:"3×10",tip:"2×3.5kg。哑铃凳上做比地板方便。双臂展开合拢，保护肩。",purpose:"胸肌（保护肩版）",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+bench+chest+fly"},
+  sideStepUp:{en:"Side Step-Up",zh:"侧向台阶上步",sets:"3×8-10/侧",tip:"用较矮台阶（20-25cm）自重，避免碰天花板。膝盖不内扣！备选：后退弓步3×6/侧（双手各持0.5kg哑铃片帮助平衡）。",purpose:"单腿推",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+step+up+exercise"},
+  arnoldPress:{en:"Arnold Press",zh:"Arnold推举",sets:"3×10",tip:"8kg哑铃。掌心朝自己开始，推举中旋转到掌心朝前。注意推举前先沉肩，避免右侧耸肩代偿。",purpose:"肩+旋转（扣球准备）",pr:"must",yt:"https://www.youtube.com/results?search_query=arnold+press+dumbbell+form"},
+  pushupPause:{en:"Push-up (3s Pause)",zh:"俯卧撑停顿",sets:"3×7/6/6",tip:"标准俯卧撑底部停3秒再推起。当前实际水平，质量优于数量，做得很标准。",purpose:"推力+底部力量",pr:"must",yt:"https://www.youtube.com/results?search_query=push+up+pause+at+bottom+technique"},
+  proneIYTW:{en:"Prone I-Y-T-W",zh:"俯卧IYTW",sets:"3×8-10",tip:"俯卧手臂做I/Y/T/W四个方向。会觉得吃力——正常，说明在练到该练的地方。",purpose:"肩袖稳定（伤害预防）",pr:"must",yt:"https://www.youtube.com/results?search_query=prone+IYTW+exercise+shoulder+rehab"},
+  sidePlankLegRaise:{en:"Side Plank (Modified)",zh:"侧平板支撑（弯腿版）",sets:"右在下3×20-30s / 左在下3×10-20s",tip:"下方腿弯曲。能保持就保持，不强求抬腿。**左侧在下时不抬右腿**（避免右髋卡顿响声）。",purpose:"核心侧链+臀中肌",pr:"must",yt:"https://www.youtube.com/results?search_query=modified+side+plank+bent+knee"},
+  slCalfRaiseISO:{en:"Calf Raise+Hold",zh:"单腿提踵",sets:"3×12-15/侧",tip:"顶部保持2-3秒即可。左右分开做，观察差异。",purpose:"小腿耐力（跳跃落地）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+isometric+hold"},
+  lyingLegRaise:{en:"Lying Leg Raise + Toe Touch",zh:"仰卧腿上伸摸脚",sets:"2-3×10",tip:"替代V字仰卧起坐（Alex腿太长做不出标准V-sit）。双腿朝天伸直，上身抬起摸脚尖。",purpose:"核心屈曲（扣球收腹）",pr:"must",yt:"https://www.youtube.com/results?search_query=lying+leg+raise+toe+touch+exercise"},
+  dbSitupTwist:{en:"Sit-up Twist",zh:"仰卧起坐转体",sets:"3×10",tip:"仰卧起坐到顶部加左右转体。核心旋转——扣球发球动力链。",purpose:"核心旋转（扣球动力链）",pr:"must",yt:"https://www.youtube.com/results?search_query=weighted+sit+up+twist+exercise"},
+  // === 放松拉伸 ===
   stretch9090:{en:"90/90 Stretch",zh:"90/90拉伸",sets:"每侧30s×2",tip:"坐姿90/90长时间保持。左侧重点。",purpose:"髋活动度恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+stretch+hold"},
   quadStretch:{en:"Quad Stretch",zh:"股四头肌拉伸",sets:"每侧30s",tip:"站立或侧卧拉脚踝靠近臀部。",purpose:"下肢恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=standing+quad+stretch"},
-  figure4Stretch:{en:"Figure-4 Stretch",zh:"4字形拉伸",sets:"每侧30s",tip:"仰卧一腿搭另一腿膝盖成4字，双手抱大腿拉向胸口。",purpose:"臀部深层放松",pr:"must",yt:"https://www.youtube.com/results?search_query=figure+4+stretch+piriformis"}
+  figure4Stretch:{en:"Figure-4 Stretch",zh:"4字形拉伸",sets:"每侧30s",tip:"仰卧一腿搭另一腿膝盖成4字，双手抱大腿拉向胸口。Alex喜欢做这个。",purpose:"臀部深层放松",pr:"must",yt:"https://www.youtube.com/results?search_query=figure+4+stretch+piriformis"},
+  // === 旧版保留（历史数据兼容）===
+  jumpRopeWarmup:{en:"Jump Rope",zh:"跳绳（已替换为开合跳）",sets:"—",tip:"已被开合跳替代。",purpose:"心肺预热",pr:"opt",legacy:true,yt:""},
+  jumpRopeStr:{en:"Jump Rope",zh:"跳绳热身（已替换）",sets:"—",tip:"已被开合跳替代。",purpose:"心肺预热",pr:"opt",legacy:true,yt:""},
+  mountainClimber:{en:"Mountain Climber",zh:"Mountain Climber",sets:"2×30s",tip:"平板支撑交替提膝。中等速度，不冲刺！核心收紧。",purpose:"心肺+核心",pr:"opt",legacy:true,yt:"https://www.youtube.com/results?search_query=mountain+climber+exercise+form"},
+  shoulderTapPlank:{en:"Shoulder Tap",zh:"Shoulder Tap",sets:"2×30s",tip:"平板支撑交替触肩。骨盆不转动！抗旋转核心训练。",purpose:"核心抗旋转",pr:"opt",legacy:true,yt:"https://www.youtube.com/results?search_query=shoulder+tap+plank+anti+rotation"},
+  dbVSit:{en:"DB V-Sit",zh:"V字仰卧起坐（已替换）",sets:"—",tip:"已被仰卧腿上伸摸脚替代（Alex腿太长做不出标准V-sit）。",purpose:"核心屈曲",pr:"opt",legacy:true,yt:""}
 };
 
 // ============================================
 // SECTIONS
 // ============================================
 const SECTIONS_BASE=[
-  {id:"warmup",num:1,title:"热身与协调",iconCls:"icon-warmup",time:"3min",desc:"唤醒身体，交叉行进改善步态协调。",exercises:["crossCrawl","jumpRopeWarmup"]},
-  {id:"hip",num:2,title:"髋关节激活",iconCls:"icon-hip",time:"6min",desc:"激活左髋活动度。蛤蛎式是最重要的激活动作，每次必做。",exercises:["hipRotation90","clamshell","hipAbduction"]},
-  {id:"stability",num:3,title:"单腿稳定",iconCls:"icon-stability",time:"7min",desc:"针对左侧骨盆下沉，通过单腿训练重建臀中肌控制。",exercises:["lateralBandWalk","slGluteBridge","hipAirplane"]},
-  {id:"core",num:4,title:"核心与平衡",iconCls:"icon-core",time:"5min",desc:"深层核心+单腿平衡。左侧站立能力是关键指标。",exercises:["deadBug","slBalance"]},
-  {id:"ankle",num:5,title:"脚踝与灵活性",iconCls:"icon-ankle",time:"4min",desc:"排球需要强壮足踝。髋屈肌拉伸释放紧张。",exercises:["shortFoot","slCalfRaise","hipFlexorStretch","bandedLungePull"]}
+  {id:"prewarm",num:0,title:"预备热身",iconCls:"icon-warmup",time:"2min",desc:"每次训练第一件事。胸椎+髋关节预热。",exercises:["thoracicRotation","windshieldWiper"]},
+  {id:"warmup",num:1,title:"热身与协调 ⭐必做",iconCls:"icon-warmup",time:"3min",desc:"交叉行进+开合跳，心率微升。",exercises:["crossCrawl","jumpingJacks"]},
+  {id:"hip",num:2,title:"髋关节激活 ⭐必做",iconCls:"icon-hip",time:"6min",desc:"蛤蛎式是最重要的激活动作。组间可穿插Dead Bug或开合跳30s。",exercises:["hipRotation90","clamshell","hipAbduction"]},
+  {id:"stability",num:3,title:"单腿稳定 ⭐必做",iconCls:"icon-stability",time:"7min",desc:"单腿臀桥+Airplane+单腿站立。Lateral Band Walk放最后测试IT Band。",exercises:["slGluteBridge","hipAirplane","slBalance","lateralBandWalk"]},
+  {id:"flex",num:4,title:"拉伸与灵活性（有时间加做）",iconCls:"icon-ankle",time:"4min",desc:"髋屈肌拉伸和弹力带弓步侧拉尽量安排。其余可省略。",exercises:["hipFlexorStretch","bandedLungePull","shortFoot","slCalfRaise"]}
 ];
 const SECTIONS_STR=[
-  {id:"strW",num:6,title:"力量热身",iconCls:"icon-warmup",time:"5min",desc:"心肺预热，不做到力竭。",exercises:["jumpRopeStr","mountainClimber","shoulderTapPlank"]},
-  {id:"ss1",num:7,title:"下肢推+上肢拉",iconCls:"icon-strength",time:"",desc:"高脚杯深蹲+俯身飞鸟，上下肢交替。",exercises:["gobletSquat","dbReverseFly"],ss:true,rope:true},
-  {id:"ss2",num:8,title:"下肢拉+上肢推",iconCls:"icon-strength",time:"",desc:"单腿RDL左侧是监测项。地板飞鸟保护肩。",exercises:["slRDL","dbFloorFly"],ss:true,rope:true},
-  {id:"ss3",num:9,title:"单腿+肩推",iconCls:"icon-strength",time:"",desc:"侧向Step-up替代弓步。Arnold推举准备扣球。",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true},
-  {id:"ss4",num:10,title:"推力+后链",iconCls:"icon-strength",time:"",desc:"俯卧撑停顿去弹性反射。IYTW覆盖肩袖全方向。",exercises:["pushupPause","proneIYTW"],ss:true,rope:true},
-  {id:"ss5",num:11,title:"核心+小腿",iconCls:"icon-strength",time:"",desc:"侧平板抬腿=核心+臀中肌。小腿模拟跳跃落地。",exercises:["sidePlankLegRaise","slCalfRaiseISO"],ss:true},
-  {id:"ss6",num:12,title:"核心旋转",iconCls:"icon-strength",time:"",desc:"扣球和发球动力链来自核心旋转。",exercises:["dbVSit","dbSitupTwist"],ss:true},
-  {id:"cool",num:13,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"力量训练后必须拉伸。90/90左侧重点。",exercises:["stretch9090","quadStretch","figure4Stretch"]}
+  {id:"strW",num:5,title:"力量预热+深蹲预激活",iconCls:"icon-warmup",time:"3min",desc:"如刚做完基础动作可跳过开合跳。箱式深蹲让臀肌开机，避免膝盖代偿。",exercises:["jumpingJacksStr","boxSquat"]},
+  {id:"ss1",num:6,title:"SS1 下肢推+上肢拉",iconCls:"icon-strength",time:"",desc:"高脚杯深蹲10kg + 俯身飞鸟2×3.5kg",exercises:["gobletSquat","dbReverseFly"],ss:true,rope:true},
+  {id:"ss2",num:7,title:"SS2 下肢拉+上肢推",iconCls:"icon-strength",time:"",desc:"单腿RDL 5kg（左侧监测项）+ 哑铃凳飞鸟2×3.5kg",exercises:["slRDL","dbFloorFly"],ss:true,rope:true},
+  {id:"ss3",num:8,title:"SS3 单腿+肩推",iconCls:"icon-strength",time:"",desc:"侧向Step-up（20-25cm自重）+ Arnold推举8kg。膝盖不适则换后退弓步。",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true},
+  {id:"ss4",num:9,title:"SS4 推力+后链",iconCls:"icon-strength",time:"",desc:"俯卧撑3×7/6/6 + IYTW肩袖稳定",exercises:["pushupPause","proneIYTW"],ss:true,rope:true},
+  {id:"ss5",num:10,title:"SS5 核心侧链+小腿",iconCls:"icon-strength",time:"",desc:"侧平板弯腿版（左在下不抬右腿）+ 提踵",exercises:["sidePlankLegRaise","slCalfRaiseISO"],ss:true},
+  {id:"ss6",num:11,title:"收尾：核心",iconCls:"icon-strength",time:"",desc:"仰卧腿上伸摸脚（替代V-sit）+ 转体",exercises:["lyingLegRaise","dbSitupTwist"],ss:true},
+  {id:"cool",num:12,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"90/90左侧重点。4字形拉伸Alex喜欢做。",exercises:["stretch9090","quadStretch","figure4Stretch"]}
 ];
 const MON=[
   {id:"itband",text:"Lateral Band Walk时IT Band感觉？",opts:["无不适","轻微，激活后消失","明显不适","需停止"]},
   {id:"leftKnee",text:"深蹲左膝跟脚尖？",opts:["完全跟住","偶尔内扣","明显内扣","无法控制"]},
+  {id:"squatLean",text:"深蹲起身腰背前倾？",opts:["正常","轻微前倾","明显前倾","站不直"]},
   {id:"slRDLcomp",text:"单腿RDL左侧代偿？",opts:["不需要","轻微","明显","无法不代偿"]},
+  {id:"sidePlankHip",text:"侧平板左在下时右髋响声？",opts:["无","轻微","明显卡顿","痛（已停止）"]},
   {id:"jointPain",text:"关节有无锐痛？",opts:["无","轻微酸胀","明显不适","锐痛(停止)"]},
   {id:"leftBalance",text:"左侧单腿站立？",opts:["明显改善","持平","比之前差","很不稳"]},
   {id:"energy",text:"整体感觉？",opts:["状态很好","正常","有点疲惫","非常疲惫"]}
@@ -717,7 +735,7 @@ function renderSection(sec,isBase){
       if(sec.ss&&i===0) h+='<div class="superset-label">A+B 连做 \u00B7 休息30-45s \u00B7 共3轮</div>';
     });
   }
-  if(sec.rope) h+='<div class="rope-break">~ 跳绳200次衔接 ~</div>';
+  if(sec.rope) h+='<div class="rope-break">🔗 开合跳30秒衔接</div>';
   h+='</div></div>';
   return h;
 }
