@@ -410,15 +410,18 @@ const EX={
   bandedLungePull:{en:"Banded Lunge Pull",zh:"弹力带弓步侧拉",sets:"1-2×30s/侧",tip:"弹力带从侧面拉住前膝做弓步抗阻。大转子前方激活感强烈，尽量安排。",purpose:"深层肌肉激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=banded+lunge+lateral+pull+hip+stability"},
   shortFoot:{en:"Short Foot",zh:"短足训练",sets:"可省略",tip:"日常动作中提醒足弓三点即可，不单独占时间。",purpose:"足弓激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=short+foot+exercise+arch+activation"},
   slCalfRaise:{en:"SL Calf Raise",zh:"单腿提踵",sets:"可省略",tip:"大训练有负重版。如有时间随手做几个。",purpose:"小腿力量",pr:"opt",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+full+range"},
-  // === 力量热身+预激活 ===
-  jumpingJacksStr:{en:"Jumping Jacks",zh:"开合跳（力量预热）",sets:"1×1分钟",tip:"室内开合跳。如果刚做完基础动作可跳过。",purpose:"心肺预热",pr:"must",yt:"https://www.youtube.com/results?search_query=jumping+jacks+proper+form"},
-  boxSquat:{en:"Box Squat",zh:"箱式深蹲（预激活）",sets:"2×5",tip:"坐到凳子上停2秒，臀部主动发力站起。让臀肌开机，避免第一组深蹲膝盖代偿。",purpose:"深蹲前臀肌激活",pr:"must",yt:"https://www.youtube.com/results?search_query=box+squat+bodyweight+activation"},
+  // === 膝关节预热（v3.1新增）===
+  wallSit:{en:"Wall Sit",zh:"靠墙静蹲",sets:"2×20-30秒，⏸间隔20秒",tip:"背靠墙，大腿与地面约45-60°（不需要90°），膝盖对准脚尖。让膝关节在轻压下预热，促进关节液分泌。",purpose:"膝关节承重预热",pr:"must",yt:"https://www.youtube.com/results?search_query=wall+sit+exercise+proper+form"},
+  heelElevSquat:{en:"Heel-Elevated BW Squat",zh:"垫高徒手深蹲",sets:"1×8（慢速，底部停2秒）",tip:"脚后跟垫1-2cm杠铃片，徒手慢速深蹲。让膝盖在踝关节辅助下适应深蹲轨迹，为后面高脚杯深蹲做准备。",purpose:"深蹲轨迹预适应",pr:"must",yt:"https://www.youtube.com/results?search_query=heel+elevated+bodyweight+squat"},
+  // === 旧版保留（历史数据兼容）===
+  jumpingJacksStr:{en:"Jumping Jacks",zh:"开合跳（力量预热）",sets:"1×1分钟",tip:"室内开合跳。如果刚做完基础动作可跳过。",purpose:"心肺预热",pr:"opt",legacy:true,yt:"https://www.youtube.com/results?search_query=jumping+jacks+proper+form"},
+  boxSquat:{en:"Box Squat",zh:"箱式深蹲（已替换）",sets:"—",tip:"v3.1已被膝关节预热层（Wall Sit+垫高徒手蹲）替代。",purpose:"深蹲前臀肌激活",pr:"opt",legacy:true,yt:"https://www.youtube.com/results?search_query=box+squat+bodyweight+activation"},
   // === 力量超级组 ===
-  gobletSquat:{en:"Goblet Squat",zh:"高脚杯深蹲",sets:"3×10",tip:"胸前托哑铃10kg（稳定后回13kg）。站距肩宽，脚尖外转10-15°，左膝推向小脚趾。起身时腰背不要过度前倾。",purpose:"下肢推",pr:"must",yt:"https://www.youtube.com/results?search_query=goblet+squat+proper+form+technique"},
+  gobletSquat:{en:"Goblet Squat",zh:"高脚杯深蹲",sets:"3×10",tip:"胸前托哑铃10kg（稳定后回13kg）。**Set1脚后跟垫高（1-2cm杠铃片），做8个慢速适应；Set2-3尝试不垫，如不适继续垫**。站距肩宽，脚尖外转10-15°，左膝推向小脚趾。起身时腰背不要过度前倾。",purpose:"下肢推（主力组）",pr:"must",yt:"https://www.youtube.com/results?search_query=goblet+squat+proper+form+technique"},
   dbReverseFly:{en:"DB Reverse Fly",zh:"俯身哑铃飞鸟",sets:"3×10-15",tip:"2×3.5kg。俯身45°，双臂侧展，肩胛后收。不需要大重量，控制肩胛后收。",purpose:"上背+扣球减速肌",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+reverse+fly+form"},
-  slRDL:{en:"Single-Leg RDL",zh:"单腿硬拉",sets:"3×10/侧",tip:"左右均5kg。左侧稳定性在改善但右臀上翘仍明显。暂不减重，重点提高技术质量。",purpose:"后链+平衡（监测项）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form"},
+  slRDL:{en:"Single-Leg RDL",zh:"单腿硬拉",sets:"3×10/侧",tip:"左右均5kg。左侧稳定性在改善但右臀上翘仍明显。暂不减重，重点提高技术质量。**放SS2（深蹲前），激活后链为深蹲的臀肌发力做准备**。",purpose:"后链+平衡（监测项）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+romanian+deadlift+form"},
   dbFloorFly:{en:"DB Bench Fly",zh:"哑铃凳飞鸟",sets:"3×10",tip:"2×3.5kg。哑铃凳上做比地板方便。双臂展开合拢，保护肩。",purpose:"胸肌（保护肩版）",pr:"must",yt:"https://www.youtube.com/results?search_query=dumbbell+bench+chest+fly"},
-  sideStepUp:{en:"Side Step-Up",zh:"侧向台阶上步",sets:"3×8-10/侧",tip:"用较矮台阶（20-25cm）自重，避免碰天花板。膝盖不内扣！备选：后退弓步3×6/侧（双手各持0.5kg哑铃片帮助平衡）。",purpose:"单腿推",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+step+up+exercise"},
+  sideStepUp:{en:"Side Step-Up",zh:"侧向台阶上步",sets:"3×8-10/侧",tip:"用较矮台阶（20-25cm）自重，避免碰天花板。**放SS1作为暖机组**，让膝关节在单腿轻负荷下继续热机。左侧如启动困难，允许地面脚轻辅助，逐次减少辅助力度。膝盖不内扣！备选：后退弓步3×6/侧。",purpose:"单腿推（暖机组）",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+step+up+exercise"},
   arnoldPress:{en:"Arnold Press",zh:"Arnold推举",sets:"3×10",tip:"8kg哑铃。掌心朝自己开始，推举中旋转到掌心朝前。注意推举前先沉肩，避免右侧耸肩代偿。",purpose:"肩+旋转（扣球准备）",pr:"must",yt:"https://www.youtube.com/results?search_query=arnold+press+dumbbell+form"},
   pushupPause:{en:"Push-up (3s Pause)",zh:"俯卧撑停顿",sets:"3×7/6/6",tip:"标准俯卧撑底部停3秒再推起。当前实际水平，质量优于数量，做得很标准。",purpose:"推力+底部力量",pr:"must",yt:"https://www.youtube.com/results?search_query=push+up+pause+at+bottom+technique"},
   proneIYTW:{en:"Prone I-Y-T-W",zh:"俯卧IYTW",sets:"3×8-10",tip:"俯卧手臂做I/Y/T/W四个方向。会觉得吃力——正常，说明在练到该练的地方。",purpose:"肩袖稳定（伤害预防）",pr:"must",yt:"https://www.youtube.com/results?search_query=prone+IYTW+exercise+shoulder+rehab"},
@@ -449,10 +452,10 @@ const SECTIONS_BASE=[
   {id:"flex",num:4,title:"拉伸与灵活性（有时间加做）",iconCls:"icon-ankle",time:"4min",desc:"髋屈肌拉伸和弹力带弓步侧拉尽量安排。其余可省略。",exercises:["hipFlexorStretch","bandedLungePull","shortFoot","slCalfRaise"]}
 ];
 const SECTIONS_STR=[
-  {id:"strW",num:5,title:"力量预热+深蹲预激活",iconCls:"icon-warmup",time:"3min",desc:"如刚做完基础动作可跳过开合跳。箱式深蹲让臀肌开机，避免膝盖代偿。",exercises:["jumpingJacksStr","boxSquat"]},
-  {id:"ss1",num:6,title:"SS1 下肢推+上肢拉",iconCls:"icon-strength",time:"",desc:"高脚杯深蹲10kg + 俯身飞鸟2×3.5kg",exercises:["gobletSquat","dbReverseFly"],ss:true,rope:true},
-  {id:"ss2",num:7,title:"SS2 下肢拉+上肢推",iconCls:"icon-strength",time:"",desc:"单腿RDL 5kg（左侧监测项）+ 哑铃凳飞鸟2×3.5kg",exercises:["slRDL","dbFloorFly"],ss:true,rope:true},
-  {id:"ss3",num:8,title:"SS3 单腿+肩推",iconCls:"icon-strength",time:"",desc:"侧向Step-up（20-25cm自重）+ Arnold推举8kg。膝盖不适则换后退弓步。",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true},
+  {id:"kneeWarm",num:5,title:"膝关节预热 ⭐v3.1新增",iconCls:"icon-warmup",time:"3-4min",desc:"替代v3.0的Box Squat预激活。靠墙静蹲+垫高徒手蹲，让膝关节在承重中预热。",exercises:["wallSit","heelElevSquat"]},
+  {id:"ss1",num:6,title:"SS1 单腿推+肩推（暖机组）",iconCls:"icon-strength",time:"",desc:"Step-up放第一组作为膝关节继续热机 + Arnold推举8kg",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true},
+  {id:"ss2",num:7,title:"SS2 下肢拉+上肢推",iconCls:"icon-strength",time:"",desc:"单腿RDL 5kg（左侧监测项）+ 哑铃凳飞鸟2×3.5kg。RDL在深蹲前激活后链。",exercises:["slRDL","dbFloorFly"],ss:true,rope:true},
+  {id:"ss3",num:8,title:"SS3 下肢推（主力组）+上肢拉",iconCls:"icon-strength",time:"",desc:"高脚杯深蹲10kg（Set1垫高过渡）+ 俯身飞鸟2×3.5kg。经SS1+SS2热机后膝盖更舒服。",exercises:["gobletSquat","dbReverseFly"],ss:true,rope:true},
   {id:"ss4",num:9,title:"SS4 推力+后链",iconCls:"icon-strength",time:"",desc:"俯卧撑3×7/6/6 + IYTW肩袖稳定",exercises:["pushupPause","proneIYTW"],ss:true,rope:true},
   {id:"ss5",num:10,title:"SS5 核心侧链+小腿",iconCls:"icon-strength",time:"",desc:"侧平板弯腿版（左在下不抬右腿）+ 提踵",exercises:["sidePlankLegRaise","slCalfRaiseISO"],ss:true},
   {id:"ss6",num:11,title:"收尾：核心",iconCls:"icon-strength",time:"",desc:"仰卧腿上伸摸脚（替代V-sit）+ 转体",exercises:["lyingLegRaise","dbSitupTwist"],ss:true},
@@ -479,7 +482,7 @@ let currentSessionIdx=1,isRestDay=false;
 let baseCollapsed=false,strCollapsed=true;
 let saveState='saved';
 let autoSaveTimer=null;
-const SK='alex_training_v3';
+const SK='alex_training_v3_1';
 
 // ============================================
 // HELPERS
