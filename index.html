@@ -14,6 +14,7 @@
 /* ================================================
    OCEAN DEPTHS THEME — v4.0
    Apple HomeKit 胶囊风格 · GitHub Pages 独立部署
+   训练计划版本：v3.2 (2026-04-08)
    ================================================ */
 :root {
   --navy: #1a2332;
@@ -183,7 +184,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 /* Superset / Rope */
 .superset-label{display:flex;align-items:center;gap:8px;padding:4px 4px;font-size:0.76em;color:var(--orange);font-weight:700;}
 .superset-label::before,.superset-label::after{content:'';flex:1;height:1px;background:var(--orange-light);}
-.rope-break{text-align:center;padding:4px;font-size:0.76em;color:var(--yellow);background:var(--yellow-bg);border-radius:8px;margin:4px 0;font-weight:500;}
+.rope-break{text-align:center;padding:6px 8px;font-size:0.76em;color:var(--yellow);background:var(--yellow-bg);border-radius:8px;margin:4px 0;font-weight:500;}
+.rope-note{font-size:0.92em;color:var(--orange);font-weight:600;margin-top:3px;}
 
 /* ===== MONITORING ===== */
 .monitoring{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin:12px 0;box-shadow:var(--shadow);}
@@ -404,7 +406,7 @@ const EX={
   slBalance:{en:"SL Balance",zh:"单腿站立",sets:"左右左 3×30s",tip:"赤脚站立。左侧多做一组（左右左）。注意左髋不要向内折叠。",purpose:"Trendelenburg监测",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+balance+stand+exercise"},
   lateralBandWalk:{en:"Lateral Band Walk",zh:"弹力带横移",sets:"2-3×15步/方向",tip:"弹力带套踝上方，微蹲横向走。**放最后做**，测试IT Band。左侧先走多一组。用髋带膝盖走，膝盖以下像固定的鞋子。",purpose:"臀中肌功能化（IT Band测试）",pr:"must",yt:"https://www.youtube.com/results?search_query=lateral+band+walk+proper+form"},
   // === 穿插用动作 ===
-  deadBug:{en:"Dead Bug",zh:"Dead Bug",sets:"1×10",tip:"仰卧双手双脚朝天，对侧手脚同时伸出，腰椎贴地。蛤蛎式组间穿插用。",purpose:"核心深层稳定（穿插）",pr:"opt",yt:"https://www.youtube.com/results?search_query=dead+bug+exercise+proper+form"},
+  deadBug:{en:"Dead Bug",zh:"Dead Bug",sets:"1×10",tip:"仰卧双手双脚朝天，对侧手脚同时伸出，腰椎贴地。在蛤蛎式两组左侧之间做（步骤4），防止臀中肌连续疲劳。",purpose:"核心深层稳定（嵌入Hip节第4步）",pr:"must",yt:"https://www.youtube.com/results?search_query=dead+bug+exercise+proper+form"},
   // === 拉伸与灵活性（有时间加做）===
   hipFlexorStretch:{en:"Hip Flexor Stretch",zh:"髋屈肌拉伸",sets:"1-2×30s/侧",tip:"半跪姿，后腿侧臀肌收紧，身体微前移。Alex感觉明显，尽量安排。",purpose:"髋屈肌释放",pr:"opt",yt:"https://www.youtube.com/results?search_query=half+kneeling+hip+flexor+stretch"},
   bandedLungePull:{en:"Banded Lunge Pull",zh:"弹力带弓步侧拉",sets:"1-2×30s/侧",tip:"弹力带从侧面拉住前膝做弓步抗阻。大转子前方激活感强烈，尽量安排。",purpose:"深层肌肉激活",pr:"opt",yt:"https://www.youtube.com/results?search_query=banded+lunge+lateral+pull+hip+stability"},
@@ -447,13 +449,13 @@ const EX={
 const SECTIONS_BASE=[
   {id:"prewarm",num:0,title:"预备热身",iconCls:"icon-warmup",time:"2min",desc:"每次训练第一件事。胸椎+髋关节预热。",exercises:["thoracicRotation","windshieldWiper"]},
   {id:"warmup",num:1,title:"热身与协调 ⭐必做",iconCls:"icon-warmup",time:"3min",desc:"交叉行进+开合跳，心率微升。",exercises:["crossCrawl","jumpingJacks"]},
-  {id:"hip",num:2,title:"髋关节激活 ⭐必做",iconCls:"icon-hip",time:"6min",desc:"蛤蛎式是最重要的激活动作。组间可穿插Dead Bug或开合跳30s。",exercises:["hipRotation90","clamshell","hipAbduction"]},
+  {id:"hip",num:2,title:"髋关节激活 ⭐必做",iconCls:"icon-hip",time:"6min",desc:"按顺序执行：①90/90 ②蛤蛊左15 ③Dead Bug×10（防臀中肌疲劳）④蛤蛊左15 ⑤直腿抬高左 ⑥开合跳30s ⑦蛤蛊右15 ⑧直腿抬高右",exercises:["hipRotation90","clamshell","deadBug","hipAbduction"]},
   {id:"stability",num:3,title:"单腿稳定 ⭐必做",iconCls:"icon-stability",time:"7min",desc:"单腿臀桥+Airplane+单腿站立。Lateral Band Walk放最后测试IT Band。",exercises:["slGluteBridge","hipAirplane","slBalance","lateralBandWalk"]},
   {id:"flex",num:4,title:"拉伸与灵活性（有时间加做）",iconCls:"icon-ankle",time:"4min",desc:"髋屈肌拉伸和弹力带弓步侧拉尽量安排。其余可省略。",exercises:["hipFlexorStretch","bandedLungePull","shortFoot","slCalfRaise"]}
 ];
 const SECTIONS_STR=[
-  {id:"kneeWarm",num:5,title:"膝关节预热 ⭐v3.1新增",iconCls:"icon-warmup",time:"3-4min",desc:"替代v3.0的Box Squat预激活。靠墙静蹲+垫高徒手蹲，让膝关节在承重中预热。",exercises:["wallSit","heelElevSquat"]},
-  {id:"ss1",num:6,title:"SS1 单腿推+肩推（暖机组）",iconCls:"icon-strength",time:"",desc:"Step-up放第一组作为膝关节继续热机 + Arnold推举8kg",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true},
+  {id:"kneeWarm",num:5,title:"膝关节预热 ⭐必做",iconCls:"icon-warmup",time:"3-4min",desc:"靠墙静蹲+垫高徒手蹲，促进关节液分泌，让膝盖承重预热后再进力量组。",exercises:["wallSit","heelElevSquat"]},
+  {id:"ss1",num:6,title:"SS1 单腿推+肩推（暖机组）",iconCls:"icon-strength",time:"",desc:"Step-up暖机组 + Arnold推举8kg。完成后做维温过渡再进SS2。",exercises:["sideStepUp","arnoldPress"],ss:true,rope:true,ropeNote:"➕ 无重量慢速深蹲 2-3次（维持膝盖温度）→ 进SS2"},
   {id:"ss2",num:7,title:"SS2 下肢拉+上肢推",iconCls:"icon-strength",time:"",desc:"单腿RDL 5kg（左侧监测项）+ 哑铃凳飞鸟2×3.5kg。RDL在深蹲前激活后链。",exercises:["slRDL","dbFloorFly"],ss:true,rope:true},
   {id:"ss3",num:8,title:"SS3 下肢推（主力组）+上肢拉",iconCls:"icon-strength",time:"",desc:"高脚杯深蹲10kg（Set1垫高过渡）+ 俯身飞鸟2×3.5kg。经SS1+SS2热机后膝盖更舒服。",exercises:["gobletSquat","dbReverseFly"],ss:true,rope:true},
   {id:"ss4",num:9,title:"SS4 推力+后链",iconCls:"icon-strength",time:"",desc:"俯卧撑3×7/6/6 + IYTW肩袖稳定",exercises:["pushupPause","proneIYTW"],ss:true,rope:true},
@@ -738,7 +740,7 @@ function renderSection(sec,isBase){
       if(sec.ss&&i===0) h+='<div class="superset-label">A+B 连做 \u00B7 休息30-45s \u00B7 共3轮</div>';
     });
   }
-  if(sec.rope) h+='<div class="rope-break">🔗 开合跳30秒衔接</div>';
+  if(sec.rope){h+='<div class="rope-break">🔗 开合跳30秒衔接'+(sec.ropeNote?'<div class="rope-note">'+sec.ropeNote+'</div>':'')+'</div>';}
   h+='</div></div>';
   return h;
 }
