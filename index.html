@@ -339,9 +339,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 [data-theme="dark"] .cal-nav button{background:var(--surface);color:var(--text);}
 [data-theme="dark"] .ex-inputs input{background:var(--surface);color:var(--text);}
 [data-theme="dark"] .session-notes textarea{background:var(--surface);color:var(--text);}
-/* Dark mode toggle button */
-.theme-toggle{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1em;transition:all .2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
-.theme-toggle:hover{background:var(--teal-bg);border-color:var(--teal-light);color:var(--teal);}
+/* Dark mode toggle button (inside topbar-left) */
+.theme-toggle{width:28px;height:28px;border-radius:50%;border:none;background:transparent;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;padding:0;}
+.theme-toggle:hover{color:var(--teal);}
+.theme-toggle svg{width:16px;height:16px;}
 </style>
 </head>
 <body>
@@ -364,8 +365,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <h1>Alex 排球力量训练</h1>
       <div class="date" id="headerDate"></div>
     </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深色/浅色模式"></button>
   </div>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深色/浅色模式">☀️</button>
   <div class="status-pill syncing" id="statusPill"><div class="s-dot"></div><span id="statusText">连接中</span></div>
 </div>
 
@@ -429,7 +430,10 @@ const GAS_API = 'https://script.google.com/macros/s/AKfycbyZEwUWg4S_9_pqgqklj7y8
 // ============================================
 function applyTheme(theme){
   document.documentElement.setAttribute('data-theme',theme);
-  document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙';
+  var btn=document.getElementById('themeToggle');
+  btn.innerHTML=theme==='dark'
+    ?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+    :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   document.getElementById('metaTheme').setAttribute('content',theme==='dark'?'#111820':'#f4f7f9');
 }
 function toggleTheme(){
