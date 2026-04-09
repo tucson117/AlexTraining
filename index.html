@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Alex训练">
-<meta name="theme-color" content="#f4f7f9">
+<meta name="theme-color" content="#f4f7f9" id="metaTheme">
 <link rel="manifest" href="manifest.json">
 <title>Alex 排球力量训练</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,6 +36,24 @@
   --font: 'Inter', -apple-system, 'PingFang SC', 'Segoe UI', sans-serif;
   --topbar-h: 56px;
   --bottombar-h: 64px;
+}
+/* ===== DARK THEME ===== */
+[data-theme="dark"] {
+  --navy: #e8edf2;
+  --teal: #3da8a8; --teal-dark: #4ec0c0; --teal-light: #1a3a3a; --teal-bg: #162e2e;
+  --seafoam: #5a9ea0; --seafoam-light: #253e3f;
+  --bg: #111820; --surface: #1a2332; --surface2: #212d3d;
+  --border: #2a3a4d; --border2: #354a60;
+  --text: #d8e2ec; --text2: #8fa3b8; --text3: #6b8199;
+  --green: #3dbd7a; --green-light: #162e22; --green-bg: #1a3328;
+  --yellow: #d4a836; --yellow-light: #2e2816; --yellow-bg: #33301a;
+  --red: #e05545; --red-light: #2e1a18;
+  --orange: #e09040; --orange-light: #2e2218;
+  --purple: #8a7aed; --purple-light: #22203a;
+  --pink: #d06090; --pink-light: #2e1a24;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.2);
+  --shadow: 0 2px 8px rgba(0,0,0,.25);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.4);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{touch-action:manipulation;background:var(--bg);}
@@ -305,6 +323,25 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* ===== DARK THEME OVERRIDES ===== */
+[data-theme="dark"] .fade-top{background:linear-gradient(to bottom, rgba(17,24,32,1) 0%, rgba(17,24,32,.9) 35%, rgba(17,24,32,.5) 70%, rgba(17,24,32,0) 100%);}
+[data-theme="dark"] .fade-bottom{background:linear-gradient(to top, rgba(17,24,32,1) 0%, rgba(17,24,32,.6) 50%, rgba(17,24,32,0) 100%);}
+[data-theme="dark"] .topbar-left,[data-theme="dark"] .status-pill{background:rgba(26,35,50,.75);border-color:rgba(42,58,77,.7);}
+[data-theme="dark"] .bottombar{background:rgba(26,35,50,.75);border-color:rgba(42,58,77,.7);}
+[data-theme="dark"] .sheet-panel{background:var(--surface);}
+[data-theme="dark"] .toast{background:var(--surface2);color:var(--text);}
+[data-theme="dark"] .loading-overlay{background:var(--bg);}
+[data-theme="dark"] .ex-check{background:var(--surface2);}
+[data-theme="dark"] .chip{background:var(--surface2);}
+[data-theme="dark"] .session-chip{background:var(--surface2);}
+[data-theme="dark"] .cal-day{background:var(--surface);}
+[data-theme="dark"] .cal-nav button{background:var(--surface);color:var(--text);}
+[data-theme="dark"] .ex-inputs input{background:var(--surface);color:var(--text);}
+[data-theme="dark"] .session-notes textarea{background:var(--surface);color:var(--text);}
+/* Dark mode toggle button */
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1em;transition:all .2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
+.theme-toggle:hover{background:var(--teal-bg);border-color:var(--teal-light);color:var(--teal);}
 </style>
 </head>
 <body>
@@ -328,6 +365,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="date" id="headerDate"></div>
     </div>
   </div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深色/浅色模式">☀️</button>
   <div class="status-pill syncing" id="statusPill"><div class="s-dot"></div><span id="statusText">连接中</span></div>
 </div>
 
@@ -385,6 +423,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 // ★ GAS API URL — 部署后填入你的 Web App URL ★
 // ============================================
 const GAS_API = 'https://script.google.com/macros/s/AKfycbyZEwUWg4S_9_pqgqklj7y822NnSqsxxa-G5fqMqSajKKmhTvnhxLt6CNsOGYR-S4Vj/exec';
+
+// ============================================
+// DARK MODE
+// ============================================
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme',theme);
+  document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙';
+  document.getElementById('metaTheme').setAttribute('content',theme==='dark'?'#111820':'#f4f7f9');
+}
+function toggleTheme(){
+  var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  localStorage.setItem('alex-theme',next);applyTheme(next);
+}
+(function(){var saved=localStorage.getItem('alex-theme');if(!saved){saved=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}applyTheme(saved);})();
 
 // ============================================
 // EXERCISE DATABASE
