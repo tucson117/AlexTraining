@@ -76,7 +76,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .topbar-left .date{font-size:0.78em;font-weight:600;color:var(--teal-dark);transition:all .35s;overflow:hidden;max-height:20px;}
 .topbar-wrap.split .topbar-left .date{max-height:0;opacity:0;margin:0;}
 /* Right capsule (status) */
-.status-pill{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 16px;height:100%;min-width:88px;border-radius:var(--radius-pill);background:rgba(255,255,255,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,210,220,.6);font-size:0.75em;font-weight:600;color:var(--text2);white-space:nowrap;box-shadow:0 4px 20px rgba(26,35,50,.15),0 1px 3px rgba(26,35,50,.08);transition:all .35s cubic-bezier(.4,0,.2,1);flex-shrink:0;}
+.status-pill{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 8px 8px 16px;height:100%;min-width:88px;border-radius:var(--radius-pill);background:rgba(255,255,255,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,210,220,.6);font-size:0.75em;font-weight:600;color:var(--text2);white-space:nowrap;box-shadow:0 4px 20px rgba(26,35,50,.15),0 1px 3px rgba(26,35,50,.08);transition:all .35s cubic-bezier(.4,0,.2,1);flex-shrink:0;}
 .status-pill .s-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .3s;}
 .status-pill.synced{color:var(--green);}.status-pill.synced .s-dot{background:var(--green);}
 .status-pill.syncing{color:var(--teal);}.status-pill.syncing .s-dot{background:var(--teal);animation:pulse 1s infinite;}
@@ -343,6 +343,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .theme-toggle{width:28px;height:28px;border-radius:50%;border:none;background:transparent;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;padding:0;}
 .theme-toggle:hover{color:var(--teal);}
 .theme-toggle svg{width:16px;height:16px;}
+.pill-divider{width:1px;height:18px;background:var(--border);flex-shrink:0;margin:0 2px;}
 </style>
 </head>
 <body>
@@ -365,9 +366,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <h1>Alex 排球力量训练</h1>
       <div class="date" id="headerDate"></div>
     </div>
-    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深色/浅色模式"></button>
   </div>
-  <div class="status-pill syncing" id="statusPill"><div class="s-dot"></div><span id="statusText">连接中</span></div>
+  <div class="status-pill syncing" id="statusPill"><div class="s-dot"></div><span id="statusText">连接中</span><span class="pill-divider"></span><button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深色/浅色模式"></button></div>
 </div>
 
 <!-- MAIN CONTENT -->
