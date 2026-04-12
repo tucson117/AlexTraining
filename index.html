@@ -78,7 +78,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .topbar-wrap.split .topbar-left .date{max-height:0;opacity:0;margin:0;}
 .topbar-wrap.split .topbar-left .date-wrap{display:none;}
 .topbar-left .date-wrap{position:relative;display:inline-flex;align-items:center;gap:6px;}
-.date-input-hidden{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0;font-size:16px;color:transparent;background:transparent;}
+.date-input-hidden{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;border:0;padding:0;margin:0;pointer-events:none;}
 .backfill-badge{font-size:0.62em;padding:1px 7px;border-radius:8px;background:var(--teal);color:#fff;font-weight:700;letter-spacing:.02em;line-height:1.4;}
 .topbar-wrap.split .backfill-badge{display:none;}
 /* Right capsule (status) */
@@ -1254,6 +1254,17 @@ function renderAll(){
       changeSelectedDate(new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])));
     });
   }
+  var openPicker=function(ev){
+    if(ev){ev.preventDefault();ev.stopPropagation();}
+    var inp=document.getElementById('dateInput');if(!inp)return;
+    inp.value=dk(today);
+    try{if(typeof inp.showPicker==='function'){inp.showPicker();return;}}catch(e){}
+    inp.focus();inp.click();
+  };
+  var headerDateEl=document.getElementById('headerDate');
+  if(headerDateEl)headerDateEl.addEventListener('click',openPicker);
+  var badgeEl=document.getElementById('backfillBadge');
+  if(badgeEl)badgeEl.addEventListener('click',openPicker);
   cloudLoad(function(){renderAll();var o=document.getElementById('loadingOverlay');if(o)o.style.display='none';});
   setTimeout(function(){var o=document.getElementById('loadingOverlay');if(o)o.style.display='none';},5000);
 })();
