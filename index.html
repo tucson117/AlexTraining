@@ -73,8 +73,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .topbar-left .logo-svg{flex-shrink:0;transition:all .35s;}
 .topbar-left h1{font-size:1.1em;font-weight:800;letter-spacing:-.03em;color:var(--navy);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:all .35s;}
 .topbar-wrap.split .topbar-left h1{font-size:0.85em;}
-.topbar-left .date{font-size:0.78em;font-weight:600;color:var(--teal-dark);transition:all .35s;overflow:hidden;max-height:20px;}
+.topbar-left .date{font-size:0.78em;font-weight:600;color:var(--teal-dark);transition:all .35s;overflow:hidden;max-height:20px;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;}
 .topbar-wrap.split .topbar-left .date{max-height:0;opacity:0;margin:0;}
+.topbar-left .date-wrap{position:relative;display:inline-flex;align-items:center;gap:6px;}
+.date-input-hidden{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0;font-size:16px;color:transparent;background:transparent;}
+.backfill-badge{font-size:0.62em;padding:1px 7px;border-radius:8px;background:var(--teal);color:#fff;font-weight:700;letter-spacing:.02em;line-height:1.4;}
+.topbar-wrap.split .backfill-badge{display:none;}
 /* Right capsule (status) */
 .status-pill{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 8px 8px 16px;height:100%;min-width:88px;border-radius:var(--radius-pill);background:rgba(255,255,255,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,210,220,.6);font-size:0.75em;font-weight:600;color:var(--text2);white-space:nowrap;box-shadow:0 4px 20px rgba(26,35,50,.15),0 1px 3px rgba(26,35,50,.08);transition:all .35s cubic-bezier(.4,0,.2,1);flex-shrink:0;}
 .status-pill .s-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .3s;}
@@ -367,7 +371,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </svg>
     <div>
       <h1>Alex 排球力量训练</h1>
-      <div class="date" id="headerDate"></div>
+      <div class="date-wrap">
+        <div class="date" id="headerDate"></div>
+        <span class="backfill-badge" id="backfillBadge" hidden>补录</span>
+        <input type="date" id="dateInput" class="date-input-hidden" aria-label="选择日期">
+      </div>
     </div>
   </div>
   <div class="status-pill syncing" id="statusPill"><div class="s-dot"></div><span id="statusText">连接中</span><button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="切换语言"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></button><span class="pill-divider"></span><button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深色/浅色模式"></button></div>
@@ -723,7 +731,8 @@ const OTHER_ACTIVITIES=["排球训练","学校体育课","校外体育项目"];
 // ============================================
 // STATE
 // ============================================
-let today=new Date(),calM=today.getMonth(),calY=today.getFullYear();
+let realToday=new Date();
+let today=new Date(),calM=realToday.getMonth(),calY=realToday.getFullYear();
 let draft={};let cloudData={};let isOnline=true;
 let currentSessionIdx=1,isRestDay=false;
 let baseCollapsed=false,strCollapsed=true;
@@ -921,6 +930,7 @@ function toggleModule(mod){
 
 function renderTraining(){
   document.getElementById('headerDate').textContent=I18N[currentLang].dateFmt(today);
+  updateDatePickerUI();
   renderControlBar();
   if(isRestDay){
     document.getElementById('trainingContent').innerHTML='<div class="rest-msg"><div class="icon">\uD83C\uDF0A</div><p>'+t('restDayTitle')+'</p><div class="sub">'+t('restDaySub')+'</div></div>';
@@ -1026,6 +1036,46 @@ function updMon(id,f,v){if(!draft.monitoring)draft.monitoring={};if(!draft.monit
 function loadDraft(){try{draft=JSON.parse(localStorage.getItem('alex_draft'))||{};}catch(e){draft={};}}
 
 // ============================================
+// DATE PICKER (backfill support)
+// ============================================
+function updateDatePickerUI(){
+  var input=document.getElementById('dateInput');
+  if(input){
+    input.value=dk(today);
+    input.max=dk(realToday);
+  }
+  var badge=document.getElementById('backfillBadge');
+  if(badge){badge.hidden=(dk(today)===dk(realToday));}
+}
+function changeSelectedDate(d){
+  if(!d||isNaN(d.getTime()))return;
+  if(dk(d)===dk(today)){updateDatePickerUI();return;}
+  if(d>realToday){toast(currentLang==='zh'?'不能选择未来日期':'Future date not allowed');updateDatePickerUI();return;}
+  if(saveState!=='saved'){
+    if(!confirm(currentLang==='zh'?'有未保存的修改，切换日期将丢弃。是否继续？':'You have unsaved changes. Switching date will discard them. Continue?')){updateDatePickerUI();return;}
+  }
+  if(autoSaveTimer){clearTimeout(autoSaveTimer);autoSaveTimer=null;}
+  today=d;
+  draft={};localStorage.removeItem('alex_draft');
+  isRestDay=false;currentSessionIdx=1;
+  baseCollapsed=false;strCollapsed=true;
+  saveState='saved';
+  renderAll();
+}
+function editFromCalendar(key){
+  var parts=key.split('-');
+  var d=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
+  changeSelectedDate(d);
+  document.querySelectorAll('.tab').forEach(function(tt){tt.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  var trainTab=document.querySelector('.tab[data-tab="train"]');
+  if(trainTab)trainTab.classList.add('active');
+  var trainPanel=document.getElementById('panel-train');
+  if(trainPanel)trainPanel.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ============================================
 // CALENDAR
 // ============================================
 function renderCalendar(){
@@ -1052,8 +1102,10 @@ function calNav(dir){calM+=dir;if(calM>11){calM=0;calY++;}if(calM<0){calM=11;cal
 
 function showHist(key){
   var sessions=getSessions(key),el=document.getElementById('historyDetail');
-  if(!sessions.length){el.innerHTML='<div class="history-detail"><p style="color:var(--text2)">'+key+': '+t('noRecord')+'</p></div>';return;}
-  var h='';
+  var editLabel=currentLang==='zh'?'编辑此日期':'Edit this date';
+  var editBtn='<button class="btn-secondary" style="margin-bottom:10px" onclick="editFromCalendar(\''+key+'\')">'+editLabel+'</button>';
+  if(!sessions.length){el.innerHTML='<div class="history-detail">'+editBtn+'<p style="color:var(--text2)">'+key+': '+t('noRecord')+'</p></div>';return;}
+  var h=editBtn;
   sessions.forEach(function(s,si){
     var label=s.isRest?t('restDay'):s.phase==='full'?t('fullLabel'):t('baseLabel');
     h+='<div class="history-detail"><h3>'+I18N[currentLang].histDate(s.date,si,sessions.length)+' \u2014 '+label+'</h3>';
@@ -1192,6 +1244,14 @@ function renderAll(){
 // ============================================
 (function init(){
   cloudData=cacheGet();loadDraft();applyLang();renderAll();
+  var dateInput=document.getElementById('dateInput');
+  if(dateInput){
+    dateInput.addEventListener('change',function(e){
+      var v=e.target.value;if(!v)return;
+      var p=v.split('-');
+      changeSelectedDate(new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])));
+    });
+  }
   cloudLoad(function(){renderAll();var o=document.getElementById('loadingOverlay');if(o)o.style.display='none';});
   setTimeout(function(){var o=document.getElementById('loadingOverlay');if(o)o.style.display='none';},5000);
 })();
