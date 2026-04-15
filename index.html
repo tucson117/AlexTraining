@@ -410,7 +410,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <h3 id="versionInfoTitle">版本信息</h3>
       <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.3</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-15)</span></p>
       <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.0</span> · Ocean Depths · GitHub Pages</p>
-      <p style="font-size:0.75em;color:var(--text3);margin-top:8px;" id="versionFooter">基础动作(1-5) + 力量训练(6-13) · 自动保存</p>
+      <details style="margin-top:10px;font-size:0.85em;" open>
+        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.3）</summary>
+        <ul style="margin:6px 0 0 0;padding-left:20px;color:var(--text2);line-height:1.6;" id="changelogList">
+          <li>高脚杯深蹲 Set1 **不再垫高脚后跟**，稳定 2 周后 10→12kg（不跳 13kg）</li>
+          <li>新增 <b>Reverse Lunge 三步试探协议</b>（徒手→4kg→6-8kg），Step-Up 保持主力</li>
+          <li>新增可选穿插动作（SS-Opt）：<b>引体向上</b>、交替哑铃肩推、哑铃三头后蹬、反向弓步</li>
+          <li>收尾核心可轮换 Dead Bug / Bear Hold（与 HVV Month 3 抗旋模式同步）</li>
+          <li>HVV 衔接表明确：Month 1-3 非强制课表；不引入 1600 次跳绳</li>
+          <li>页面版本显示区分"训练计划 v3.x"与"应用 UI v4.x"</li>
+        </ul>
+      </details>
+      <p style="font-size:0.75em;color:var(--text3);margin-top:10px;" id="versionFooter">基础动作(1-5) + 力量训练(6-13) · 自动保存</p>
       <div id="statsOverview"></div>
     </div>
   </div>
@@ -492,7 +503,9 @@ zh:{
   dataDesc:'数据自动同步到 Google Sheet，手机电脑实时共享。',
   exportJSON:'导出 JSON',trainingPlan:'训练计划',
   versionInfo:'版本信息',trainPlanLabel:'训练计划',appUiLabel:'应用 UI',
-  versionFooter:'基础动作(1-5) + 力量训练(6-13) \u00B7 自动保存',
+  versionFooter:'基础动作(1-5) + 力量训练(6-14) \u00B7 自动保存',
+  changelogTitle:'本次更新（v3.3）',
+  changelogHTML:'<li>\u9AD8\u811A\u676F\u6DF1\u8E72 Set1 <b>\u4E0D\u518D\u57AB\u9AD8\u811A\u540E\u8DDF</b>\uFF0C\u7A33\u5B9A 2 \u5468\u540E 10\u219212kg\uFF08\u4E0D\u8DF3 13kg\uFF09</li><li>\u65B0\u589E <b>Reverse Lunge \u4E09\u6B65\u8BD5\u63A2\u534F\u8BAE</b>\uFF08\u5F92\u624B\u21924kg\u21926-8kg\uFF09\uFF0CStep-Up \u4FDD\u6301\u4E3B\u529B</li><li>\u65B0\u589E\u53EF\u9009\u7A7F\u63D2\u52A8\u4F5C\uFF08SS-Opt\uFF09\uFF1A<b>\u5F15\u4F53\u5411\u4E0A</b>\u3001\u4EA4\u66FF\u54D1\u94C3\u80A9\u63A8\u3001\u54D1\u94C3\u4E09\u5934\u540E\u8E6C\u3001\u53CD\u5411\u5F13\u6B65</li><li>\u6536\u5C3E\u6838\u5FC3\u53EF\u8F6E\u6362 Dead Bug / Bear Hold\uFF08\u4E0E HVV Month 3 \u6297\u65CB\u6A21\u5F0F\u540C\u6B65\uFF09</li><li>HVV \u8854\u63A5\u8868\u660E\u786E\uFF1AMonth 1-3 \u975E\u5F3A\u5236\u8BFE\u8868\uFF1B\u4E0D\u5F15\u5165 1600 \u6B21\u8DF3\u7EF3</li><li>\u9875\u9762\u7248\u672C\u663E\u793A\u533A\u5206\u201C\u8BAD\u7EC3\u8BA1\u5212 v3.x\u201D\u4E0E\u201C\u5E94\u7528 UI v4.x\u201D</li>',
   planInfo:'v4.0 \u2014 胶囊风格 \u00B7 GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) \u00B7 自动保存',
   cloudSync:'\u2601\uFE0F 云端同步',records:'次记录',
   offlineLabel:'\u26A0\uFE0F 离线',localRecords:'次本地记录',
@@ -538,7 +551,9 @@ en:{
   dataDesc:'Data auto-syncs to Google Sheet, shared across devices.',
   exportJSON:'Export JSON',trainingPlan:'Training Plan',
   versionInfo:'Version Info',trainPlanLabel:'Training Plan',appUiLabel:'App UI',
-  versionFooter:'Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
+  versionFooter:'Basic(1-5) + Strength(6-14) \u00B7 Auto-save',
+  changelogTitle:'Latest Update (v3.3)',
+  changelogHTML:'<li>Goblet Squat Set1 <b>no longer heel-elevated</b>; after 2 stable weeks 10\u219212kg (no jump to 13kg)</li><li>New <b>Reverse Lunge 3-step test protocol</b> (BW\u21924kg\u21926-8kg); Step-Up remains primary</li><li>New optional section (SS-Opt): <b>Pull-up</b>, Alt DB Shoulder Press, DB Triceps Kickback, Reverse Lunge</li><li>Core finisher can alternate Dead Bug / Bear Hold (syncs with HVV Month 3 anti-rotation pattern)</li><li>HVV mapping clarified: Month 1-3 not mandatory; no 1600-rep jump rope</li><li>Version display now separates "Training Plan v3.x" from "App UI v4.x"</li>',
   planInfo:'v4.0 \u2014 Capsule style \u00B7 GitHub Pages<br>Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
   cloudSync:'\u2601\uFE0F Cloud Sync',records:' records',
   offlineLabel:'\u26A0\uFE0F Offline',localRecords:' local records',
@@ -641,6 +656,8 @@ function applyLang(){
     var _tp=document.getElementById('trainPlanLabel');if(_tp)_tp.textContent=t('trainPlanLabel');
     var _au=document.getElementById('appUiLabel');if(_au)_au.textContent=t('appUiLabel');
     var _vf=document.getElementById('versionFooter');if(_vf)_vf.textContent=t('versionFooter');
+    var _ct=document.getElementById('changelogTitle');if(_ct)_ct.textContent=t('changelogTitle');
+    var _cl=document.getElementById('changelogList');if(_cl)_cl.innerHTML=t('changelogHTML');
   }
   var nh=document.querySelector('#notesSection h3');if(nh)nh.textContent=t('sessionNotes');
   var nt=document.getElementById('sessionNotes');if(nt)nt.placeholder=t('notesPlaceholder');
@@ -697,6 +714,11 @@ const EX={
   slCalfRaiseISO:{en:"Calf Raise+Hold",zh:"单腿提踵",sets:"3×12-15/侧",tip:"顶部保持2-3秒即可。左右分开做，观察差异。",purpose:"小腿耐力（跳跃落地）",pr:"must",yt:"https://www.youtube.com/results?search_query=single+leg+calf+raise+isometric+hold"},
   lyingLegRaise:{en:"Lying Leg Raise + Toe Touch",zh:"仰卧腿上伸摸脚",sets:"2-3×10",tip:"替代V字仰卧起坐（Alex腿太长做不出标准V-sit）。双腿朝天伸直，上身抬起摸脚尖。",purpose:"核心屈曲（扣球收腹）",pr:"must",yt:"https://www.youtube.com/results?search_query=lying+leg+raise+toe+touch+exercise"},
   dbSitupTwist:{en:"Sit-up Twist",zh:"仰卧起坐转体",sets:"3×10",tip:"仰卧起坐到顶部加左右转体。核心旋转——扣球发球动力链。",purpose:"核心旋转（扣球动力链）",pr:"must",yt:"https://www.youtube.com/results?search_query=weighted+sit+up+twist+exercise"},
+  // === 可选穿插动作（v3.3 新增，吸收自 HVV Month 3）===
+  altShoulderPress:{en:"Alt DB Shoulder Press",zh:"交替哑铃肩推",sets:"2×8/侧",tip:"6-8kg起步。**一次只推一侧**，另一侧停在肩位。核心稳定不侧身借力。可与SS1的Arnold推举轮换。",purpose:"肩单边+核心抗侧屈",pr:"opt",yt:"https://www.youtube.com/results?search_query=alternating+dumbbell+shoulder+press"},
+  tricepsKickback:{en:"DB Triceps Kickback",zh:"哑铃三头后蹬",sets:"2×10/侧",tip:"3-4kg起步。俯身单臂，**大臂贴躯干不动，只小臂伸直**。控制下放，不甩。可与SS4的IYTW穿插。",purpose:"三头孤立（局部弱点补强）",pr:"opt",yt:"https://www.youtube.com/results?search_query=dumbbell+triceps+kickback+form"},
+  pullUp:{en:"Pull-up",zh:"引体向上",sets:"2-3组至力竭前1次",tip:"标准握距，下巴过杠。**不勉强，能做几个就几个**。做不动可改用弹力带辅助或反握划船。完整背链训练。",purpose:"背阔+握力（排球发球）",pr:"opt",yt:"https://www.youtube.com/results?search_query=pull+up+proper+form+technique"},
+  reverseLungeTest:{en:"Reverse Lunge (Test)",zh:"反向弓步（试探）",sets:"2×6/侧（Step 1徒手）",tip:"**v3.3 试探协议**：Step1 徒手→Step2 4kg→Step3 6-8kg，每步通过后才升级。慢速下放，左膝对准脚尖，左膝窝有任何紧张感立即停。**Step-Up 仍是主力，本动作只是补充选项**。",purpose:"弓步模式试探（为将来Kader一队准备）",pr:"opt",yt:"https://www.youtube.com/results?search_query=dumbbell+reverse+lunge+form"},
   // === 放松拉伸 ===
   stretch9090:{en:"90/90 Stretch",zh:"90/90拉伸",sets:"每侧30s×2",tip:"坐姿90/90长时间保持。左侧重点。",purpose:"髋活动度恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+stretch+hold"},
   quadStretch:{en:"Quad Stretch",zh:"股四头肌拉伸",sets:"每侧30s",tip:"站立或侧卧拉脚踝靠近臀部。",purpose:"下肢恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=standing+quad+stretch"},
@@ -727,7 +749,8 @@ const SECTIONS_STR=[
   {id:"ss4",num:9,title:"SS4 推力+后链",iconCls:"icon-strength",time:"",desc:"俯卧撑3×7/6/6 + IYTW肩袖稳定",exercises:["pushupPause","proneIYTW"],ss:true,rope:true},
   {id:"ss5",num:10,title:"SS5 核心侧链+小腿",iconCls:"icon-strength",time:"",desc:"侧平板弯腿版（左在下不抬右腿）+ 提踵",exercises:["sidePlankLegRaise","slCalfRaiseISO"],ss:true},
   {id:"ss6",num:11,title:"收尾：核心",iconCls:"icon-strength",time:"",desc:"仰卧腿上伸摸脚（替代V-sit）+ 转体",exercises:["lyingLegRaise","dbSitupTwist"],ss:true},
-  {id:"cool",num:12,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"90/90左侧重点。4字形拉伸Alex喜欢做。",exercises:["stretch9090","quadStretch","figure4Stretch"]}
+  {id:"ssOpt",num:12,title:"可选穿插动作（v3.3 新增）",iconCls:"icon-strength",time:"有时间就做",desc:"吸收自 HVV Month 3。**能做就做，做不动就跳过**，不计入完成率硬指标。引体向上建议放最前面（力气最足时）；反向弓步为 v3.3 三步试探协议，严格按剂量进阶。",exercises:["pullUp","altShoulderPress","tricepsKickback","reverseLungeTest"]},
+  {id:"cool",num:13,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"90/90左侧重点。4字形拉伸Alex喜欢做。",exercises:["stretch9090","quadStretch","figure4Stretch"]}
 ];
 const MON=[
   {id:"itband",text:"Lateral Band Walk时IT Band感觉？",opts:["无不适","轻微，激活后消失","明显不适","需停止"]},
