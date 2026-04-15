@@ -407,8 +407,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <button class="btn-export" onclick="exportData()">导出 JSON</button>
     </div>
     <div class="data-section" style="margin-top:10px;">
-      <h3>训练计划</h3>
-      <p>v4.0 — 胶囊风格 · GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) · 自动保存</p>
+      <h3 id="versionInfoTitle">版本信息</h3>
+      <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.3</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-15)</span></p>
+      <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.0</span> · Ocean Depths · GitHub Pages</p>
+      <p style="font-size:0.75em;color:var(--text3);margin-top:8px;" id="versionFooter">基础动作(1-5) + 力量训练(6-13) · 自动保存</p>
       <div id="statsOverview"></div>
     </div>
   </div>
@@ -489,6 +491,8 @@ zh:{
   exportReport:'导出报告',dataManagement:'数据管理',
   dataDesc:'数据自动同步到 Google Sheet，手机电脑实时共享。',
   exportJSON:'导出 JSON',trainingPlan:'训练计划',
+  versionInfo:'版本信息',trainPlanLabel:'训练计划',appUiLabel:'应用 UI',
+  versionFooter:'基础动作(1-5) + 力量训练(6-13) \u00B7 自动保存',
   planInfo:'v4.0 \u2014 胶囊风格 \u00B7 GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) \u00B7 自动保存',
   cloudSync:'\u2601\uFE0F 云端同步',records:'次记录',
   offlineLabel:'\u26A0\uFE0F 离线',localRecords:'次本地记录',
@@ -533,6 +537,8 @@ en:{
   exportReport:'Export Report',dataManagement:'Data Management',
   dataDesc:'Data auto-syncs to Google Sheet, shared across devices.',
   exportJSON:'Export JSON',trainingPlan:'Training Plan',
+  versionInfo:'Version Info',trainPlanLabel:'Training Plan',appUiLabel:'App UI',
+  versionFooter:'Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
   planInfo:'v4.0 \u2014 Capsule style \u00B7 GitHub Pages<br>Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
   cloudSync:'\u2601\uFE0F Cloud Sync',records:' records',
   offlineLabel:'\u26A0\uFE0F Offline',localRecords:' local records',
@@ -630,7 +636,12 @@ function applyLang(){
   document.querySelectorAll('.tab').forEach(function(tab){var label=tab.querySelector('.tab-label');if(!label)return;var map={train:'tabTrain',calendar:'tabCalendar',report:'tabReport',settings:'tabData'};if(map[tab.dataset.tab])label.textContent=t(map[tab.dataset.tab]);});
   var ss=document.querySelectorAll('#panel-settings .data-section');
   if(ss[0]){ss[0].querySelector('h3').textContent=t('dataManagement');ss[0].querySelector('p').textContent=t('dataDesc');ss[0].querySelector('button').textContent=t('exportJSON');}
-  if(ss[1]){ss[1].querySelector('h3').textContent=t('trainingPlan');ss[1].querySelector('p').innerHTML=t('planInfo');}
+  if(ss[1]){
+    var _vt=document.getElementById('versionInfoTitle');if(_vt)_vt.textContent=t('versionInfo');
+    var _tp=document.getElementById('trainPlanLabel');if(_tp)_tp.textContent=t('trainPlanLabel');
+    var _au=document.getElementById('appUiLabel');if(_au)_au.textContent=t('appUiLabel');
+    var _vf=document.getElementById('versionFooter');if(_vf)_vf.textContent=t('versionFooter');
+  }
   var nh=document.querySelector('#notesSection h3');if(nh)nh.textContent=t('sessionNotes');
   var nt=document.getElementById('sessionNotes');if(nt)nt.placeholder=t('notesPlaceholder');
   var cb=document.querySelectorAll('.cal-nav button');if(cb[0])cb[0].innerHTML=t('prevMonth');if(cb[1])cb[1].innerHTML=t('nextMonth');
