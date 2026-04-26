@@ -14,7 +14,7 @@
 /* ================================================
    OCEAN DEPTHS THEME — v4.0
    Apple HomeKit 胶囊风格 · GitHub Pages 独立部署
-   训练计划版本：v3.4 (2026-04-26) — 应用 UI v4.1
+   训练计划版本：v3.4 (2026-04-26) — 应用 UI v4.2 (上次重量回显)
    ================================================ */
 :root {
   --navy: #1a2332;
@@ -202,13 +202,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .ex-btn-tip:hover{background:var(--teal);color:#fff;}
 .ex-btn-yt{background:var(--red-light);color:var(--red);border:1.5px solid transparent;}
 .ex-btn-yt:hover{background:var(--red);color:#fff;}
-.ex-inputs{display:flex;gap:6px;padding:0 12px 6px 54px;opacity:.7;transition:opacity .2s;}
+.ex-inputs{display:flex;gap:6px;padding:0 12px 6px 54px;opacity:.7;transition:opacity .2s;align-items:center;}
 .ex-capsule:hover+.ex-inputs,.ex-inputs:focus-within{opacity:1;}
 .ex-inputs input{background:var(--surface);border:1.5px solid var(--border);color:var(--text);border-radius:8px;padding:5px 8px;font-size:0.76em;font-family:var(--font);transition:all .2s;min-height:36px;}
 .ex-inputs input:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 2px var(--teal-light);}
 .ex-inputs input::placeholder{color:var(--text3);font-style:italic;}
 .ex-inputs input.actual{flex:1;min-width:0;}
 .ex-inputs input.note{flex:2;min-width:0;}
+.ex-last{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:8px;background:var(--teal-bg);color:var(--teal-dark);border:1.5px solid var(--teal-light);font-size:0.7em;font-weight:600;cursor:pointer;font-family:var(--font);min-height:36px;flex-shrink:0;white-space:nowrap;max-width:46%;overflow:hidden;text-overflow:ellipsis;-webkit-tap-highlight-color:transparent;}
+.ex-last:hover,.ex-last:active{background:var(--teal-light);}
+.ex-last .lbl{font-weight:800;color:var(--teal);letter-spacing:.02em;}
+.ex-last .val{overflow:hidden;text-overflow:ellipsis;}
 
 /* Superset / Rope */
 .superset-label{display:flex;align-items:center;gap:8px;padding:4px 4px;font-size:0.76em;color:var(--orange);font-weight:700;}
@@ -326,9 +330,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   .app{padding:calc(var(--topbar-h) + env(safe-area-inset-top, 10px) + 14px) 8px calc(var(--bottombar-h) + env(safe-area-inset-bottom, 8px) + 20px);}
   .section-header{padding:8px 14px;}
   .section-body{padding:4px 8px 8px;}
-  .ex-inputs{padding-left:42px;}
+  .ex-inputs{padding-left:42px;flex-wrap:wrap;}
   .ex-inputs input.actual{flex:1;min-width:0;}
   .ex-inputs input.note{flex:2;min-width:0;}
+  .ex-last{max-width:100%;font-size:0.72em;}
   .stat-grid{grid-template-columns:1fr 1fr;}
 }
 ::-webkit-scrollbar{width:5px;}
@@ -414,9 +419,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <div class="data-section" style="margin-top:10px;">
       <h3 id="versionInfoTitle">版本信息</h3>
       <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.4</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-26)</span></p>
-      <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.1</span> · Ocean Depths · GitHub Pages</p>
+      <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.2</span> · Ocean Depths · GitHub Pages</p>
       <details style="margin-top:10px;font-size:0.85em;" open>
-        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.4 / UI v4.1）</summary>
+        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.4 / UI v4.2）</summary>
         <ul style="margin:6px 0 0 0;padding-left:20px;color:var(--text2);line-height:1.6;" id="changelogList">
           <li>新增 <b>🪶 自主</b> 按钮（休息日开关右侧）：一键勾选 Alex 自主小训练动作（雨刷、交叉行进、90/90、蛤蛎、侧抬腿、单腿臀桥、Hip Airplane、单腿站立、弹力带横移、死虫）</li>
           <li>点击后弹确认：<b>有酸痛 → 追加 股四头/猫背/4字 三项拉伸</b>；无酸痛 → 仅基础 10 项</li>
@@ -503,6 +508,7 @@ zh:{
   basicTraining:'基础训练',strengthTraining:'力量训练 + 放松',
   trainingMonitor:'训练监控',
   supplement:'补充说明...',actualSets:'实际组数/重量',remark:'备注',
+  lastLabel:'上次',lastTitle:'%s 的记录 · 点击填入',
   optional:'可选',optionalDivider:'以下可选，有时间再做',
   supersetLabel:'A+B 连做 \u00B7 休息30-45s \u00B7 共3轮',
   ropeBreak:'\uD83D\uDD17 开合跳30秒衔接',
@@ -520,8 +526,8 @@ zh:{
   exportJSON:'导出 JSON',trainingPlan:'训练计划',
   versionInfo:'版本信息',trainPlanLabel:'训练计划',appUiLabel:'应用 UI',
   versionFooter:'基础动作(1-5) + 力量训练(6-14) \u00B7 自动保存',
-  changelogTitle:'本次更新（v3.4 / UI v4.1）',
-  changelogHTML:'<li>\u9AD8\u811A\u676F\u6DF1\u8E72 Set1 <b>\u4E0D\u518D\u57AB\u9AD8\u811A\u540E\u8DDF</b>\uFF0C\u7A33\u5B9A 2 \u5468\u540E 10\u219212kg\uFF08\u4E0D\u8DF3 13kg\uFF09</li><li>\u65B0\u589E <b>Reverse Lunge \u4E09\u6B65\u8BD5\u63A2\u534F\u8BAE</b>\uFF08\u5F92\u624B\u21924kg\u21926-8kg\uFF09\uFF0CStep-Up \u4FDD\u6301\u4E3B\u529B</li><li>\u65B0\u589E\u53EF\u9009\u7A7F\u63D2\u52A8\u4F5C\uFF08SS-Opt\uFF09\uFF1A<b>\u5F15\u4F53\u5411\u4E0A</b>\u3001\u4EA4\u66FF\u54D1\u94C3\u80A9\u63A8\u3001\u54D1\u94C3\u4E09\u5934\u540E\u8E6C\u3001\u53CD\u5411\u5F13\u6B65</li><li>\u6536\u5C3E\u6838\u5FC3\u53EF\u8F6E\u6362 Dead Bug / Bear Hold\uFF08\u4E0E HVV Month 3 \u6297\u65CB\u6A21\u5F0F\u540C\u6B65\uFF09</li><li>HVV \u8854\u63A5\u8868\u660E\u786E\uFF1AMonth 1-3 \u975E\u5F3A\u5236\u8BFE\u8868\uFF1B\u4E0D\u5F15\u5165 1600 \u6B21\u8DF3\u7EF3</li><li>\u9875\u9762\u7248\u672C\u663E\u793A\u533A\u5206\u201C\u8BAD\u7EC3\u8BA1\u5212 v3.x\u201D\u4E0E\u201C\u5E94\u7528 UI v4.x\u201D</li>',
+  changelogTitle:'本次更新（v3.4 / UI v4.2）',
+  changelogHTML:'<li><b>负重动作显示「上次：xxx」</b>（高脚杯深蹲 / 单腿RDL / Arnold推举 / 哑铃飞鸟），点击芯片直接填入</li><li>\u9AD8\u811A\u676F\u6DF1\u8E72 Set1 <b>\u4E0D\u518D\u57AB\u9AD8\u811A\u540E\u8DDF</b>\uFF0C\u7A33\u5B9A 2 \u5468\u540E 10\u219212kg\uFF08\u4E0D\u8DF3 13kg\uFF09</li><li>\u65B0\u589E <b>Reverse Lunge \u4E09\u6B65\u8BD5\u63A2\u534F\u8BAE</b>\uFF08\u5F92\u624B\u21924kg\u21926-8kg\uFF09\uFF0CStep-Up \u4FDD\u6301\u4E3B\u529B</li><li>\u65B0\u589E\u53EF\u9009\u7A7F\u63D2\u52A8\u4F5C\uFF08SS-Opt\uFF09\uFF1A<b>\u5F15\u4F53\u5411\u4E0A</b>\u3001\u4EA4\u66FF\u54D1\u94C3\u80A9\u63A8\u3001\u54D1\u94C3\u4E09\u5934\u540E\u8E6C\u3001\u53CD\u5411\u5F13\u6B65</li><li>\u6536\u5C3E\u6838\u5FC3\u53EF\u8F6E\u6362 Dead Bug / Bear Hold\uFF08\u4E0E HVV Month 3 \u6297\u65CB\u6A21\u5F0F\u540C\u6B65\uFF09</li>',
   planInfo:'v4.0 \u2014 胶囊风格 \u00B7 GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) \u00B7 自动保存',
   cloudSync:'\u2601\uFE0F 云端同步',records:'次记录',
   offlineLabel:'\u26A0\uFE0F 离线',localRecords:'次本地记录',
@@ -556,6 +562,7 @@ en:{
   basicTraining:'Basic Training',strengthTraining:'Strength + Cool-down',
   trainingMonitor:'Training Monitor',
   supplement:'Additional notes...',actualSets:'Actual sets/weight',remark:'Notes',
+  lastLabel:'Last',lastTitle:'From %s · tap to fill',
   optional:'Optional',optionalDivider:'Optional \u2014 do if time allows',
   supersetLabel:'A+B back-to-back \u00B7 Rest 30-45s \u00B7 3 rounds',
   ropeBreak:'\uD83D\uDD17 30s jumping jacks transition',
@@ -573,8 +580,8 @@ en:{
   exportJSON:'Export JSON',trainingPlan:'Training Plan',
   versionInfo:'Version Info',trainPlanLabel:'Training Plan',appUiLabel:'App UI',
   versionFooter:'Basic(1-5) + Strength(6-14) \u00B7 Auto-save',
-  changelogTitle:'Latest Update (v3.4 / UI v4.1)',
-  changelogHTML:'<li>Goblet Squat Set1 <b>no longer heel-elevated</b>; after 2 stable weeks 10\u219212kg (no jump to 13kg)</li><li>New <b>Reverse Lunge 3-step test protocol</b> (BW\u21924kg\u21926-8kg); Step-Up remains primary</li><li>New optional section (SS-Opt): <b>Pull-up</b>, Alt DB Shoulder Press, DB Triceps Kickback, Reverse Lunge</li><li>Core finisher can alternate Dead Bug / Bear Hold (syncs with HVV Month 3 anti-rotation pattern)</li><li>HVV mapping clarified: Month 1-3 not mandatory; no 1600-rep jump rope</li><li>Version display now separates "Training Plan v3.x" from "App UI v4.x"</li>',
+  changelogTitle:'Latest Update (v3.4 / UI v4.2)',
+  changelogHTML:'<li><b>Weighted exercises now show "Last: xxx"</b> (Goblet Squat / SL RDL / Arnold Press / DB Flys) — tap chip to fill</li><li>Goblet Squat Set1 <b>no longer heel-elevated</b>; after 2 stable weeks 10\u219212kg (no jump to 13kg)</li><li>New <b>Reverse Lunge 3-step test protocol</b> (BW\u21924kg\u21926-8kg); Step-Up remains primary</li><li>New optional section (SS-Opt): <b>Pull-up</b>, Alt DB Shoulder Press, DB Triceps Kickback, Reverse Lunge</li><li>Core finisher can alternate Dead Bug / Bear Hold (syncs with HVV Month 3 anti-rotation pattern)</li>',
   planInfo:'v4.0 \u2014 Capsule style \u00B7 GitHub Pages<br>Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
   cloudSync:'\u2601\uFE0F Cloud Sync',records:' records',
   offlineLabel:'\u26A0\uFE0F Offline',localRecords:' local records',
@@ -1086,6 +1093,37 @@ function renderSection(sec,isBase){
   return h;
 }
 
+var WEIGHTED_EX={gobletSquat:1,dbReverseFly:1,slRDL:1,dbFloorFly:1,arnoldPress:1};
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function getLastActual(exId){
+  var todayKey=dk(today);
+  var keys=Object.keys(cloudData||{}).sort().reverse();
+  for(var i=0;i<keys.length;i++){
+    var key=keys[i];
+    if(key>todayKey) continue;
+    var arr=Array.isArray(cloudData[key])?cloudData[key]:[cloudData[key]];
+    var sorted=arr.slice().sort(function(a,b){return (b.sessionIdx||0)-(a.sessionIdx||0);});
+    for(var j=0;j<sorted.length;j++){
+      var s=sorted[j];
+      if(!s) continue;
+      if(key===todayKey && s.sessionIdx===currentSessionIdx) continue;
+      if(!s.exercises||!s.exercises[exId]) continue;
+      var v=(s.exercises[exId].actual||'').trim();
+      if(v) return {date:key,value:v};
+    }
+  }
+  return null;
+}
+function useLastActual(id){
+  var la=getLastActual(id);if(!la) return;
+  var input=document.getElementById('actual-'+id);if(!input) return;
+  input.value=la.value;
+  if(!draft.exercises)draft.exercises={};
+  if(!draft.exercises[id])draft.exercises[id]={};
+  draft.exercises[id].actual=la.value;
+  markDirty();
+}
+
 function renderEx(id){
   var ex=EX[id],sd=(draft&&draft.exercises&&draft.exercises[id])||{};
   var dc=sd.done?' done':'';
@@ -1096,8 +1134,15 @@ function renderEx(id){
   h+='</div><div class="ex-row2"><span class="sets">'+exT(id,'sets')+'</span><span class="purpose">'+exT(id,'purpose')+'</span></div></div>';
   h+='<div class="ex-actions"><button class="ex-btn ex-btn-tip" onclick="openSheet(\''+id+'\')" title="?">?</button>';
   h+='<a class="ex-btn ex-btn-yt" href="'+ex.yt+'" target="_blank" title="video">\u25B6</a></div></div>';
-  h+='<div class="ex-inputs"><input class="actual" type="text" placeholder="'+t('actualSets')+'" value="'+(sd.actual||'')+'" onchange="updEx(\''+id+'\',\'actual\',this.value)">';
-  h+='<input class="note" type="text" placeholder="'+t('remark')+'" value="'+(sd.note||'')+'" onchange="updEx(\''+id+'\',\'note\',this.value)"></div>';
+  var lastHint='';
+  if(WEIGHTED_EX[id]){
+    var la=getLastActual(id);
+    if(la){
+      lastHint='<button type="button" class="ex-last" title="'+escHtml(t('lastTitle').replace('%s',la.date))+'" onclick="useLastActual(\''+id+'\')"><span class="lbl">'+t('lastLabel')+'</span><span class="val">'+escHtml(la.value)+'</span></button>';
+    }
+  }
+  h+='<div class="ex-inputs">'+lastHint+'<input id="actual-'+id+'" class="actual" type="text" placeholder="'+t('actualSets')+'" value="'+escHtml(sd.actual||'')+'" onchange="updEx(\''+id+'\',\'actual\',this.value)">';
+  h+='<input class="note" type="text" placeholder="'+t('remark')+'" value="'+escHtml(sd.note||'')+'" onchange="updEx(\''+id+'\',\'note\',this.value)"></div>';
   return h;
 }
 
