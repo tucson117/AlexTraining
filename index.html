@@ -14,7 +14,7 @@
 /* ================================================
    OCEAN DEPTHS THEME — v4.0
    Apple HomeKit 胶囊风格 · GitHub Pages 独立部署
-   训练计划版本：v3.3 (2026-04-15)
+   训练计划版本：v3.4 (2026-04-26) — 应用 UI v4.1
    ================================================ */
 :root {
   --navy: #1a2332;
@@ -125,6 +125,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .session-chip.active{border-color:var(--teal);background:var(--teal);color:#fff;}
 .btn-clear{padding:4px 10px;border-radius:var(--radius-pill);border:1.5px solid var(--red-light);background:var(--surface);color:var(--red);font-size:0.76em;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .15s;display:inline-flex;align-items:center;gap:3px;min-height:32px;}
 .btn-clear:hover{background:var(--red-light);}
+.btn-self{padding:4px 11px;border-radius:var(--radius-pill);border:1.5px solid var(--purple-light,#cfc6f5);background:var(--surface);color:#5b4dba;font-size:0.78em;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .15s;display:inline-flex;align-items:center;gap:4px;min-height:32px;}
+.btn-self:hover{background:var(--purple-light,#e9e3ff);}
+.btn-self.active{background:linear-gradient(135deg,#7c6bdb,#5b4dba);border-color:#5b4dba;color:#fff;}
+.btn-self.active:hover{filter:brightness(1.08);}
+.self-badge{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:10px;background:linear-gradient(135deg,#7c6bdb,#5b4dba);color:#fff;font-size:0.7em;font-weight:700;letter-spacing:.02em;}
 .rest-msg{text-align:center;padding:48px 24px;color:var(--text2);}
 .rest-msg .icon{font-size:2.5em;margin-bottom:8px;}
 .rest-msg p{font-size:1em;font-weight:600;}
@@ -408,17 +413,23 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
     <div class="data-section" style="margin-top:10px;">
       <h3 id="versionInfoTitle">版本信息</h3>
-      <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.3</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-15)</span></p>
-      <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.0</span> · Ocean Depths · GitHub Pages</p>
+      <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.4</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-26)</span></p>
+      <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.1</span> · Ocean Depths · GitHub Pages</p>
       <details style="margin-top:10px;font-size:0.85em;" open>
-        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.3）</summary>
+        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.4 / UI v4.1）</summary>
         <ul style="margin:6px 0 0 0;padding-left:20px;color:var(--text2);line-height:1.6;" id="changelogList">
-          <li>高脚杯深蹲 Set1 **不再垫高脚后跟**，稳定 2 周后 10→12kg（不跳 13kg）</li>
-          <li>新增 <b>Reverse Lunge 三步试探协议</b>（徒手→4kg→6-8kg），Step-Up 保持主力</li>
-          <li>新增可选穿插动作（SS-Opt）：<b>引体向上</b>、交替哑铃肩推、哑铃三头后蹬、反向弓步</li>
-          <li>收尾核心可轮换 Dead Bug / Bear Hold（与 HVV Month 3 抗旋模式同步）</li>
-          <li>HVV 衔接表明确：Month 1-3 非强制课表；不引入 1600 次跳绳</li>
-          <li>页面版本显示区分"训练计划 v3.x"与"应用 UI v4.x"</li>
+          <li>新增 <b>🪶 自主</b> 按钮（休息日开关右侧）：一键勾选 Alex 自主小训练动作（雨刷、交叉行进、90/90、蛤蛎、侧抬腿、单腿臀桥、Hip Airplane、单腿站立、弹力带横移、死虫）</li>
+          <li>点击后弹确认：<b>有酸痛 → 追加 股四头/猫背/4字 三项拉伸</b>；无酸痛 → 仅基础 10 项</li>
+          <li>不与"完整/基础" phase 冲突，不隐藏力量段；同一天可有 Session 1 自主 + Session 2 监督</li>
+          <li>记录里持久化 <code>selfManaged</code> + <code>selfManagedSoreness</code>，日历视图显示 🪶 徽章</li>
+          <li>新增动作：<b>猫背（Cat-Cow）</b>，加入放松拉伸（Section 13）</li>
+        </ul>
+      </details>
+      <details style="margin-top:6px;font-size:0.82em;">
+        <summary style="cursor:pointer;font-weight:500;color:var(--text3);padding:2px 0;">v3.3 (2026-04-15)</summary>
+        <ul style="margin:4px 0 0 0;padding-left:20px;color:var(--text3);line-height:1.5;">
+          <li>高脚杯深蹲 Set1 不再垫高脚后跟，稳定 2 周后 10→12kg</li>
+          <li>Reverse Lunge 三步试探协议；新增 SS-Opt（引体向上等）</li>
         </ul>
       </details>
       <p style="font-size:0.75em;color:var(--text3);margin-top:10px;" id="versionFooter">基础动作(1-5) + 力量训练(6-13) · 自动保存</p>
@@ -484,6 +495,11 @@ zh:{
   otherSports:'其他运动',none:'无',
   restDay:'休息日',session1:'训练一',session2:'训练二',clear:'清除',
   restDayTitle:'今天是休息日',restDaySub:'恢复也是训练的一部分',
+  selfLabel:'自主',selfBtnTitle:'Alex 自主完成（无监督）— 一键勾选基础动作',
+  selfConfirmSoreness:'Alex 今天有肌肉酸痛吗？\n\n确定 = 有酸痛（追加股四头/猫背/4字 三项拉伸）\n取消 = 无酸痛（仅勾选基础 10 项 + 死虫）',
+  selfApplied:'已勾选自主小训练动作',
+  selfCleared:'已取消自主标记（动作勾选保留）',
+  selfBadge:'🪶 自主',selfBadgeWithSore:'🪶 自主+酸痛拉伸',
   basicTraining:'基础训练',strengthTraining:'力量训练 + 放松',
   trainingMonitor:'训练监控',
   supplement:'补充说明...',actualSets:'实际组数/重量',remark:'备注',
@@ -504,7 +520,7 @@ zh:{
   exportJSON:'导出 JSON',trainingPlan:'训练计划',
   versionInfo:'版本信息',trainPlanLabel:'训练计划',appUiLabel:'应用 UI',
   versionFooter:'基础动作(1-5) + 力量训练(6-14) \u00B7 自动保存',
-  changelogTitle:'本次更新（v3.3）',
+  changelogTitle:'本次更新（v3.4 / UI v4.1）',
   changelogHTML:'<li>\u9AD8\u811A\u676F\u6DF1\u8E72 Set1 <b>\u4E0D\u518D\u57AB\u9AD8\u811A\u540E\u8DDF</b>\uFF0C\u7A33\u5B9A 2 \u5468\u540E 10\u219212kg\uFF08\u4E0D\u8DF3 13kg\uFF09</li><li>\u65B0\u589E <b>Reverse Lunge \u4E09\u6B65\u8BD5\u63A2\u534F\u8BAE</b>\uFF08\u5F92\u624B\u21924kg\u21926-8kg\uFF09\uFF0CStep-Up \u4FDD\u6301\u4E3B\u529B</li><li>\u65B0\u589E\u53EF\u9009\u7A7F\u63D2\u52A8\u4F5C\uFF08SS-Opt\uFF09\uFF1A<b>\u5F15\u4F53\u5411\u4E0A</b>\u3001\u4EA4\u66FF\u54D1\u94C3\u80A9\u63A8\u3001\u54D1\u94C3\u4E09\u5934\u540E\u8E6C\u3001\u53CD\u5411\u5F13\u6B65</li><li>\u6536\u5C3E\u6838\u5FC3\u53EF\u8F6E\u6362 Dead Bug / Bear Hold\uFF08\u4E0E HVV Month 3 \u6297\u65CB\u6A21\u5F0F\u540C\u6B65\uFF09</li><li>HVV \u8854\u63A5\u8868\u660E\u786E\uFF1AMonth 1-3 \u975E\u5F3A\u5236\u8BFE\u8868\uFF1B\u4E0D\u5F15\u5165 1600 \u6B21\u8DF3\u7EF3</li><li>\u9875\u9762\u7248\u672C\u663E\u793A\u533A\u5206\u201C\u8BAD\u7EC3\u8BA1\u5212 v3.x\u201D\u4E0E\u201C\u5E94\u7528 UI v4.x\u201D</li>',
   planInfo:'v4.0 \u2014 胶囊风格 \u00B7 GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) \u00B7 自动保存',
   cloudSync:'\u2601\uFE0F 云端同步',records:'次记录',
@@ -532,6 +548,11 @@ en:{
   otherSports:'Other Sports',none:'None',
   restDay:'Rest Day',session1:'Session 1',session2:'Session 2',clear:'Clear',
   restDayTitle:'Today is a Rest Day',restDaySub:'Recovery is part of training',
+  selfLabel:'Self',selfBtnTitle:'Alex self-managed (unsupervised) — auto-check basic moves',
+  selfConfirmSoreness:'Did Alex have muscle soreness today?\n\nOK = Yes (also tick Quad / Cat-Cow / Figure-4 stretches)\nCancel = No (just tick the 10 basics + Dead Bug)',
+  selfApplied:'Self-managed exercises ticked',
+  selfCleared:'Self flag cleared (ticks kept)',
+  selfBadge:'🪶 Self',selfBadgeWithSore:'🪶 Self + Sore-Stretch',
   basicTraining:'Basic Training',strengthTraining:'Strength + Cool-down',
   trainingMonitor:'Training Monitor',
   supplement:'Additional notes...',actualSets:'Actual sets/weight',remark:'Notes',
@@ -552,7 +573,7 @@ en:{
   exportJSON:'Export JSON',trainingPlan:'Training Plan',
   versionInfo:'Version Info',trainPlanLabel:'Training Plan',appUiLabel:'App UI',
   versionFooter:'Basic(1-5) + Strength(6-14) \u00B7 Auto-save',
-  changelogTitle:'Latest Update (v3.3)',
+  changelogTitle:'Latest Update (v3.4 / UI v4.1)',
   changelogHTML:'<li>Goblet Squat Set1 <b>no longer heel-elevated</b>; after 2 stable weeks 10\u219212kg (no jump to 13kg)</li><li>New <b>Reverse Lunge 3-step test protocol</b> (BW\u21924kg\u21926-8kg); Step-Up remains primary</li><li>New optional section (SS-Opt): <b>Pull-up</b>, Alt DB Shoulder Press, DB Triceps Kickback, Reverse Lunge</li><li>Core finisher can alternate Dead Bug / Bear Hold (syncs with HVV Month 3 anti-rotation pattern)</li><li>HVV mapping clarified: Month 1-3 not mandatory; no 1600-rep jump rope</li><li>Version display now separates "Training Plan v3.x" from "App UI v4.x"</li>',
   planInfo:'v4.0 \u2014 Capsule style \u00B7 GitHub Pages<br>Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
   cloudSync:'\u2601\uFE0F Cloud Sync',records:' records',
@@ -628,7 +649,8 @@ var EX_EN={
   lyingLegRaise:{sets:'2-3\u00D710',tip:'Legs up, crunch to touch toes. Replaces V-sit.',purpose:'Core flexion'},
   dbSitupTwist:{sets:'3\u00D710',tip:'Sit-up with L/R twist at top. Spiking power chain.',purpose:'Core rotation'},
   stretch9090:{sets:'30s\u00D72/side',tip:'Seated 90/90 hold. Focus left.',purpose:'Hip mobility recovery'},
-  quadStretch:{sets:'30s/side',tip:'Pull ankle toward glute.',purpose:'Lower body recovery'},
+  quadStretch:{sets:'30s/side',tip:'Pull ankle toward glute. Common in soreness recovery.',purpose:'Lower body recovery'},
+  catCow:{sets:'8-10 reps',tip:'Quadruped, alternate arch and round. Spinal mobility.',purpose:'Spinal mobility'},
   figure4Stretch:{sets:'30s/side',tip:'Supine, ankle on opposite knee, pull thigh to chest.',purpose:'Deep glute release'},
   boxSquat:{sets:'\u2014',tip:'Replaced by knee warm-up layer.',purpose:'Pre-squat activation'},
   jumpRope:{sets:'\u2014',tip:'Replaced by jumping jacks.',purpose:'Cardio'},
@@ -721,7 +743,8 @@ const EX={
   reverseLungeTest:{en:"Reverse Lunge (Test)",zh:"反向弓步（试探）",sets:"2×6/侧（Step 1徒手）",tip:"**v3.3 试探协议**：Step1 徒手→Step2 4kg→Step3 6-8kg，每步通过后才升级。慢速下放，左膝对准脚尖，左膝窝有任何紧张感立即停。**Step-Up 仍是主力，本动作只是补充选项**。",purpose:"弓步模式试探（为将来Kader一队准备）",pr:"opt",yt:"https://www.youtube.com/results?search_query=dumbbell+reverse+lunge+form"},
   // === 放松拉伸 ===
   stretch9090:{en:"90/90 Stretch",zh:"90/90拉伸",sets:"每侧30s×2",tip:"坐姿90/90长时间保持。左侧重点。",purpose:"髋活动度恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=90+90+hip+stretch+hold"},
-  quadStretch:{en:"Quad Stretch",zh:"股四头肌拉伸",sets:"每侧30s",tip:"站立或侧卧拉脚踝靠近臀部。",purpose:"下肢恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=standing+quad+stretch"},
+  quadStretch:{en:"Quad Stretch",zh:"股四头肌拉伸",sets:"每侧30s",tip:"站立或侧卧拉脚踝靠近臀部。酸痛时常做。",purpose:"下肢恢复",pr:"must",yt:"https://www.youtube.com/results?search_query=standing+quad+stretch"},
+  catCow:{en:"Cat-Cow",zh:"猫背（猫牛式）",sets:"8-10次",tip:"四足跪姿，吸气塌腰抬头（牛），呼气拱背收腹（猫）。脊柱节段性活动，酸痛时常做。",purpose:"脊柱活动度",pr:"must",yt:"https://www.youtube.com/results?search_query=cat+cow+stretch+yoga"},
   figure4Stretch:{en:"Figure-4 Stretch",zh:"4字形拉伸",sets:"每侧30s",tip:"仰卧一腿搭另一腿膝盖成4字，双手抱大腿拉向胸口。Alex喜欢做这个。",purpose:"臀部深层放松",pr:"must",yt:"https://www.youtube.com/results?search_query=figure+4+stretch+piriformis"},
   // === 旧版保留（历史数据兼容）===
   jumpRopeWarmup:{en:"Jump Rope",zh:"跳绳（已替换为开合跳）",sets:"—",tip:"已被开合跳替代。",purpose:"心肺预热",pr:"opt",legacy:true,yt:""},
@@ -750,7 +773,7 @@ const SECTIONS_STR=[
   {id:"ss5",num:10,title:"SS5 核心侧链+小腿",iconCls:"icon-strength",time:"",desc:"侧平板弯腿版（左在下不抬右腿）+ 提踵",exercises:["sidePlankLegRaise","slCalfRaiseISO"],ss:true},
   {id:"ss6",num:11,title:"收尾：核心",iconCls:"icon-strength",time:"",desc:"仰卧腿上伸摸脚（替代V-sit）+ 转体",exercises:["lyingLegRaise","dbSitupTwist"],ss:true},
   {id:"ssOpt",num:12,title:"可选穿插动作（v3.3 新增）",iconCls:"icon-strength",time:"有时间就做",desc:"吸收自 HVV Month 3。**能做就做，做不动就跳过**，不计入完成率硬指标。引体向上建议放最前面（力气最足时）；反向弓步为 v3.3 三步试探协议，严格按剂量进阶。",exercises:["pullUp","altShoulderPress","tricepsKickback","reverseLungeTest"]},
-  {id:"cool",num:13,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"90/90左侧重点。4字形拉伸Alex喜欢做。",exercises:["stretch9090","quadStretch","figure4Stretch"]}
+  {id:"cool",num:13,title:"放松拉伸",iconCls:"icon-cooldown",time:"5min",desc:"90/90左侧重点。猫背 + 4字形拉伸 Alex 自主训练时常做。",exercises:["stretch9090","quadStretch","catCow","figure4Stretch"]}
 ];
 const MON=[
   {id:"itband",text:"Lateral Band Walk时IT Band感觉？",opts:["无不适","轻微，激活后消失","明显不适","需停止"]},
@@ -770,7 +793,9 @@ const OTHER_ACTIVITIES=["排球训练","学校体育课","校外体育项目"];
 let realToday=new Date();
 let today=new Date(),calM=realToday.getMonth(),calY=realToday.getFullYear();
 let draft={};let cloudData={};let isOnline=true;
-let currentSessionIdx=1,isRestDay=false;
+let currentSessionIdx=1,isRestDay=false,isSelfManaged=false,selfManagedSoreness=false;
+const SELF_BASE_IDS=['windshieldWiper','crossCrawl','hipRotation90','clamshell','hipAbduction','slGluteBridge','hipAirplane','slBalance','lateralBandWalk','deadBug'];
+const SELF_SORENESS_IDS=['quadStretch','catCow','figure4Stretch'];
 let baseCollapsed=false,strCollapsed=true;
 let saveState='saved';
 let autoSaveTimer=null;
@@ -841,6 +866,7 @@ function doSave(isAuto){
   const hasStr=SECTIONS_STR.some(function(sec){return sec.exercises.some(function(id){return allEx[id]&&allEx[id].done;});});
   const sessionData={
     date:key,sessionIdx:currentSessionIdx,phase:hasStr?'full':'base',isRest:isRestDay,
+    selfManaged:isSelfManaged,selfManagedSoreness:selfManagedSoreness,
     exercises:allEx,monitoring:monData,otherActivities:draft.otherActivities||[],
     notes:document.getElementById('sessionNotes')?.value||'',savedAt:localISO()
   };
@@ -908,6 +934,7 @@ function renderControlBar(){
   h+='</div></div>';
   h+='<div class="session-row">';
   h+='<div class="rest-part"><span class="rlabel">'+t('restDay')+'</span><label class="toggle-switch"><input type="checkbox" id="restToggle" '+(isRestDay?'checked':'')+' onchange="toggleRest()"><span class="toggle-slider"></span></label></div>';
+  h+='<button class="btn-self'+(isSelfManaged?' active':'')+'" onclick="applySelfManaged()" title="'+t('selfBtnTitle')+'">🪶 '+t('selfLabel')+(isSelfManaged?(selfManagedSoreness?' ✓+酸痛':' ✓'):'')+'</button>';
   h+='<div class="ctrl-div"></div>';
   h+='<span class="session-chip'+(currentSessionIdx===1?' active':'')+'" onclick="switchSession(1)">'+t('session1')+'</span>';
   var hasSaved1=sessions.some(function(s){return s.sessionIdx===1;});
@@ -926,7 +953,7 @@ function renderControlBar(){
 function clearForm(){
   if(!confirm(t('confirmClear')))return;
   draft={exercises:{},monitoring:{},notes:'',otherActivities:[]};
-  isRestDay=false;
+  isRestDay=false;isSelfManaged=false;selfManagedSoreness=false;
   localStorage.removeItem('alex_draft');
   saveState='saved';updateStatus('synced','connected');
   renderTraining();
@@ -942,7 +969,29 @@ function toggleRest(){
   if(wantRest&&draft&&draft.exercises&&Object.values(draft.exercises).some(function(e){return e.done;})){
     if(!confirm(t('confirmRest'))){toggle.checked=false;return;}
   }
-  isRestDay=wantRest;renderTraining();markDirty();
+  isRestDay=wantRest;
+  if(wantRest){isSelfManaged=false;selfManagedSoreness=false;}
+  renderTraining();markDirty();
+}
+
+function applySelfManaged(){
+  if(isSelfManaged){
+    isSelfManaged=false;selfManagedSoreness=false;
+    renderTraining();markDirty();toast(t('selfCleared'));return;
+  }
+  if(isRestDay){toast(t('restDay'));return;}
+  var hasSoreness=confirm(t('selfConfirmSoreness'));
+  if(!draft.exercises) draft.exercises={};
+  var ids=SELF_BASE_IDS.slice();
+  if(hasSoreness) ids=ids.concat(SELF_SORENESS_IDS);
+  ids.forEach(function(id){
+    if(!EX[id]) return;
+    if(!draft.exercises[id]) draft.exercises[id]={done:true,actual:'',note:''};
+    else draft.exercises[id].done=true;
+  });
+  isSelfManaged=true;selfManagedSoreness=hasSoreness;
+  if(hasSoreness)strCollapsed=false;
+  renderTraining();markDirty();toast(t('selfApplied'));
 }
 
 function switchSession(idx){
@@ -950,10 +999,10 @@ function switchSession(idx){
   const saved=getCurrentSaved();
   if(saved){
     draft={exercises:Object.assign({},(saved.exercises||{})),monitoring:Object.assign({},(saved.monitoring||{})),notes:saved.notes||'',otherActivities:[].concat(saved.otherActivities||[])};
-    isRestDay=!!saved.isRest;
+    isRestDay=!!saved.isRest;isSelfManaged=!!saved.selfManaged;selfManagedSoreness=!!saved.selfManagedSoreness;
     var hasStr=SECTIONS_STR.some(function(sec){return sec.exercises.some(function(id){return saved.exercises&&saved.exercises[id]&&saved.exercises[id].done;});});
     strCollapsed=!hasStr;baseCollapsed=false;
-  } else {draft={};isRestDay=false;baseCollapsed=false;strCollapsed=true;}
+  } else {draft={};isRestDay=false;isSelfManaged=false;selfManagedSoreness=false;baseCollapsed=false;strCollapsed=true;}
   saveState='saved';updateStatus('synced','connected');
   renderTraining();
 }
@@ -1144,7 +1193,8 @@ function showHist(key){
   var h=editBtn;
   sessions.forEach(function(s,si){
     var label=s.isRest?t('restDay'):s.phase==='full'?t('fullLabel'):t('baseLabel');
-    h+='<div class="history-detail"><h3>'+I18N[currentLang].histDate(s.date,si,sessions.length)+' \u2014 '+label+'</h3>';
+    var selfBadge=s.selfManaged?'<span class="self-badge">'+t(s.selfManagedSoreness?'selfBadgeWithSore':'selfBadge')+'</span>':'';
+    h+='<div class="history-detail"><h3>'+I18N[currentLang].histDate(s.date,si,sessions.length)+' \u2014 '+label+selfBadge+'</h3>';
     h+='<div class="meta">'+t('savedAt')+' '+(s.savedAt||'');
     if(s.otherActivities&&s.otherActivities.length)h+=' \u00B7 '+t('other')+': '+s.otherActivities.map(actT).join(', ');
     h+='</div>';
@@ -1242,7 +1292,7 @@ function renderAll(){
     var latest=sessions[sessions.length-1];
     currentSessionIdx=latest.sessionIdx||1;
     if(latest.exercises)draft={exercises:Object.assign({},(latest.exercises||{})),monitoring:Object.assign({},(latest.monitoring||{})),notes:latest.notes||'',otherActivities:[].concat(latest.otherActivities||[])};
-    isRestDay=!!latest.isRest;
+    isRestDay=!!latest.isRest;isSelfManaged=!!latest.selfManaged;selfManagedSoreness=!!latest.selfManagedSoreness;
     var hasStr=SECTIONS_STR.some(function(sec){return sec.exercises.some(function(id){return latest.exercises&&latest.exercises[id]&&latest.exercises[id].done;});});
     strCollapsed=!hasStr;baseCollapsed=false;
   }else{loadDraft();}
