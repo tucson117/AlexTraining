@@ -14,7 +14,7 @@
 /* ================================================
    OCEAN DEPTHS THEME — v4.0
    Apple HomeKit 胶囊风格 · GitHub Pages 独立部署
-   训练计划版本：v3.4 (2026-04-26) — 应用 UI v4.2 (上次重量回显)
+   训练计划版本：v3.5 (2026-04-29) — 应用 UI v4.2 (上次重量回显)
    ================================================ */
 :root {
   --navy: #1a2332;
@@ -418,16 +418,22 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
     <div class="data-section" style="margin-top:10px;">
       <h3 id="versionInfoTitle">版本信息</h3>
-      <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.4</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-26)</span></p>
+      <p style="font-size:1em;font-weight:700;color:var(--teal-dark);margin:4px 0;"><span id="trainPlanLabel">训练计划</span> <span id="planVersion">v3.5</span> <span style="font-weight:500;color:var(--text3);" id="planVersionDate">(2026-04-29)</span></p>
       <p style="font-size:0.85em;color:var(--text3);margin:2px 0;"><span id="appUiLabel">应用 UI</span> <span id="appVersion">v4.2</span> · Ocean Depths · GitHub Pages</p>
       <details style="margin-top:10px;font-size:0.85em;" open>
-        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.4 / UI v4.2）</summary>
+        <summary style="cursor:pointer;font-weight:600;color:var(--teal-dark);padding:4px 0;" id="changelogTitle">本次更新（v3.5 / UI v4.2）</summary>
         <ul style="margin:6px 0 0 0;padding-left:20px;color:var(--text2);line-height:1.6;" id="changelogList">
-          <li>新增 <b>🪶 自主</b> 按钮（休息日开关右侧）：一键勾选 Alex 自主小训练动作（雨刷、交叉行进、90/90、蛤蛎、侧抬腿、单腿臀桥、Hip Airplane、单腿站立、弹力带横移、死虫）</li>
-          <li>点击后弹确认：<b>有酸痛 → 追加 股四头/猫背/4字 三项拉伸</b>；无酸痛 → 仅基础 10 项</li>
-          <li>不与"完整/基础" phase 冲突，不隐藏力量段；同一天可有 Session 1 自主 + Session 2 监督</li>
-          <li>记录里持久化 <code>selfManaged</code> + <code>selfManagedSoreness</code>，日历视图显示 🪶 徽章</li>
-          <li>新增动作：<b>猫背（Cat-Cow）</b>，加入放松拉伸（Section 13）</li>
+          <li>预备热身新增两个动作：<b>Foam Roller 胸椎过伸 2×30秒</b>（被动松开胸椎僵硬）+ <b>Wall Angel 墙天使 2×10</b>（主动激活后背肌群）</li>
+          <li>缘起：教练 04-28 集训反馈"Alex 圆肩驼背、要挺起来、自信一点"——影响扣球肩外旋范围（损失 15-25°）、摸高（损失 5-10cm）、呼吸耐力</li>
+          <li>SS4 IYTW 备注更新：动作时主动夹肩胛，与 Wall Angel 协同纠正圆肩</li>
+          <li>🪶 自主 流程同步纳入两个新动作</li>
+        </ul>
+      </details>
+      <details style="margin-top:6px;font-size:0.82em;">
+        <summary style="cursor:pointer;font-weight:500;color:var(--text3);padding:2px 0;">v3.4 (2026-04-26)</summary>
+        <ul style="margin:4px 0 0 0;padding-left:20px;color:var(--text3);line-height:1.5;">
+          <li>新增 🪶 自主按钮：一键勾选基础动作（雨刷、交叉行进、90/90、蛤蛎、侧抬腿、单腿臀桥、Hip Airplane、单腿站立、弹力带横移、死虫）</li>
+          <li>有酸痛 → 追加股四头/猫背/4字三项拉伸；新增 Cat-Cow 动作</li>
         </ul>
       </details>
       <details style="margin-top:6px;font-size:0.82em;">
@@ -526,7 +532,7 @@ zh:{
   exportJSON:'导出 JSON',trainingPlan:'训练计划',
   versionInfo:'版本信息',trainPlanLabel:'训练计划',appUiLabel:'应用 UI',
   versionFooter:'基础动作(1-5) + 力量训练(6-14) \u00B7 自动保存',
-  changelogTitle:'本次更新（v3.4 / UI v4.2）',
+  changelogTitle:'本次更新（v3.5 / UI v4.2）',
   changelogHTML:'<li><b>负重动作显示「上次：xxx」</b>（高脚杯深蹲 / 单腿RDL / Arnold推举 / 哑铃飞鸟），点击芯片直接填入</li><li>\u9AD8\u811A\u676F\u6DF1\u8E72 Set1 <b>\u4E0D\u518D\u57AB\u9AD8\u811A\u540E\u8DDF</b>\uFF0C\u7A33\u5B9A 2 \u5468\u540E 10\u219212kg\uFF08\u4E0D\u8DF3 13kg\uFF09</li><li>\u65B0\u589E <b>Reverse Lunge \u4E09\u6B65\u8BD5\u63A2\u534F\u8BAE</b>\uFF08\u5F92\u624B\u21924kg\u21926-8kg\uFF09\uFF0CStep-Up \u4FDD\u6301\u4E3B\u529B</li><li>\u65B0\u589E\u53EF\u9009\u7A7F\u63D2\u52A8\u4F5C\uFF08SS-Opt\uFF09\uFF1A<b>\u5F15\u4F53\u5411\u4E0A</b>\u3001\u4EA4\u66FF\u54D1\u94C3\u80A9\u63A8\u3001\u54D1\u94C3\u4E09\u5934\u540E\u8E6C\u3001\u53CD\u5411\u5F13\u6B65</li><li>\u6536\u5C3E\u6838\u5FC3\u53EF\u8F6E\u6362 Dead Bug / Bear Hold\uFF08\u4E0E HVV Month 3 \u6297\u65CB\u6A21\u5F0F\u540C\u6B65\uFF09</li>',
   planInfo:'v4.0 \u2014 胶囊风格 \u00B7 GitHub Pages 独立部署<br>基础(1-5) + 力量(6-13) \u00B7 自动保存',
   cloudSync:'\u2601\uFE0F 云端同步',records:'次记录',
@@ -580,7 +586,7 @@ en:{
   exportJSON:'Export JSON',trainingPlan:'Training Plan',
   versionInfo:'Version Info',trainPlanLabel:'Training Plan',appUiLabel:'App UI',
   versionFooter:'Basic(1-5) + Strength(6-14) \u00B7 Auto-save',
-  changelogTitle:'Latest Update (v3.4 / UI v4.2)',
+  changelogTitle:'Latest Update (v3.5 / UI v4.2)',
   changelogHTML:'<li><b>Weighted exercises now show "Last: xxx"</b> (Goblet Squat / SL RDL / Arnold Press / DB Flys) — tap chip to fill</li><li>Goblet Squat Set1 <b>no longer heel-elevated</b>; after 2 stable weeks 10\u219212kg (no jump to 13kg)</li><li>New <b>Reverse Lunge 3-step test protocol</b> (BW\u21924kg\u21926-8kg); Step-Up remains primary</li><li>New optional section (SS-Opt): <b>Pull-up</b>, Alt DB Shoulder Press, DB Triceps Kickback, Reverse Lunge</li><li>Core finisher can alternate Dead Bug / Bear Hold (syncs with HVV Month 3 anti-rotation pattern)</li>',
   planInfo:'v4.0 \u2014 Capsule style \u00B7 GitHub Pages<br>Basic(1-5) + Strength(6-13) \u00B7 Auto-save',
   cloudSync:'\u2601\uFE0F Cloud Sync',records:' records',
@@ -705,6 +711,8 @@ const EX={
   // === 预备热身 ===
   thoracicRotation:{en:"Thoracic Rotation",zh:"仰卧胸椎旋转（开胸）",sets:"各5-8次/侧",tip:"躺下来手臂打开，感受胸椎转动。每次训练第一件事。",purpose:"胸椎活动度",pr:"must",yt:"https://www.youtube.com/results?search_query=supine+thoracic+rotation+stretch"},
   windshieldWiper:{en:"Windshield Wiper",zh:"仰卧膝倒（雨刷）",sets:"各10次/侧",tip:"双腿弯起左右倒，髋关节内外旋预热。配合胸椎旋转作为开场。",purpose:"髋关节内外旋预热",pr:"must",yt:"https://www.youtube.com/results?search_query=supine+windshield+wiper+hip+mobility"},
+  foamRollerThoracic:{en:"Foam Roller Thoracic Extension",zh:"Foam Roller 胸椎过伸",sets:"2×30秒",tip:"仰卧屈膝，泡沫轴**横向**置肩胛骨下方（**绝不滚到腰**），双手抱头肘指天花板。呼气时**仅上背**慢慢后伸，每节 3-5 次小幅过伸后沿背向头方向滚 2-3cm。腹肌轻收防止腰椎代偿。**v3.5 新增**：针对教练反馈的圆肩驼背，被动松开胸椎僵硬。",purpose:"胸椎被动松动（纠正圆肩）",pr:"must",yt:"https://www.youtube.com/watch?v=9Y11Kc0E0og"},
+  wallAngel:{en:"Wall Angel",zh:"Wall Angel（墙天使）",sets:"2×10",tip:"腰、上背、后脑贴墙（脚距墙10-15cm），手肘+手背全程贴墙，慢速从肩高上举到顶再降回。手背贴不到墙说明胸小肌+前锯肌紧——这正是要练的。**v3.5 新增**：主动激活中下斜方+菱形，与 IYTW 协同纠正圆肩。日常用手机后也可单独做当微休息。",purpose:"后背肌群主动激活（纠正圆肩）",pr:"must",yt:"https://www.youtube.com/results?search_query=wall+angel+exercise+posture"},
   // === 热身与协调 ===
   crossCrawl:{en:"Cross Crawl",zh:"交叉行进",sets:"1×50-60 或 1分钟",tip:"站立，对侧手膝碰触。一组做完即可。训练对侧协调——改善步态。",purpose:"步态协调",pr:"must",yt:"https://www.youtube.com/results?search_query=cross+crawl+standing+exercise"},
   jumpingJacks:{en:"Jumping Jacks",zh:"开合跳",sets:"1×1分钟",tip:"室内用开合跳替代跳绳。心率微升即可，不需要做到喘。",purpose:"心肺预热",pr:"must",yt:"https://www.youtube.com/results?search_query=jumping+jacks+proper+form"},
@@ -765,7 +773,7 @@ const EX={
 // SECTIONS
 // ============================================
 const SECTIONS_BASE=[
-  {id:"prewarm",num:0,title:"预备热身",iconCls:"icon-warmup",time:"2min",desc:"每次训练第一件事。胸椎+髋关节预热。",exercises:["thoracicRotation","windshieldWiper"]},
+  {id:"prewarm",num:0,title:"预备热身",iconCls:"icon-warmup",time:"3-4min",desc:"每次训练第一件事。胸椎+髋关节预热 + **v3.5 新增姿态纠正**（Foam Roller 胸椎过伸 + Wall Angel）。",exercises:["thoracicRotation","windshieldWiper","foamRollerThoracic","wallAngel"]},
   {id:"warmup",num:1,title:"热身与协调 ⭐必做",iconCls:"icon-warmup",time:"3min",desc:"交叉行进+开合跳，心率微升。",exercises:["crossCrawl","jumpingJacks"]},
   {id:"hip",num:2,title:"髋关节激活 ⭐必做",iconCls:"icon-hip",time:"6min",desc:"按顺序执行：①90/90 ②蛤蛊左15 ③Dead Bug×10（防臀中肌疲劳）④蛤蛊左15 ⑤直腿抬高左 ⑥开合跳30s ⑦蛤蛊右15 ⑧直腿抬高右",exercises:["hipRotation90","clamshell","deadBug","hipAbduction"]},
   {id:"stability",num:3,title:"单腿稳定 ⭐必做",iconCls:"icon-stability",time:"7min",desc:"单腿臀桥+Airplane+单腿站立。Lateral Band Walk放最后测试IT Band。",exercises:["slGluteBridge","hipAirplane","slBalance","lateralBandWalk"]},
@@ -801,7 +809,7 @@ let realToday=new Date();
 let today=new Date(),calM=realToday.getMonth(),calY=realToday.getFullYear();
 let draft={};let cloudData={};let isOnline=true;
 let currentSessionIdx=1,isRestDay=false,isSelfManaged=false,selfManagedSoreness=false;
-const SELF_BASE_IDS=['windshieldWiper','crossCrawl','hipRotation90','clamshell','hipAbduction','slGluteBridge','hipAirplane','slBalance','lateralBandWalk','deadBug'];
+const SELF_BASE_IDS=['windshieldWiper','foamRollerThoracic','wallAngel','crossCrawl','hipRotation90','clamshell','hipAbduction','slGluteBridge','hipAirplane','slBalance','lateralBandWalk','deadBug'];
 const SELF_SORENESS_IDS=['quadStretch','catCow','figure4Stretch'];
 let baseCollapsed=false,strCollapsed=true;
 let saveState='saved';
